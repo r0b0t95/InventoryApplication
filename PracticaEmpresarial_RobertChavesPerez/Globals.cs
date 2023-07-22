@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using Logica.Models;
 
 namespace PracticaEmpresarial_RobertChavesPerez
 {
@@ -12,12 +13,11 @@ namespace PracticaEmpresarial_RobertChavesPerez
         //ROBERT H. CHAVES PEREZ 2023
 
         // -> STATIC OBJECTS 
-        
-        
-         
+
 
         // -> STATIC VARIABLES
 
+        static User GlobalUser = new User ();
 
 
     }

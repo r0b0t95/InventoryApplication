@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PracticaEmpresarial_RobertChavesPerez.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace PracticaEmpresarial_RobertChavesPerez
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Application.Run(new LoginForm());
         }
     }
 }
