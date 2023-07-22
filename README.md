@@ -2,11 +2,19 @@
 
 for management my advice is Microsoft SQL Server Management Studio
 
-![[README_FILES/SQL-Server-Microsoft.jpg]]
+<p align="center">
+<img src="README_FILES/SQL-Server-Microsoft.jpg"
+        alt="First"
+        style="float: left; margin-right: 50px;" />
+</p>
 
-* Microsoft SQL Server
+**Microsoft SQL Server**
 
 ```SQL
+/* 
+Robert Chaves Perez (r0b0t95)
+2023
+*/
 CREATE DATABASE InventoryDB
 GO
 
@@ -133,7 +141,5 @@ ALTER TABLE Supplier ADD CONSTRAINT SU_ST FOREIGN KEY (fkState) REFERENCES State
 ALTER TABLE Client ADD CONSTRAINT CL_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
 
 ALTER TABLE [User] ADD CONSTRAINT US_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
-
-
 ```
 
