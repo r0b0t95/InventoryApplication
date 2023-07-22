@@ -2,7 +2,7 @@
 
 for management my advice is Microsoft SQL Server Management Studio
 
-[[SQL-Server-Microsoft.jpg]]
+![[README_FILES/SQL-Server-Microsoft.jpg]]
 
 * Microsoft SQL Server
 
