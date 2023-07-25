@@ -23,7 +23,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( string.IsNullOrEmpty( validate ) )
             {
-                new MainForm().Show();
+                //new MainForm().Show();
+                new LoadingForm().Show();
+                //this.Hide();
             }
             else
             {

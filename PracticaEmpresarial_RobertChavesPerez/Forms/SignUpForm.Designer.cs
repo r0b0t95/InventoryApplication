@@ -173,6 +173,7 @@
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtName);
             this.Name = "SignUpForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SignUpForm";
             this.ResumeLayout(false);
             this.PerformLayout();

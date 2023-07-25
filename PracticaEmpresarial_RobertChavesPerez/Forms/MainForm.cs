@@ -16,5 +16,26 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             InitializeComponent();
         }
+
+        private void clientsItem_Click(object sender, EventArgs e)
+        {
+            new ClientsForm().Show();
+        }
+
+        private void logsItem_Click(object sender, EventArgs e)
+        {
+            new LogsForm().Show();
+        }
+
+        private void suppliersItem_Click(object sender, EventArgs e)
+        {
+            new SuppliersForm().Show();
+        }
+
+        private void inventoryItem_Click(object sender, EventArgs e)
+        {
+            new InventoryForm().Show();
+        }
+
     }
 }
