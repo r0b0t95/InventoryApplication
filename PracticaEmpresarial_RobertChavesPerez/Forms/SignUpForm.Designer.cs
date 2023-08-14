@@ -55,7 +55,7 @@
             this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.ForeColor = System.Drawing.Color.Silver;
-            this.txtEmail.Location = new System.Drawing.Point(62, 192);
+            this.txtEmail.Location = new System.Drawing.Point(62, 194);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(366, 47);
             this.txtEmail.TabIndex = 1;
@@ -65,7 +65,7 @@
             this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.ForeColor = System.Drawing.Color.Silver;
-            this.txtPassword.Location = new System.Drawing.Point(62, 279);
+            this.txtPassword.Location = new System.Drawing.Point(62, 284);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(366, 47);
             this.txtPassword.TabIndex = 2;
@@ -91,7 +91,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnExit.Location = new System.Drawing.Point(62, 493);
+            this.btnExit.Location = new System.Drawing.Point(62, 494);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(366, 54);
             this.btnExit.TabIndex = 4;
@@ -104,7 +104,7 @@
             this.lblSignUp.AutoSize = true;
             this.lblSignUp.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSignUp.ForeColor = System.Drawing.Color.Gray;
-            this.lblSignUp.Location = new System.Drawing.Point(122, 19);
+            this.lblSignUp.Location = new System.Drawing.Point(114, 18);
             this.lblSignUp.Name = "lblSignUp";
             this.lblSignUp.Size = new System.Drawing.Size(263, 46);
             this.lblSignUp.TabIndex = 5;
@@ -116,7 +116,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.Gray;
-            this.lblName.Location = new System.Drawing.Point(61, 81);
+            this.lblName.Location = new System.Drawing.Point(58, 81);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(78, 20);
             this.lblName.TabIndex = 6;
@@ -127,7 +127,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.ForeColor = System.Drawing.Color.Gray;
-            this.lblEmail.Location = new System.Drawing.Point(61, 169);
+            this.lblEmail.Location = new System.Drawing.Point(58, 171);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(63, 20);
             this.lblEmail.TabIndex = 7;
@@ -138,7 +138,7 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.ForeColor = System.Drawing.Color.Gray;
-            this.lblPassword.Location = new System.Drawing.Point(61, 256);
+            this.lblPassword.Location = new System.Drawing.Point(58, 261);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(109, 20);
             this.lblPassword.TabIndex = 8;
@@ -148,7 +148,7 @@
             // 
             this.cbShowPassword.AutoSize = true;
             this.cbShowPassword.ForeColor = System.Drawing.Color.Gray;
-            this.cbShowPassword.Location = new System.Drawing.Point(62, 332);
+            this.cbShowPassword.Location = new System.Drawing.Point(62, 337);
             this.cbShowPassword.Name = "cbShowPassword";
             this.cbShowPassword.Size = new System.Drawing.Size(80, 30);
             this.cbShowPassword.TabIndex = 9;
@@ -161,7 +161,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(475, 592);
+            this.ClientSize = new System.Drawing.Size(489, 592);
             this.Controls.Add(this.cbShowPassword);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblEmail);

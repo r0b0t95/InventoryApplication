@@ -16,5 +16,42 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             InitializeComponent();
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            string validate = validateFields();
+
+            if (string.IsNullOrEmpty(validate))
+            {
+                MessageBox.Show(validate, "Se registro con exito", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show(validate, "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private string validateFields()
+        {
+            string responce = "El campo {0} esta vacio";
+
+            if ( string.IsNullOrWhiteSpace( txtName.Text ) )
+            {
+                return string.Format(responce, "nombre");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                return string.Format(responce, "telefono");
+            }
+
+            return string.Empty;
+        }
     }
 }

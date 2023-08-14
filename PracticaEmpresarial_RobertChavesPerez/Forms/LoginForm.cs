@@ -23,9 +23,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( string.IsNullOrEmpty( validate ) )
             {
-                //new MainForm().Show();
                 new LoadingForm().Show();
-                //this.Hide();
+
+                this.Hide();
             }
             else
             {
@@ -104,7 +104,17 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void lblPolicies_Click(object sender, EventArgs e)
         {
-            string message = "";
+            string message = "Hola usuario las politicas del software son \n" +
+                             "para ingresar al programa tienes que ingresar \n" +
+                             "solo por medio del login \n \n" +
+                             "el programa tiene la base de datos local \n" +
+                             "solo el administrador puede tener acceso a la \n" +
+                             "base de datos \n \n" +
+                             "actualizar el respaldo del inventario de hace de \n" +
+                             "forma manual si el usuario lo olvida es responsabilidad \n" +
+                             "del usuario \n \n \n" +
+                             "Creado por Robert Chaves Perez v1 2023";
+
             MessageBox.Show( message, "Politicas", MessageBoxButtons.OK );
         }
     }

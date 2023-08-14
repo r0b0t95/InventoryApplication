@@ -41,6 +41,7 @@
             this.clientsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             this.MainMenu.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitItem,
             this.inventoryItem,
             this.suppliersItem,
             this.opetationsItem,
@@ -66,21 +68,21 @@
             this.logsItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(1143, 33);
+            this.MainMenu.Size = new System.Drawing.Size(1143, 40);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "menuStrip1";
             // 
             // inventoryItem
             // 
             this.inventoryItem.Name = "inventoryItem";
-            this.inventoryItem.Size = new System.Drawing.Size(116, 29);
+            this.inventoryItem.Size = new System.Drawing.Size(116, 36);
             this.inventoryItem.Text = "Inventario";
             this.inventoryItem.Click += new System.EventHandler(this.inventoryItem_Click);
             // 
             // suppliersItem
             // 
             this.suppliersItem.Name = "suppliersItem";
-            this.suppliersItem.Size = new System.Drawing.Size(136, 29);
+            this.suppliersItem.Size = new System.Drawing.Size(136, 36);
             this.suppliersItem.Text = "Proveedores";
             this.suppliersItem.Click += new System.EventHandler(this.suppliersItem_Click);
             // 
@@ -91,7 +93,7 @@
             this.ventasToolStripMenuItem,
             this.devolucionesToolStripMenuItem});
             this.opetationsItem.Name = "opetationsItem";
-            this.opetationsItem.Size = new System.Drawing.Size(134, 29);
+            this.opetationsItem.Size = new System.Drawing.Size(134, 36);
             this.opetationsItem.Text = "Operaciones";
             // 
             // comprasToolStripMenuItem
@@ -115,19 +117,26 @@
             // clientsItem
             // 
             this.clientsItem.Name = "clientsItem";
-            this.clientsItem.Size = new System.Drawing.Size(93, 29);
+            this.clientsItem.Size = new System.Drawing.Size(93, 36);
             this.clientsItem.Text = "Clientes";
             this.clientsItem.Click += new System.EventHandler(this.clientsItem_Click);
             // 
             // logsItem
             // 
             this.logsItem.Name = "logsItem";
-            this.logsItem.Size = new System.Drawing.Size(105, 29);
+            this.logsItem.Size = new System.Drawing.Size(105, 36);
             this.logsItem.Text = "Bitacoras";
             this.logsItem.Click += new System.EventHandler(this.logsItem_Click);
             // 
-            // timer1
+            // exitItem
             // 
+            this.exitItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.exitItem.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitItem.ForeColor = System.Drawing.Color.Black;
+            this.exitItem.Name = "exitItem";
+            this.exitItem.Size = new System.Drawing.Size(76, 36);
+            this.exitItem.Text = "Salir";
+            this.exitItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -162,5 +171,6 @@
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolucionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logsItem;
+        private System.Windows.Forms.ToolStripMenuItem exitItem;
     }
 }

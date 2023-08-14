@@ -27,5 +27,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             this.Close();
         }
+
+       
     }
 }

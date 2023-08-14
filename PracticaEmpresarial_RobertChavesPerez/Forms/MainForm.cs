@@ -37,5 +37,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new InventoryForm().Show();
         }
 
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
