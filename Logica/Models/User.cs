@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,11 @@ namespace Logica.Models
 
         public long userId { get; set; }
 
-        public string Name { get; set; }
+        public string userName { get; set; }
 
-        public string Email { get; set; }
+        public string userEmail { get; set; }
 
-        public string Password { get; set; }
+        public string password { get; set; }
 
         public State userState { get; set; }
 
@@ -32,36 +33,19 @@ namespace Logica.Models
 
         public bool addUser()
         {
-            bool R = false;
-
             Connection conn = new Connection();
 
-            /*
-             //lista de parámetros para el insert
-            MiCnn.ListaParametros.Add(new SqlParameter("@Nombre", this.Nombre));
-            MiCnn.ListaParametros.Add(new SqlParameter("@Cedula", this.Cedula));
-            MiCnn.ListaParametros.Add(new SqlParameter("@NombreUsuario", this.NombreUsuario));
+            Encryption encrypt = new Encryption();
 
-            Crypto MiEncriptador = new Crypto();
-            string ContrasenniaEncriptada = MiEncriptador.EncriptarEnUnSentido(this.Contrasennia);
-            MiCnn.ListaParametros.Add(new SqlParameter("@Contrasennia", ContrasenniaEncriptada));
+            string hash = encrypt.EncryptText( this.password );
 
-            MiCnn.ListaParametros.Add(new SqlParameter("@Email", this.Email));
+            conn.ParamList.Add( new SqlParameter( "@userName", this.userName ) );
+            conn.ParamList.Add( new SqlParameter( "@userEmail", this.userEmail ) );
+            conn.ParamList.Add( new SqlParameter( "@password", hash ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.userState.stateId ) );
+            int r = conn.PerformUpdateDeleteInsert( "AddUser" );
 
-            //Parametros para los FKs, normalmente son de objetos compuestos de la clase 
-            MiCnn.ListaParametros.Add(new SqlParameter("@IDRol", this.MiRol.IDUsuarioRol));
-            MiCnn.ListaParametros.Add(new SqlParameter("@IDEmpresa", this.MiEmpresa.IDEmpresa));
-
-            int Resultado = MiCnn.EjecutarUpdateDeleteInsert("SPUsuarioAgregar");
-
-            if (Resultado > 0)
-            {
-                R = true;
-            }
-            */
-
-
-            return R;
+            return r > 0 ? true : false;
         }
 
         public bool updateUser()

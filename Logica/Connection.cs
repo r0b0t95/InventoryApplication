@@ -13,20 +13,18 @@ namespace Logica
 
         public List<SqlParameter> ParamList = new List<SqlParameter>();
 
-
-        public int PerformUpdateDeleteInsert(string SPName)
+        public int PerformUpdateDeleteInsert( string SPName )
         {
             int Responce = 0;
 
-            using (SqlConnection MyCnn = new SqlConnection(ConnectionString))
-
+            using ( SqlConnection MyCnn = new SqlConnection( ConnectionString ) )
             {
-                SqlCommand MyCommand = new SqlCommand(SPName, MyCnn);
+                SqlCommand MyCommand = new SqlCommand( SPName, MyCnn );
                 MyCommand.CommandType = CommandType.StoredProcedure;
 
-                if (ParamList != null && ParamList.Count > 0)
+                if ( ParamList != null && ParamList.Count > 0 )
                 {
-                    foreach (SqlParameter item in ParamList)
+                    foreach ( SqlParameter item in ParamList )
                     {
                         MyCommand.Parameters.Add(item);
                     }
@@ -34,8 +32,8 @@ namespace Logica
 
                 MyCnn.Open();
 
-                //Si el comando a ejecutar en un DML (update, Insert o delete) 
-                //establecer SET NOCOUNT OFF; en el SP 
+                //if a command to perform is some = (update, Insert or delete) 
+                //establich SET NOCOUNT OFF; en el SP 
 
                 Responce = MyCommand.ExecuteNonQuery();
             }
@@ -44,31 +42,31 @@ namespace Logica
         }
 
 
-        public DataTable PerformSelect(string SPName, bool LoadTable = false)
+        public DataTable PerformSelect( string SPName, bool LoadTable = false )
         {
             DataTable ReturnData = new DataTable();
 
-            using (SqlConnection MyCnn = new SqlConnection(ConnectionString))
+            using (SqlConnection MyCnn = new SqlConnection( ConnectionString ) )
             {
-                SqlCommand MyComando = new SqlCommand(SPName, MyCnn);
-                MyComando.CommandType = CommandType.StoredProcedure;
-                if (ParamList != null && ParamList.Count > 0)
+                SqlCommand MyCommand = new SqlCommand( SPName, MyCnn );
+                MyCommand.CommandType = CommandType.StoredProcedure;
+                if ( ParamList != null && ParamList.Count > 0 )
                 {
-                    foreach (SqlParameter item in ParamList)
+                    foreach ( SqlParameter item in ParamList )
                     {
-                        MyComando.Parameters.Add(item);
+                        MyCommand.Parameters.Add( item );
                     }
                 }
-                SqlDataAdapter MyAdaptador = new SqlDataAdapter(MyComando);
+                SqlDataAdapter MyAdaptador = new SqlDataAdapter( MyCommand );
 
                 if (LoadTable)
                 {
-                    MyAdaptador.FillSchema(ReturnData, SchemaType.Source);
+                    MyAdaptador.FillSchema( ReturnData, SchemaType.Source );
                 }
                 else
                 {
                     // optional Paso 1.3.1 y 1.3.2 
-                    MyAdaptador.Fill(ReturnData);
+                    MyAdaptador.Fill( ReturnData );
                 }
             }
             return ReturnData;

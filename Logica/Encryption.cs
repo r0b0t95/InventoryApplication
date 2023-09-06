@@ -17,16 +17,16 @@ namespace Logica
 
         // -> METHOD, ENCRYPTION
 
-        public string EncryptText(string Pass)
+        public string EncryptText( string text )
         {
             StringBuilder sb = new StringBuilder();
 
-            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
-            byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+            byte[] keyBytes = Encoding.UTF8.GetBytes( key );
+            byte[] ivBytes = Encoding.UTF8.GetBytes( iv );
 
             try
             {
-                using (Aes aes = Aes.Create())
+                using ( Aes aes = Aes.Create() )
                 {
                     aes.KeySize = 256;
                     aes.BlockSize = 128;
@@ -35,32 +35,31 @@ namespace Logica
                     aes.Key = keyBytes;
                     aes.IV = ivBytes;
 
-                    ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+                    ICryptoTransform encryptor = aes.CreateEncryptor( aes.Key, aes.IV );
 
-                    byte[] plaintextBytes = Encoding.UTF8.GetBytes(Pass);
-                    byte[] ciphertextBytes = encryptor.TransformFinalBlock(plaintextBytes, 0, plaintextBytes.Length);
+                    byte[] plaintextBytes = Encoding.UTF8.GetBytes( text );
+                    byte[] ciphertextBytes = encryptor.TransformFinalBlock( plaintextBytes, 0, plaintextBytes.Length );
 
-                    sb.Append(Convert.ToBase64String(ciphertextBytes));
+                    sb.Append( Convert.ToBase64String( ciphertextBytes ) );
                 }
 
                 return sb.ToString();
-
             }
-            catch (FormatException ex)
+            catch ( FormatException ex )
             {
-                sb.Append(string.Format("Error {0}", ex.Message));
-
-                return sb.ToString();
-            }
-            catch (ArgumentException ex)
-            {
-                sb.Append(string.Format("Error {0}", ex.Message));
+                sb.Append(string.Format( "Error {0}", ex.Message ) );
 
                 return sb.ToString();
             }
-            catch (Exception ex)
+            catch ( ArgumentException ex )
             {
-                sb.Append(string.Format("Error {0}", ex.Message));
+                sb.Append( string.Format( "Error {0}", ex.Message ) );
+
+                return sb.ToString();
+            }
+            catch ( Exception ex )
+            {
+                sb.Append( string.Format( "Error {0}", ex.Message ) );
 
                 return sb.ToString();
             }

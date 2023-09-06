@@ -42,29 +42,28 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user = new Logica.Models.User();
 
-            user.Name = txtName.Text.Trim();
-            user.Email = txtEmail.Text.Trim();
-            user.Password = txtPassword.Text.Trim();
+            user.userName = txtName.Text.Trim();
+            user.userEmail = txtEmail.Text.Trim();
+            user.password = txtPassword.Text.Trim();
             user.userState.stateId = 1;
 
             if ( string.IsNullOrEmpty( validate ) )
             {
+                bool msg = validateYesOrNot( user.userName );
 
-                bool msg = validateYesOrNot( user.Name );
-
-                if (msg )
+                if ( msg )
                 {
                     bool ok = user.addUser();
 
                     if ( ok )
                     {
-                        MessageBox.Show("Usuario agregado correctamente", ":)", MessageBoxButtons.OK);
+                        MessageBox.Show( "Usuario agregado correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
                     }
                     else
                     {
-                        MessageBox.Show("No se agrego el usuario", ":(", MessageBoxButtons.OK);
+                        MessageBox.Show( "No se agrego el usuario", ":(", MessageBoxButtons.OK );
                     }
 
                 }
