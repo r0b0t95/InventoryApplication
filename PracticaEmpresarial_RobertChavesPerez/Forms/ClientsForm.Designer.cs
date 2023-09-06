@@ -64,7 +64,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.ForeColor = System.Drawing.Color.Gray;
-            this.lblEmail.Location = new System.Drawing.Point(58, 257);
+            this.lblEmail.Location = new System.Drawing.Point(58, 261);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(63, 20);
             this.lblEmail.TabIndex = 23;
@@ -75,7 +75,7 @@
             this.lblTel.AutoSize = true;
             this.lblTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTel.ForeColor = System.Drawing.Color.Gray;
-            this.lblTel.Location = new System.Drawing.Point(58, 169);
+            this.lblTel.Location = new System.Drawing.Point(58, 171);
             this.lblTel.Name = "lblTel";
             this.lblTel.Size = new System.Drawing.Size(86, 20);
             this.lblTel.TabIndex = 22;
@@ -87,7 +87,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnExit.Location = new System.Drawing.Point(56, 494);
+            this.btnExit.Location = new System.Drawing.Point(62, 494);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(366, 54);
             this.btnExit.TabIndex = 21;
@@ -101,7 +101,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSave.Location = new System.Drawing.Point(56, 414);
+            this.btnSave.Location = new System.Drawing.Point(62, 414);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(366, 54);
             this.btnSave.TabIndex = 20;
@@ -147,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(489, 590);
+            this.ClientSize = new System.Drawing.Size(489, 592);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtTel);
             this.Controls.Add(this.lblEmail);
@@ -157,7 +157,9 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblRegisterClient);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ClientsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clients";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -12,6 +12,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class SignUpForm : Form
     {
+        private Logica.Models.User user { get; set; }
+
         public SignUpForm()
         {
             InitializeComponent();
@@ -38,9 +40,35 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string validate = validateFields();
 
+            user = new Logica.Models.User();
+
+            user.Name = txtName.Text.Trim();
+            user.Email = txtEmail.Text.Trim();
+            user.Password = txtPassword.Text.Trim();
+            user.userState.stateId = 1;
+
             if ( string.IsNullOrEmpty( validate ) )
             {
-                MessageBox.Show( validate, "Se registro con exito", MessageBoxButtons.OK );
+
+                bool msg = validateYesOrNot( user.Name );
+
+                if (msg )
+                {
+                    bool ok = user.addUser();
+
+                    if ( ok )
+                    {
+                        MessageBox.Show("Usuario agregado correctamente", ":)", MessageBoxButtons.OK);
+
+                        cleanFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se agrego el usuario", ":(", MessageBoxButtons.OK);
+                    }
+
+                }
+
             }
             else
             {
@@ -60,6 +88,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return string.Empty;
         }
 
- 
+        private bool validateYesOrNot( string description )
+        {
+            string msg = string.Format( "Quieres agregar al usuario: {0} ?", description );
+
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+
+            return result == DialogResult.Yes ? true : false;
+        }
+
+        private void cleanFields()
+        {
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+        }
+
     }
 }

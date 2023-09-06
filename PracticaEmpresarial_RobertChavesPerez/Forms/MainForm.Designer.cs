@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryItem = new System.Windows.Forms.ToolStripMenuItem();
             this.suppliersItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opetationsItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,6 @@
             this.clientsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +71,16 @@
             this.MainMenu.Size = new System.Drawing.Size(1143, 40);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "menuStrip1";
+            // 
+            // exitItem
+            // 
+            this.exitItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.exitItem.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitItem.ForeColor = System.Drawing.Color.Black;
+            this.exitItem.Name = "exitItem";
+            this.exitItem.Size = new System.Drawing.Size(76, 36);
+            this.exitItem.Text = "Salir";
+            this.exitItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // inventoryItem
             // 
@@ -128,16 +138,6 @@
             this.logsItem.Text = "Bitacoras";
             this.logsItem.Click += new System.EventHandler(this.logsItem_Click);
             // 
-            // exitItem
-            // 
-            this.exitItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.exitItem.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitItem.ForeColor = System.Drawing.Color.Black;
-            this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(76, 36);
-            this.exitItem.Text = "Salir";
-            this.exitItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,6 +146,7 @@
             this.ClientSize = new System.Drawing.Size(1143, 701);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.MainMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
