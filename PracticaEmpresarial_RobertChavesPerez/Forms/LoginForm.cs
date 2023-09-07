@@ -12,6 +12,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class LoginForm : Form
     {
+        private Logica.Models.User user { get; set; }
+
         public LoginForm()
         {
             InitializeComponent();
@@ -21,15 +23,37 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string validate = validateFields();
 
+            user = new Logica.Models.User();
+
+            user.userName = txtName.Text.Trim();
+            user.password = txtPassword.Text.Trim();
+
             if ( string.IsNullOrEmpty( validate ) )
             {
-                new LoadingForm().Show();
 
-                this.Hide();
+                int userId = user.loginUser();
+
+                if ( userId > 0 )
+                {
+                    Globals.GlobalUser.userId = userId;
+
+                    //TODO: insert all data into GlobalUser
+
+                    cleanFields();
+                   
+                    new LoadingForm().Show();
+
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK );
+                }
+
             }
             else
             {
-                MessageBox.Show(validate, "Error", MessageBoxButtons.OK);
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
             }
         }
 
@@ -52,7 +76,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void txtName_Click(object sender, EventArgs e)
         {
-            if ( txtName.ForeColor == Color.FromArgb(64, 64, 64) )
+            if ( txtName.ForeColor == Color.FromArgb( 64, 64, 64 ) )
             {
                 textName();
             }
@@ -61,7 +85,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         private void txtPassword_Click(object sender, EventArgs e)
         {
             //contraseña
-            if ( txtPassword.ForeColor == Color.FromArgb(64, 64, 64) )
+            if ( txtPassword.ForeColor == Color.FromArgb( 64, 64, 64 ) )
             {
                 textPassword();
             }
@@ -117,5 +141,17 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             MessageBox.Show( message, "Politicas", MessageBoxButtons.OK );
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cleanFields()
+        {
+            txtName.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+        }
+
     }
 }

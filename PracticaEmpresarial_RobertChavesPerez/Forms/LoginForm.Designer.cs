@@ -37,6 +37,7 @@
             this.lblSignUp = new System.Windows.Forms.Label();
             this.lblPolicies = new System.Windows.Forms.Label();
             this.lblLogo = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogIn
@@ -111,7 +112,7 @@
             this.lblNotUser.AutoSize = true;
             this.lblNotUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNotUser.ForeColor = System.Drawing.Color.Gray;
-            this.lblNotUser.Location = new System.Drawing.Point(119, 519);
+            this.lblNotUser.Location = new System.Drawing.Point(118, 552);
             this.lblNotUser.Name = "lblNotUser";
             this.lblNotUser.Size = new System.Drawing.Size(131, 13);
             this.lblNotUser.TabIndex = 10;
@@ -123,7 +124,7 @@
             this.lblSignUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSignUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSignUp.ForeColor = System.Drawing.Color.White;
-            this.lblSignUp.Location = new System.Drawing.Point(256, 517);
+            this.lblSignUp.Location = new System.Drawing.Point(255, 549);
             this.lblSignUp.Name = "lblSignUp";
             this.lblSignUp.Size = new System.Drawing.Size(79, 16);
             this.lblSignUp.TabIndex = 11;
@@ -136,7 +137,7 @@
             this.lblPolicies.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPolicies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPolicies.ForeColor = System.Drawing.Color.White;
-            this.lblPolicies.Location = new System.Drawing.Point(172, 458);
+            this.lblPolicies.Location = new System.Drawing.Point(175, 514);
             this.lblPolicies.Name = "lblPolicies";
             this.lblPolicies.Size = new System.Drawing.Size(129, 15);
             this.lblPolicies.TabIndex = 12;
@@ -155,12 +156,27 @@
             this.lblLogo.Text = "Repuestos\r\nSanta Eulalia";
             this.lblLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(1)))), ((int)(((byte)(16)))));
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnExit.Location = new System.Drawing.Point(69, 434);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(366, 54);
+            this.btnExit.TabIndex = 14;
+            this.btnExit.Text = "Salir";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(489, 564);
+            this.ClientSize = new System.Drawing.Size(489, 592);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblLogo);
             this.Controls.Add(this.lblPolicies);
             this.Controls.Add(this.lblSignUp);
@@ -191,5 +207,6 @@
         private System.Windows.Forms.Label lblSignUp;
         private System.Windows.Forms.Label lblPolicies;
         private System.Windows.Forms.Label lblLogo;
+        private System.Windows.Forms.Button btnExit;
     }
 }

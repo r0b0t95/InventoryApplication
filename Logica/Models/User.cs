@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,29 @@ namespace Logica.Models
         {
             bool R = false;
             return R;
+        }
+
+        public int loginUser()
+        {
+            int r = 0;
+
+            Connection conn = new Connection();
+
+            Encryption encrypt = new Encryption();
+
+            string hash = encrypt.EncryptText( this.password );
+
+            conn.ParamList.Add(new SqlParameter( "@userName", this.userName ) );
+            conn.ParamList.Add(new SqlParameter( "@password", hash ) );
+            DataTable responce = conn.PerformSelect( "LoginUser" );
+
+            if ( responce != null && responce.Rows.Count > 0 )
+            {
+                DataRow row = responce.Rows[0];
+                r = Convert.ToInt32( row["userId"] );
+            }
+
+            return r;
         }
 
         //TODO: method -> consult by email
