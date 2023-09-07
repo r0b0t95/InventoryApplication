@@ -12,6 +12,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class ClientsForm : Form
     {
+        private Logica.Models.Client client { get; set; }
+
         public ClientsForm()
         {
             InitializeComponent();
@@ -25,6 +27,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             string validate = validateFields();
+
+            client = new Logica.Models.Client();
+
+            client.clientName = txtName.Text.Trim();
+            client.clientEmail = txtEmail.Text.Trim();
+            client.clientTel = Convert.ToInt32( txtTel.Text.Trim() );
 
             if (string.IsNullOrEmpty(validate))
             {

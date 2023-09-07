@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtTel = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblTel = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -37,6 +36,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.lblRegisterClient = new System.Windows.Forms.Label();
+            this.txtTel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtEmail
@@ -48,16 +48,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(366, 47);
             this.txtEmail.TabIndex = 26;
-            // 
-            // txtTel
-            // 
-            this.txtTel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.txtTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTel.ForeColor = System.Drawing.Color.Silver;
-            this.txtTel.Location = new System.Drawing.Point(62, 194);
-            this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(366, 47);
-            this.txtTel.TabIndex = 25;
             // 
             // lblEmail
             // 
@@ -142,14 +132,24 @@
             this.lblRegisterClient.Text = "Registrar Cliente";
             this.lblRegisterClient.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // txtTel
+            // 
+            this.txtTel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.txtTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTel.ForeColor = System.Drawing.Color.Silver;
+            this.txtTel.Location = new System.Drawing.Point(62, 194);
+            this.txtTel.Name = "txtTel";
+            this.txtTel.Size = new System.Drawing.Size(366, 47);
+            this.txtTel.TabIndex = 27;
+            // 
             // ClientsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(489, 592);
-            this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtTel);
+            this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblTel);
             this.Controls.Add(this.btnExit);
@@ -169,7 +169,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtTel;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblTel;
         private System.Windows.Forms.Button btnExit;
@@ -177,5 +176,6 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblRegisterClient;
+        private System.Windows.Forms.TextBox txtTel;
     }
 }
