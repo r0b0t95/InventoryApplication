@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,10 +47,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 43);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1149, 673);
+            this.pictureBox1.Size = new System.Drawing.Size(1143, 661);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -70,7 +68,7 @@
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(1143, 40);
             this.MainMenu.TabIndex = 1;
-            this.MainMenu.Text = "menuStrip1";
+            this.MainMenu.Text = "mainMenu";
             // 
             // exitItem
             // 
@@ -146,11 +144,11 @@
             this.ClientSize = new System.Drawing.Size(1143, 701);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.MainMenu);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "Main Form";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();

@@ -17,17 +17,17 @@ namespace Logica.Models
 
         public long userId { get; set; }
 
-        public string userName { get; set; }
+        public string name { get; set; }
 
-        public string userEmail { get; set; }
+        public string email { get; set; }
 
         public string password { get; set; }
 
-        public State userState { get; set; }
+        public State state { get; set; }
 
         public User()
         {
-            userState = new State();
+            state = new State();
         }
 
         // -> METHODS, DATABASE QUERIES
@@ -40,10 +40,10 @@ namespace Logica.Models
 
             string hash = encrypt.EncryptText( this.password );
 
-            conn.ParamList.Add( new SqlParameter( "@userName", this.userName ) );
-            conn.ParamList.Add( new SqlParameter( "@userEmail", this.userEmail ) );
+            conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
+            conn.ParamList.Add( new SqlParameter( "@userEmail", this.email ) );
             conn.ParamList.Add( new SqlParameter( "@password", hash ) );
-            conn.ParamList.Add( new SqlParameter( "@fkState", this.userState.stateId ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
             int r = conn.PerformUpdateDeleteInsert( "AddUser" );
 
             return r > 0 ? true : false;
@@ -71,7 +71,7 @@ namespace Logica.Models
 
             string hash = encrypt.EncryptText( this.password );
 
-            conn.ParamList.Add(new SqlParameter( "@userName", this.userName ) );
+            conn.ParamList.Add(new SqlParameter( "@userName", this.name ) );
             conn.ParamList.Add(new SqlParameter( "@password", hash ) );
             DataTable responce = conn.PerformSelect( "LoginUser" );
 

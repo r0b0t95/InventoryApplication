@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logica.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,17 +31,34 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             client = new Logica.Models.Client();
 
-            client.clientName = txtName.Text.Trim();
-            client.clientEmail = txtEmail.Text.Trim();
-            client.clientTel = Convert.ToInt32( txtTel.Text.Trim() );
+            client.name = txtName.Text.Trim();
+            client.email = txtEmail.Text.Trim();
+            client.tel = Convert.ToInt32( txtTel.Text.Trim() );
+            client.state.stateId = 1;
 
-            if (string.IsNullOrEmpty(validate))
+            if ( string.IsNullOrEmpty( validate ) )
             {
-                MessageBox.Show(validate, "Se registro con exito", MessageBoxButtons.OK);
+                bool msg = validateYesOrNot( client.name );
+
+                if( msg )
+                {
+                    bool ok = client.addClient();
+
+                    if( ok )
+                    {
+                        MessageBox.Show("Cliente agregado correctamente", ":)", MessageBoxButtons.OK);
+
+                        cleanFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se agrego el cliente", ":(", MessageBoxButtons.OK);
+                    }
+                }
             }
             else
             {
-                MessageBox.Show(validate, "Error", MessageBoxButtons.OK);
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
             }
         }
 
@@ -48,12 +66,33 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string responce = "El campo {0} esta vacio";
 
-            if (string.IsNullOrWhiteSpace(txtName.Text))
+            if ( string.IsNullOrWhiteSpace( txtName.Text ) )
             {
-                return string.Format(responce, "nombre");
+                return string.Format( responce, "nombre" );
             }
 
             return string.Empty;
+        }
+
+        private bool validateYesOrNot(string description)
+        {
+            string msg = string.Format( "Quieres agregar al cliente: {0} ?", description );
+
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+
+            return result == DialogResult.Yes ? true : false;
+        }
+
+        private void cleanFields()
+        {
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtTel.Text = string.Empty;
+        }
+
+        private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( !char.IsDigit( e.KeyChar ) ) e.Handled = true;
         }
     }
 }

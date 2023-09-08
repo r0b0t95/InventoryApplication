@@ -25,7 +25,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user = new Logica.Models.User();
 
-            user.userName = txtName.Text.Trim();
+            user.name = txtName.Text.Trim();
             user.password = txtPassword.Text.Trim();
 
             if ( string.IsNullOrEmpty( validate ) )

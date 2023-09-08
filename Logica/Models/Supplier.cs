@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,19 +24,27 @@ namespace Logica.Models
 
         public string description { get; set; }
 
-        public State supplierState { get; set; }
+        public State state { get; set; }
 
         public Supplier()
         {
-            supplierState = new State();
+            state = new State();
         }
 
         // -> METHODS, DATABASE QUERIES
 
         public bool addSupplier()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@supplierName", this.name ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierEmail", this.email ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierTel", this.tel ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierDescription", this.description ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
+            int r = conn.PerformUpdateDeleteInsert( "AddSupplier" );
+
+            return r > 0 ? true : false;
         }
 
         public bool updateSupplier()
@@ -51,8 +60,6 @@ namespace Logica.Models
         }
 
         //TODO: method -> consult by name
-
-        //TODO: method -> consult by description
 
         //TODO: method -> list of suppliers
 

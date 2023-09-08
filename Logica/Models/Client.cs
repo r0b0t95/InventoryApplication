@@ -16,17 +16,17 @@ namespace Logica.Models
 
         public long clientId { get; set; }
 
-        public string clientName { get; set; }
+        public string name { get; set; }
 
-        public string clientEmail { get; set; }
+        public string email { get; set; }
 
-        public long clientTel { get; set; }
+        public long tel { get; set; }
 
-        public State clientState { get; set; }
+        public State state { get; set; }
 
         public Client()
         {
-            clientState = new State();
+            state = new State();
         }
 
         // -> METHODS, DATABASE QUERIES
@@ -35,10 +35,10 @@ namespace Logica.Models
         {
             Connection conn = new Connection();
 
-            conn.ParamList.Add( new SqlParameter( "@clientName", this.clientName ) );
-            conn.ParamList.Add( new SqlParameter( "@clientEmail", this.clientEmail ) );
-            conn.ParamList.Add( new SqlParameter( "@clientTel", this.clientTel ) );
-            conn.ParamList.Add( new SqlParameter( "@fkState", this.clientState.stateId ) );
+            conn.ParamList.Add( new SqlParameter( "@clientName", this.name ) );
+            conn.ParamList.Add( new SqlParameter( "@clientEmail", this.email ) );
+            conn.ParamList.Add( new SqlParameter( "@clientTel", this.tel ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
             int r = conn.PerformUpdateDeleteInsert( "AddClient" );
 
             return r > 0 ? true : false;

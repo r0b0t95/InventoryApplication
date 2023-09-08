@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logica.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class SuppliersForm : Form
     {
+        private Logica.Models.Supplier supplier;
+
         public SuppliersForm()
         {
             InitializeComponent();
@@ -24,16 +27,41 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             string validate = validateFields();
 
-            if (string.IsNullOrEmpty(validate))
+            supplier = new Logica.Models.Supplier();
+
+            supplier.name = txtName.Text.Trim();
+            supplier.email = txtEmail.Text.Trim();  
+            supplier.description = txtDescription.Text.Trim();
+            supplier.tel = Convert.ToInt32( txtTel.Text.Trim() );
+            supplier.state.stateId = 1;
+
+            if ( string.IsNullOrEmpty( validate ) )
             {
-                MessageBox.Show(validate, "Se registro con exito", MessageBoxButtons.OK);
+                bool msg = validateYesOrNot( supplier.name );
+
+                if ( msg )
+                {
+                    bool ok = supplier.addSupplier();
+
+                    if (ok)
+                    {
+                        MessageBox.Show( "Proveedor agregado correctamente", ":)", MessageBoxButtons.OK );
+
+                        cleanFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No se agrego el proveedor", ":(", MessageBoxButtons.OK );
+                    }
+
+                }
+
             }
             else
             {
-                MessageBox.Show(validate, "Error", MessageBoxButtons.OK);
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
             }
         }
 
@@ -43,15 +71,37 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( string.IsNullOrWhiteSpace( txtName.Text ) )
             {
-                return string.Format(responce, "nombre");
+                return string.Format( responce, "nombre" );
             }
 
-            if (string.IsNullOrWhiteSpace(txtName.Text))
+            if (string.IsNullOrWhiteSpace( txtName.Text ) )
             {
-                return string.Format(responce, "telefono");
+                return string.Format( responce, "telefono" );
             }
 
             return string.Empty;
+        }
+
+        private bool validateYesOrNot( string description )
+        {
+            string msg = string.Format( "Quieres agregar al proveedor: {0} ?", description );
+
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+
+            return result == DialogResult.Yes ? true : false;
+        }
+
+        private void cleanFields()
+        {
+            txtName.Text = string.Empty;
+            txtTel.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtDescription.Text = string.Empty;
+        }
+
+        private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( !char.IsDigit( e.KeyChar ) ) e.Handled = true;
         }
     }
 }

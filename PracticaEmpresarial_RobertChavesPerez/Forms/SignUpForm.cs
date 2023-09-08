@@ -42,14 +42,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user = new Logica.Models.User();
 
-            user.userName = txtName.Text.Trim();
-            user.userEmail = txtEmail.Text.Trim();
+            user.name = txtName.Text.Trim();
+            user.email = txtEmail.Text.Trim();
             user.password = txtPassword.Text.Trim();
-            user.userState.stateId = 1;
+            user.state.stateId = 1;
 
             if ( string.IsNullOrEmpty( validate ) )
             {
-                bool msg = validateYesOrNot( user.userName );
+                bool msg = validateYesOrNot( user.name );
 
                 if ( msg )
                 {
