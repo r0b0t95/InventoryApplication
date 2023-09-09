@@ -15,11 +15,14 @@ for management my advice is Microsoft SQL Server Management Studio
 Robert Chaves Perez (r0b0t95)
 2023
 */
+
 CREATE DATABASE InventoryDB
 GO
 
 USE InventoryDB
 GO
+
+-- TABLES
 
 CREATE TABLE Client (
   clientId    int IDENTITY NOT NULL, 
@@ -141,5 +144,134 @@ ALTER TABLE Supplier ADD CONSTRAINT SU_ST FOREIGN KEY (fkState) REFERENCES State
 ALTER TABLE Client ADD CONSTRAINT CL_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
 
 ALTER TABLE [User] ADD CONSTRAINT US_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
+
+-- SOME INSERTS
+
+INSERT INTO [dbo].[State] ( stateName ) VALUES ( 'Active' )
+GO
+
+INSERT INTO [dbo].[State] ( stateName ) VALUES ( 'Inactive' )
+GO
+
+-- PROCEDURES
+
+-- USER PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[AddUser] 
+	@userName varchar(100),
+	@userEmail varchar(255),
+	@password varchar(255),
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[User] 
+		( userName, userEmail, password, fkState ) 
+	VALUES 
+		( @userName, @userEmail, @password, @fkState )
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[LoginUser] 
+	@userName varchar(100),
+	@password varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT userId, userName FROM [dbo].[User] WHERE userName = @userName AND password = @password
+END
+GO
+
+
+-- CLIENT PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[AddClient] 
+	@clientName varchar(100),
+	@clientEmail varchar(255),
+	@clientTel bigint,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Client] 
+		( clientName, clientEmail, clientTel, fkState ) 
+	VALUES 
+		( @clientName, @clientEmail, @clientTel, @fkState )
+END
+GO
+
+-- SUPPLIER PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[AddSupplier] 
+	@supplierName varchar(100),
+	@supplierEmail varchar(255),
+	@supplierTel bigint,
+	@supplierDescription varchar(255),
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Supplier] 
+		( supplierName, supplierEmail, supplierTel, supplierDescription, fkState ) 
+	VALUES 
+		( @supplierName, @supplierEmail, @supplierTel, @supplierDescription,@fkState )
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[suppliersList] 
+	@actives bit,
+	@filter varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT supplierId, supplierName, supplierTel, supplierEmail, supplierDescription
+			FROM [dbo].[Supplier]
+			WHERE fkState = @actives
+		END
+	ELSE
+		BEGIN
+			SELECT supplierId, supplierName, supplierTel, supplierEmail, supplierDescription
+			FROM [dbo].[Supplier]
+			WHERE fkState = @actives AND
+				  supplierName LIKE @filter OR 
+				  supplierTel LIKE @filter OR
+				  supplierEmail LIKE @filter OR 
+				  supplierDescription LIKE @filter 
+		END
+END
+GO
+
+
+
+/*
+ALTER TABLE Purchase DROP CONSTRAINT FKPurchase520850;
+ALTER TABLE Refund DROP CONSTRAINT FKRefund496037;
+ALTER TABLE Sale DROP CONSTRAINT FKSale550232;
+ALTER TABLE Sale DROP CONSTRAINT FKSale148848;
+ALTER TABLE Log DROP CONSTRAINT FKLog641589;
+ALTER TABLE Product DROP CONSTRAINT FKProduct310633;
+ALTER TABLE Product DROP CONSTRAINT FKProduct138986;
+ALTER TABLE Supplier DROP CONSTRAINT FKSupplier989295;
+ALTER TABLE Client DROP CONSTRAINT FKClient195508;
+ALTER TABLE [User] DROP CONSTRAINT FKUser298032;
+DROP TABLE Client;
+DROP TABLE Logg;
+DROP TABLE Product;
+DROP TABLE Purchase;
+DROP TABLE Refund;
+DROP TABLE Sale;
+DROP TABLE State;
+DROP TABLE Supplier;
+DROP TABLE [User];
+*/
 ```
 
