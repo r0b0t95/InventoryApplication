@@ -18,5 +18,7 @@ namespace PracticaEmpresarial_RobertChavesPerez
 
         public static Logica.Models.User GlobalUser = new User();
 
+        public static Logica.Models.Client GlobalClient = new Client();
+
     }
 }

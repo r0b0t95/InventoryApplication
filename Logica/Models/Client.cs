@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,20 @@ namespace Logica.Models
         {
             bool R = false;
             return R;
+        }
+
+        public DataTable list( bool actives = true, string filter = "" )
+        {
+            DataTable dt = new DataTable();
+
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
+            conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
+
+            dt = conn.PerformSelect( "ClientsList" );
+
+            return dt;
         }
 
     }

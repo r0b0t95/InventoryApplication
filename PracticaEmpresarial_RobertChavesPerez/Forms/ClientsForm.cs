@@ -46,13 +46,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     if( ok )
                     {
-                        MessageBox.Show("Cliente agregado correctamente", ":)", MessageBoxButtons.OK);
+                        MessageBox.Show( "Cliente agregado correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
                     }
                     else
                     {
-                        MessageBox.Show("No se agrego el cliente", ":(", MessageBoxButtons.OK);
+                        MessageBox.Show( "No se agrego el cliente", ":(", MessageBoxButtons.OK );
                     }
                 }
             }
@@ -74,7 +74,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return string.Empty;
         }
 
-        private bool validateYesOrNot(string description)
+        private bool validateYesOrNot( string description )
         {
             string msg = string.Format( "Quieres agregar al cliente: {0} ?", description );
 
@@ -92,7 +92,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b') e.Handled = true;
+            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
     }
 }

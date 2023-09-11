@@ -19,7 +19,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void clientsItem_Click(object sender, EventArgs e)
         {
-            new ClientsForm().Show();
+            new ClientsListForm().Show();
         }
 
         private void logsItem_Click(object sender, EventArgs e)
@@ -39,7 +39,23 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            Environment.Exit( 0 );
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void loadData()
+        {
+            lblSellerName.Text = Globals.GlobalUser.name.ToString();
+           
+            if ( !string.IsNullOrEmpty( Globals.GlobalClient.name ) )
+            {
+                txtClientName.Text = Globals.GlobalClient.name;
+            }
+        }
+
     }
 }

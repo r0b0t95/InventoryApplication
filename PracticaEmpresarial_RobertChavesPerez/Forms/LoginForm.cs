@@ -37,7 +37,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 {
                     Globals.GlobalUser.userId = userId;
 
-                    //TODO: insert all data into GlobalUser
+                    Globals.GlobalUser.name = txtName.Text.Trim();
 
                     cleanFields();
                    

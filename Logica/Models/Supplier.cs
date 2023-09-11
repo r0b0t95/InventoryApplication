@@ -71,7 +71,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
 
-            dt = conn.PerformSelect( "suppliersList" );
+            dt = conn.PerformSelect( "SuppliersList" );
 
             return dt;
         }
