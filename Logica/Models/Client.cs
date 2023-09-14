@@ -47,8 +47,15 @@ namespace Logica.Models
 
         public bool updateClient()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@clientId", this.clientId ) );
+            conn.ParamList.Add( new SqlParameter( "@clientName", this.name ) );
+            conn.ParamList.Add( new SqlParameter( "@clientEmail", this.email ) );
+            conn.ParamList.Add( new SqlParameter( "@clientTel", this.tel ) );
+            int r = conn.PerformUpdateDeleteInsert( "UpdateClient" );
+
+            return r > 0 ? true : false;
         }
 
         public bool deleteClient()

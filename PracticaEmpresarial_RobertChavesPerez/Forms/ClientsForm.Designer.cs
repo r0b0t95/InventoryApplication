@@ -37,6 +37,7 @@
             this.lblName = new System.Windows.Forms.Label();
             this.lblRegisterClient = new System.Windows.Forms.Label();
             this.txtTel = new System.Windows.Forms.TextBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtEmail
@@ -143,6 +144,21 @@
             this.txtTel.TabIndex = 27;
             this.txtTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTel_KeyPress);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnUpdate.Location = new System.Drawing.Point(62, 414);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(366, 54);
+            this.btnUpdate.TabIndex = 28;
+            this.btnUpdate.Text = "Actualizar";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Visible = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // ClientsForm
             // 
             this.AcceptButton = this.btnSave;
@@ -150,6 +166,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(489, 592);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtTel);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.lblEmail);
@@ -163,21 +180,22 @@
             this.Name = "ClientsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clients";
+            this.Load += new System.EventHandler(this.ClientsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblTel;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblRegisterClient;
-        private System.Windows.Forms.TextBox txtTel;
+        public System.Windows.Forms.TextBox txtEmail;
+        public System.Windows.Forms.TextBox txtName;
+        public System.Windows.Forms.TextBox txtTel;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

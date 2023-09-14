@@ -15,6 +15,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
     {
         private Logica.Models.Client client { get; set; }
 
+        private Logica.Models.Logg log { get; set; }
+
+        public long tempId { get; set; }
+
         public ClientsForm()
         {
             InitializeComponent();
@@ -33,12 +37,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             client.name = txtName.Text.Trim();
             client.email = txtEmail.Text.Trim();
-            client.tel = Convert.ToInt32( txtTel.Text.Trim() );
+            client.tel = Convert.ToInt64( txtTel.Text.Trim() );
             client.state.stateId = 1;
 
             if ( string.IsNullOrEmpty( validate ) )
             {
-                bool msg = validateYesOrNot( client.name );
+                string text = "Quieres agregar al cliente: {0} ?";
+
+                bool msg = validateYesOrNot( text ,client.name );
 
                 if( msg )
                 {
@@ -46,6 +52,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     if( ok )
                     {
+                        string detail = string.Format( "Agrego al cliente: {0}", client.name );
+
+                        addLogEvent( detail );
+
                         MessageBox.Show( "Cliente agregado correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
@@ -74,9 +84,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return string.Empty;
         }
 
-        private bool validateYesOrNot( string description )
+        private bool validateYesOrNot( string text ,string description )
         {
-            string msg = string.Format( "Quieres agregar al cliente: {0} ?", description );
+            string msg = string.Format( text, description );
 
             DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
 
@@ -94,5 +104,78 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
+
+        private void addLogEvent( string detail )
+        {
+            log = new Logica.Models.Logg();
+            log.user.userId = Globals.GlobalUser.userId;
+            log.logDetail = detail;
+            log.logDate = DateTime.Now;
+
+            log.addLog();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string validate = validateFields();
+
+            client = new Logica.Models.Client();
+
+            client.clientId = tempId;
+            client.name = txtName.Text.Trim();
+            client.email = txtEmail.Text.Trim();
+            client.tel = Convert.ToInt64( txtTel.Text.Trim() );
+
+            if ( string.IsNullOrEmpty( validate ) )
+            {
+                string text = "Quieres actualizar al cliente: {0} ?";
+
+                bool msg = validateYesOrNot( text, client.name );
+
+                if (msg)
+                {
+                    bool ok = client.updateClient();
+
+                    if (ok)
+                    {
+                        string detail = string.Format( "Actualizo al cliente: {0}", client.name );
+
+                        addLogEvent( detail );
+
+                        MessageBox.Show( "Cliente actualizado correctamente", ":)", MessageBoxButtons.OK );
+
+                        cleanFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No se actualizo el cliente", ":(", MessageBoxButtons.OK );
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+            }
+        }
+
+        private void ClientsForm_Load(object sender, EventArgs e)
+        {
+            loadForm();
+        }
+
+        private void loadForm()
+        {
+            if ( this.id.Equals( 0 ) )
+            {
+                btnSave.Visible = true;
+                btnUpdate.Visible = false;
+            }
+            else
+            {
+                btnSave.Visible = false;
+                btnUpdate.Visible = true;
+            }
+        }
+
     }
 }

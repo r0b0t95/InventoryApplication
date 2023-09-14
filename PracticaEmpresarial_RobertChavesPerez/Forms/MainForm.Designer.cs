@@ -54,6 +54,7 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.lblClientId = new System.Windows.Forms.Label();
             this.txtClientId = new System.Windows.Forms.TextBox();
+            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -66,7 +67,9 @@
             this.inventoryItem,
             this.suppliersItem,
             this.opetationsItem,
-            this.logsItem});
+            this.logsItem,
+            this.usuariosToolStripMenuItem});
+            this.MainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(1326, 40);
@@ -304,12 +307,18 @@
             this.txtClientId.TabIndex = 44;
             this.txtClientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(101, 36);
+            this.usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(1326, 770);
+            this.ClientSize = new System.Drawing.Size(1326, 785);
             this.Controls.Add(this.txtClientId);
             this.Controls.Add(this.lblClientId);
             this.Controls.Add(this.txtUser);
@@ -363,5 +372,6 @@
         public System.Windows.Forms.TextBox txtClientName;
         private System.Windows.Forms.Label lblClientId;
         public System.Windows.Forms.TextBox txtClientId;
+        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
     }
 }

@@ -74,5 +74,26 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
+        private void dgvList_DoubleClick(object sender, EventArgs e)
+        {
+            if ( dgvList.SelectedRows.Count == 1 )
+            {
+                DataGridViewRow row = dgvList.SelectedRows[0];
+
+                long clientId = Convert.ToInt64( row.Cells["CclientId"].Value );
+                string clientName = row.Cells["CclientName"].Value.ToString();
+                string clientTel = row.Cells["CclientTel"].Value.ToString();
+                string clientEmail = row.Cells["CclientEmail"].Value.ToString();
+
+                Globals.StcClientForm.tempId = clientId;
+                Globals.StcClientForm.txtName.Text = clientName.ToString();
+                Globals.StcClientForm.txtTel.Text = clientTel.ToString();
+                Globals.StcClientForm.txtEmail.Text = clientEmail.ToString();
+                Globals.StcClientForm.Show();
+            }
+
+        }
+
+
     }
 }
