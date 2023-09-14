@@ -35,8 +35,7 @@ CREATE TABLE Client (
 CREATE TABLE Logg (
   logId     bigint IDENTITY NOT NULL, 
   logDetail varchar(255) NOT NULL, 
-  logDate   date NOT NULL, 
-  logTime   time NOT NULL, 
+  logDate   datetime NOT NULL, 
   fkUser    smallint NOT NULL, 
   PRIMARY KEY (logId));
 
@@ -205,6 +204,22 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE [dbo].[UpdateClient] 
+	@clientId int,
+	@clientName varchar(100),
+	@clientEmail varchar(255),
+	@clientTel bigint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Client] 
+	SET clientName = @clientName, clientEmail = @clientEmail, 
+		 clientTel = @clientTel WHERE clientId = @clientId 
+END
+GO
+
+
 CREATE OR ALTER PROCEDURE [dbo].[ClientsList] 
 	@actives bit,
 	@filter varchar(255)
@@ -300,28 +315,43 @@ GO
 
 CREATE OR ALTER PROCEDURE [dbo].[AddLogg] 
 	@logDetail varchar(255),
-	@logDate date,
-	@logTime time(7),
+	@logDate datetime,
 	@fkUser smallint
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
 	INSERT INTO [dbo].[Logg] 
-		( logDetail, logDate, logTime, fkUser ) 
+		( logDetail, logDate, fkUser ) 
 	VALUES 
-		( @logDetail, @logDate, @logTime, @fkUser )
+		( @logDetail, @logDate, @fkUser )
 END
 GO
 
 
 CREATE OR ALTER PROCEDURE [dbo].[LoggsList] 
+	@filter varchar(255),
+	@fromDate datetime,
+	@toDate datetime
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	SELECT logDetail, logDate, logTime, userName
-	FROM Logg INNER  JOIN [dbo].[User] ON fkUser = userId
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT logDetail, logDate, userName
+			FROM Logg INNER  JOIN [dbo].[User] ON fkUser = userId
+			WHERE logDate BETWEEN @fromDate AND @toDate
+		END
+	ELSE
+		BEGIN
+			SET @filter = '%' + @filter + '%'
+
+			SELECT logDetail, logDate, userName
+			FROM Logg INNER  JOIN [dbo].[User] ON fkUser = userId
+			WHERE logDetail LIKE @filter AND
+			logDate BETWEEN @fromDate AND @toDate
+		END
 END
 GO
 

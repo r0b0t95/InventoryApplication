@@ -132,11 +132,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 bool msg = validateYesOrNot( text, client.name );
 
-                if (msg)
+                if ( msg )
                 {
                     bool ok = client.updateClient();
 
-                    if (ok)
+                    if ( ok )
                     {
                         string detail = string.Format( "Actualizo al cliente: {0}", client.name );
 
@@ -165,7 +165,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void loadForm()
         {
-            if ( this.id.Equals( 0 ) )
+            if ( this.tempId.Equals( 0 ) )
             {
                 btnSave.Visible = true;
                 btnUpdate.Visible = false;
