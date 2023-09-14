@@ -32,12 +32,13 @@
             this.lblClientsList = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.CclientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CclientTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CclientEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.CclientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CclientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CclientTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CclientEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,6 +88,7 @@
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CclientName,
+            this.CclientId,
             this.CclientTel,
             this.CclientEmail});
             this.dgvList.Location = new System.Drawing.Point(71, 199);
@@ -95,27 +97,6 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1017, 445);
             this.dgvList.TabIndex = 30;
-            // 
-            // CclientName
-            // 
-            this.CclientName.DataPropertyName = "clientName";
-            this.CclientName.HeaderText = "Nombre";
-            this.CclientName.Name = "CclientName";
-            this.CclientName.ReadOnly = true;
-            // 
-            // CclientTel
-            // 
-            this.CclientTel.DataPropertyName = "clientTel";
-            this.CclientTel.HeaderText = "Tel";
-            this.CclientTel.Name = "CclientTel";
-            this.CclientTel.ReadOnly = true;
-            // 
-            // CclientEmail
-            // 
-            this.CclientEmail.DataPropertyName = "clientEmail";
-            this.CclientEmail.HeaderText = "Correo";
-            this.CclientEmail.Name = "CclientEmail";
-            this.CclientEmail.ReadOnly = true;
             // 
             // btnExit
             // 
@@ -156,6 +137,35 @@
             this.txtSearch.TabIndex = 27;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
+            // CclientName
+            // 
+            this.CclientName.DataPropertyName = "clientName";
+            this.CclientName.HeaderText = "Nombre";
+            this.CclientName.Name = "CclientName";
+            this.CclientName.ReadOnly = true;
+            // 
+            // CclientId
+            // 
+            this.CclientId.DataPropertyName = "clientId";
+            this.CclientId.HeaderText = "Id";
+            this.CclientId.Name = "CclientId";
+            this.CclientId.ReadOnly = true;
+            this.CclientId.Visible = false;
+            // 
+            // CclientTel
+            // 
+            this.CclientTel.DataPropertyName = "clientTel";
+            this.CclientTel.HeaderText = "Tel";
+            this.CclientTel.Name = "CclientTel";
+            this.CclientTel.ReadOnly = true;
+            // 
+            // CclientEmail
+            // 
+            this.CclientEmail.DataPropertyName = "clientEmail";
+            this.CclientEmail.HeaderText = "Correo";
+            this.CclientEmail.Name = "CclientEmail";
+            this.CclientEmail.ReadOnly = true;
+            // 
             // ClientsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,6 +199,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridViewTextBoxColumn CclientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CclientId;
         private System.Windows.Forms.DataGridViewTextBoxColumn CclientTel;
         private System.Windows.Forms.DataGridViewTextBoxColumn CclientEmail;
     }

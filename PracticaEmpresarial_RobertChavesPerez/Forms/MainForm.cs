@@ -12,14 +12,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class MainForm : Form
     {
+
         public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void clientsItem_Click(object sender, EventArgs e)
-        {
-            new ClientsListForm().Show();
         }
 
         private void logsItem_Click(object sender, EventArgs e)
@@ -39,7 +35,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Environment.Exit( 0 );
+            Application.Exit();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -49,13 +45,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void loadData()
         {
-            lblSellerName.Text = Globals.GlobalUser.name.ToString();
-           
-            if ( !string.IsNullOrEmpty( Globals.GlobalClient.name ) )
-            {
-                txtClientName.Text = Globals.GlobalClient.name;
-            }
+            txtUser.Text = Globals.GlobalUser.name.ToString();
         }
 
+        private void btnSearchClient_Click(object sender, EventArgs e)
+        {
+            Form clientListForm = new ClientsListForm();
+
+            DialogResult r = clientListForm.ShowDialog();
+
+            if ( r == DialogResult.OK ) MessageBox.Show( "Cliente seleccionado", ":)", MessageBoxButtons.OK );
+        }
     }
 }

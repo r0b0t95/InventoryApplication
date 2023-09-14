@@ -204,6 +204,49 @@ BEGIN
 END
 GO
 
+
+CREATE OR ALTER PROCEDURE [dbo].[ClientsList] 
+	@actives bit,
+	@filter varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT clientId, clientName, clientEmail, clientTel
+			FROM [dbo].[Client]
+			WHERE fkState = @actives
+		END
+	ELSE
+		BEGIN
+			SET @filter = '%' + @filter + '%'
+
+			SELECT clientId, clientName, clientEmail, clientTel
+			FROM [dbo].[Client]
+			WHERE fkState = @actives AND
+				  clientName LIKE @filter OR 
+				  clientTel LIKE @filter OR
+				  clientEmail LIKE @filter
+		END
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[ClientObject] 
+	@id int,
+	@actives bit
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT clientId, clientName
+	FROM [dbo].[Client]
+	WHERE fkState = @actives AND clientId = @id
+END
+GO
+
+
 -- SUPPLIER PROCEDURES
 
 CREATE OR ALTER PROCEDURE [dbo].[AddSupplier] 
@@ -224,7 +267,7 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE [dbo].[suppliersList] 
+CREATE OR ALTER PROCEDURE [dbo].[SuppliersList] 
 	@actives bit,
 	@filter varchar(255)
 AS
@@ -239,6 +282,8 @@ BEGIN
 		END
 	ELSE
 		BEGIN
+			SET @filter = '%' + @filter + '%'
+
 			SELECT supplierId, supplierName, supplierTel, supplierEmail, supplierDescription
 			FROM [dbo].[Supplier]
 			WHERE fkState = @actives AND
@@ -247,6 +292,36 @@ BEGIN
 				  supplierEmail LIKE @filter OR 
 				  supplierDescription LIKE @filter 
 		END
+END
+GO
+
+
+-- LOGG PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[AddLogg] 
+	@logDetail varchar(255),
+	@logDate date,
+	@logTime time(7),
+	@fkUser smallint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Logg] 
+		( logDetail, logDate, logTime, fkUser ) 
+	VALUES 
+		( @logDetail, @logDate, @logTime, @fkUser )
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[LoggsList] 
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT logDetail, logDate, logTime, userName
+	FROM Logg INNER  JOIN [dbo].[User] ON fkUser = userId
 END
 GO
 

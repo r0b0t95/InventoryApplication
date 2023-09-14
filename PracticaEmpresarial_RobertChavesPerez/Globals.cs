@@ -14,11 +14,11 @@ namespace PracticaEmpresarial_RobertChavesPerez
         //ROBERT H. CHAVES PEREZ 2023
 
 
-        public static Form StcMainForm = new Forms.MainForm();
+        public static Forms.MainForm StcMainForm = new Forms.MainForm();
 
-        public static Logica.Models.User GlobalUser = new User();
+        public static Logica.Models.User GlobalUser = new Logica.Models.User();
 
-        public static Logica.Models.Client GlobalClient = new Client();
+        public static Logica.Models.Client GlobalClient = new Logica.Models.Client();
 
     }
 }

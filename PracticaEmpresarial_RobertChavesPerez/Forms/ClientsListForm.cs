@@ -59,9 +59,20 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            DataGridViewRow dgvr = dgvList.SelectedRows[0];
+            if ( dgvList.SelectedRows.Count == 1 ) 
+            { 
+                DataGridViewRow row = dgvList.SelectedRows[0];
 
-            Globals.GlobalClient.name = dgvr.Cells["CclientName"].Value.ToString();
+                string clientId = Convert.ToString( row.Cells["CclientId"].Value );
+                string clientName = Convert.ToString( row.Cells["CclientName"].Value );
+
+                Globals.StcMainForm.txtClientId.Text = clientId.ToString();
+                Globals.StcMainForm.txtClientName.Text = clientName.ToString();
+
+                this.DialogResult = DialogResult.OK;
+            }
+
         }
+
     }
 }
