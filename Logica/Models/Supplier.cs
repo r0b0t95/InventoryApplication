@@ -19,7 +19,7 @@ namespace Logica.Models
 
         public string name { get; set; }
 
-        public int tel { get; set; }
+        public long tel { get; set; }
 
         public string email { get; set; }
 
@@ -50,8 +50,16 @@ namespace Logica.Models
 
         public bool updateSupplier()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@supplierId", this.supplierId ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierName", this.name ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierEmail", this.email ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierTel", this.tel ) );
+            conn.ParamList.Add( new SqlParameter( "@supplierDescription", this.description ) );
+            int r = conn.PerformUpdateDeleteInsert( "UpdateSupplier" );
+
+            return r > 0 ? true : false;
         }
 
         public bool deleteSupplier()

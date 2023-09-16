@@ -15,7 +15,6 @@ for management my advice is Microsoft SQL Server Management Studio
 Robert Chaves Perez (r0b0t95)
 2023
 */
-
 CREATE DATABASE InventoryDB
 GO
 
@@ -278,6 +277,24 @@ BEGIN
 		( supplierName, supplierEmail, supplierTel, supplierDescription, fkState ) 
 	VALUES 
 		( @supplierName, @supplierEmail, @supplierTel, @supplierDescription,@fkState )
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdateSupplier] 
+	@supplierId int,
+	@supplierName varchar(100),
+	@supplierEmail varchar(255),
+	@supplierTel bigint,
+	@supplierDescription varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Supplier] 
+	SET supplierName = @supplierName, supplierEmail = @supplierEmail, 
+		 supplierTel = @supplierTel, supplierDescription = @supplierDescription 
+		 WHERE supplierId = @supplierId 
 END
 GO
 

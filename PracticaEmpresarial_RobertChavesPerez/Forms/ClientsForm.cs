@@ -59,6 +59,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                         MessageBox.Show( "Cliente agregado correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
+
+                        this.DialogResult = DialogResult.OK;
                     }
                     else
                     {
@@ -145,6 +147,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                         MessageBox.Show( "Cliente actualizado correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
+
+                        this.DialogResult = DialogResult.OK;
                     }
                     else
                     {

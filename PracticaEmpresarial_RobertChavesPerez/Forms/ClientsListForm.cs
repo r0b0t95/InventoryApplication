@@ -28,7 +28,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            new ClientsForm().ShowDialog();
+
+            ClientsForm clientForm = new ClientsForm();
+
+            DialogResult resp = clientForm.ShowDialog();
+
+            if ( resp == DialogResult.OK ) fillDgv();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -85,11 +90,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 string clientTel = row.Cells["CclientTel"].Value.ToString();
                 string clientEmail = row.Cells["CclientEmail"].Value.ToString();
 
-                Globals.StcClientForm.tempId = clientId;
-                Globals.StcClientForm.txtName.Text = clientName.ToString();
-                Globals.StcClientForm.txtTel.Text = clientTel.ToString();
-                Globals.StcClientForm.txtEmail.Text = clientEmail.ToString();
-                Globals.StcClientForm.Show();
+                ClientsForm clientForm = new ClientsForm();
+                clientForm.tempId = clientId;
+                clientForm.txtName.Text = clientName.ToString();
+                clientForm.txtTel.Text = clientTel.ToString();
+                clientForm.txtEmail.Text = clientEmail.ToString();
+
+                DialogResult resp = clientForm.ShowDialog();
+
+                if ( resp == DialogResult.OK ) fillDgv();
+
             }
 
         }

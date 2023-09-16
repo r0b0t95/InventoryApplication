@@ -32,13 +32,14 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.CsupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CsupplierTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CsupplierEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CsupplierDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSelect = new System.Windows.Forms.Button();
             this.lblSuppliersList = new System.Windows.Forms.Label();
             this.cbActivos = new System.Windows.Forms.CheckBox();
+            this.CsupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CsupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CsupplierTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CsupplierEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CsupplierDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,6 +90,7 @@
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CsupplierName,
+            this.CsupplierId,
             this.CsupplierTel,
             this.CsupplierEmail,
             this.CsupplierDescription});
@@ -98,35 +100,7 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1017, 445);
             this.dgvList.TabIndex = 23;
-            // 
-            // CsupplierName
-            // 
-            this.CsupplierName.DataPropertyName = "supplierName";
-            this.CsupplierName.HeaderText = "Nombre";
-            this.CsupplierName.Name = "CsupplierName";
-            this.CsupplierName.ReadOnly = true;
-            // 
-            // CsupplierTel
-            // 
-            this.CsupplierTel.DataPropertyName = "supplierTel";
-            this.CsupplierTel.HeaderText = "Tel";
-            this.CsupplierTel.Name = "CsupplierTel";
-            this.CsupplierTel.ReadOnly = true;
-            // 
-            // CsupplierEmail
-            // 
-            this.CsupplierEmail.DataPropertyName = "supplierEmail";
-            this.CsupplierEmail.HeaderText = "Correo";
-            this.CsupplierEmail.Name = "CsupplierEmail";
-            this.CsupplierEmail.ReadOnly = true;
-            // 
-            // CsupplierDescription
-            // 
-            this.CsupplierDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CsupplierDescription.DataPropertyName = "supplierDescription";
-            this.CsupplierDescription.HeaderText = "Descripcion";
-            this.CsupplierDescription.Name = "CsupplierDescription";
-            this.CsupplierDescription.ReadOnly = true;
+            this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
             // 
             // btnSelect
             // 
@@ -165,6 +139,43 @@
             this.cbActivos.Text = "Proveedores\r\nActivos";
             this.cbActivos.UseVisualStyleBackColor = true;
             // 
+            // CsupplierName
+            // 
+            this.CsupplierName.DataPropertyName = "supplierName";
+            this.CsupplierName.HeaderText = "Nombre";
+            this.CsupplierName.Name = "CsupplierName";
+            this.CsupplierName.ReadOnly = true;
+            // 
+            // CsupplierId
+            // 
+            this.CsupplierId.DataPropertyName = "supplierId";
+            this.CsupplierId.HeaderText = "Id";
+            this.CsupplierId.Name = "CsupplierId";
+            this.CsupplierId.ReadOnly = true;
+            this.CsupplierId.Visible = false;
+            // 
+            // CsupplierTel
+            // 
+            this.CsupplierTel.DataPropertyName = "supplierTel";
+            this.CsupplierTel.HeaderText = "Tel";
+            this.CsupplierTel.Name = "CsupplierTel";
+            this.CsupplierTel.ReadOnly = true;
+            // 
+            // CsupplierEmail
+            // 
+            this.CsupplierEmail.DataPropertyName = "supplierEmail";
+            this.CsupplierEmail.HeaderText = "Correo";
+            this.CsupplierEmail.Name = "CsupplierEmail";
+            this.CsupplierEmail.ReadOnly = true;
+            // 
+            // CsupplierDescription
+            // 
+            this.CsupplierDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CsupplierDescription.DataPropertyName = "supplierDescription";
+            this.CsupplierDescription.HeaderText = "Descripcion";
+            this.CsupplierDescription.Name = "CsupplierDescription";
+            this.CsupplierDescription.ReadOnly = true;
+            // 
             // SuppliersListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,12 +206,13 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.DataGridView dgvList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierTel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierDescription;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Label lblSuppliersList;
         private System.Windows.Forms.CheckBox cbActivos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierTel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierDescription;
     }
 }

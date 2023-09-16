@@ -48,7 +48,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            new SuppliersForm().Show();
+            SuppliersForm supplierForm = new SuppliersForm();
+
+            DialogResult resp = supplierForm.ShowDialog();
+
+            if ( resp == DialogResult.OK ) fillDgv();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -56,6 +60,32 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             this.Close();
         }
 
-        
+        private void dgvList_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvList.SelectedRows.Count == 1)
+            {
+                DataGridViewRow row = dgvList.SelectedRows[0];
+
+                long supplierId = Convert.ToInt64(row.Cells["CsupplierId"].Value);
+                string supplierName = row.Cells["CsupplierName"].Value.ToString();
+                string supplierTel = row.Cells["CsupplierTel"].Value.ToString();
+                string supplierEmail = row.Cells["CsupplierEmail"].Value.ToString();
+                string supplierDescription = row.Cells["CsupplierDescription"].Value.ToString();
+
+                SuppliersForm supplierForm = new SuppliersForm();
+                supplierForm.tempId = supplierId;
+                supplierForm.txtName.Text = supplierName.ToString();
+                supplierForm.txtTel.Text = supplierTel.ToString();
+                supplierForm.txtEmail.Text = supplierEmail.ToString();
+                supplierForm.txtDescription.Text = supplierDescription.ToString();
+
+                DialogResult resp = supplierForm.ShowDialog();
+
+                if (resp == DialogResult.OK) fillDgv();
+
+            }
+        }
+
+
     }
 }

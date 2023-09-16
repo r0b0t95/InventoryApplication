@@ -39,6 +39,7 @@
             this.txtTel = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblRegisterSupplier
@@ -166,12 +167,28 @@
             this.txtDescription.Size = new System.Drawing.Size(366, 47);
             this.txtDescription.TabIndex = 16;
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnUpdate.Location = new System.Drawing.Point(61, 504);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(366, 54);
+            this.btnUpdate.TabIndex = 29;
+            this.btnUpdate.Text = "Actualizar";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Visible = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // SuppliersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(489, 679);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtTel);
@@ -187,6 +204,7 @@
             this.Name = "SuppliersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Suppliers";
+            this.Load += new System.EventHandler(this.SuppliersForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,14 +214,15 @@
 
         private System.Windows.Forms.Label lblRegisterSupplier;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblTel;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.TextBox txtTel;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtDescription;
+        public System.Windows.Forms.TextBox txtName;
+        public System.Windows.Forms.TextBox txtTel;
+        public System.Windows.Forms.TextBox txtEmail;
+        public System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
