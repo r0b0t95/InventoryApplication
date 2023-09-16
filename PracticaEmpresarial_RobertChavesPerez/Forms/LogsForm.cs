@@ -37,9 +37,28 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             string fromDate = fromDTPicker.Text.ToString();
             string toDate = toDTPicker.Value.ToString();
 
-            dtList = log.list( txtSearch.Text.Trim(), fromDate, toDate );
+            if ( compareDates() )
+            {
+                dtList = log.list(txtSearch.Text.Trim(), fromDate, toDate);
+                dgvList.DataSource = dtList;
+            }
+            else
+            {
+                MessageBox.Show( "La fecha desde no puede ser mayor que la fecha hasta", ":)", MessageBoxButtons.OK );
+            }
 
-            dgvList.DataSource = dtList;
+        }
+
+        private bool compareDates()
+        {
+            DateTime fromDate = fromDTPicker.Value.Date;
+            DateTime toDate = toDTPicker.Value.Date;
+
+            if ( DateTime.Compare( toDate, fromDate ).Equals( 1 ) ) return true;
+
+            if ( DateTime.Equals( toDate, fromDate ) ) return true;
+
+            return false;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

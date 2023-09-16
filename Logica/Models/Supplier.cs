@@ -64,24 +64,25 @@ namespace Logica.Models
 
         public bool deleteSupplier()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@supplierId", this.supplierId ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
+            int r = conn.PerformUpdateDeleteInsert( "DeleteSupplier" );
+
+            return r > 0 ? true : false;
         }
 
         //TODO: method -> consult by name
 
         public DataTable list( bool actives = true, string filter = "" )
         {
-            DataTable dt = new DataTable();
-
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
 
-            dt = conn.PerformSelect( "SuppliersList" );
-
-            return dt;
+            return conn.PerformSelect( "SuppliersList" );
         }
 
     }

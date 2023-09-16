@@ -116,11 +116,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 btnSave.Visible = true;
                 btnUpdate.Visible = false;
+                btnDelete.Visible = false;
             }
             else
             {
                 btnSave.Visible = false;
                 btnUpdate.Visible = true;
+                btnDelete.Visible = true;
             }
         }
 
@@ -187,6 +189,41 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             log.logDate = DateTime.Now;
 
             log.addLog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            supplier = new Logica.Models.Supplier();
+            supplier.supplierId = tempId;
+            supplier.name = txtName.Text.Trim();
+            supplier.state.stateId = 2;
+
+            string text = "Quieres eliminar al proveedor: {0} ?";
+
+            bool msg = validateYesOrNot( text, supplier.name );
+
+            if ( msg )
+            {
+                bool ok = supplier.deleteSupplier();
+
+                if ( ok )
+                {
+                    string detail = string.Format( "Elimino al proveedor: {0}", supplier.name );
+
+                    addLogEvent(detail);
+
+                    MessageBox.Show( "Proveedor fue eliminado correctamente", ":)", MessageBoxButtons.OK );
+
+                    cleanFields();
+
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show( "No se elimino el proveedor", ":(", MessageBoxButtons.OK );
+                }
+            }
+
         }
 
 

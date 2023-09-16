@@ -48,7 +48,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public void fillDgv()
         {
-            dtList = client.list( true, txtSearch.Text.Trim() );
+            dtList = client.list( cbActivos.Checked, txtSearch.Text.Trim() );
 
             dgvList.DataSource = dtList;
         }
@@ -104,6 +104,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
+        private void cbActivos_CheckedChanged(object sender, EventArgs e)
+        {
+            fillDgv();
+        }
 
     }
 }

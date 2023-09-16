@@ -32,14 +32,14 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.btnSelect = new System.Windows.Forms.Button();
-            this.lblSuppliersList = new System.Windows.Forms.Label();
-            this.cbActivos = new System.Windows.Forms.CheckBox();
             this.CsupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CsupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CsupplierTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CsupplierEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CsupplierDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.lblSuppliersList = new System.Windows.Forms.Label();
+            this.cbActivos = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,43 +102,6 @@
             this.dgvList.TabIndex = 23;
             this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
             // 
-            // btnSelect
-            // 
-            this.btnSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(123)))), ((int)(((byte)(19)))));
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSelect.Location = new System.Drawing.Point(764, 673);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(324, 54);
-            this.btnSelect.TabIndex = 24;
-            this.btnSelect.Text = "Seleccionar";
-            this.btnSelect.UseVisualStyleBackColor = false;
-            // 
-            // lblSuppliersList
-            // 
-            this.lblSuppliersList.AutoSize = true;
-            this.lblSuppliersList.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuppliersList.ForeColor = System.Drawing.Color.Gray;
-            this.lblSuppliersList.Location = new System.Drawing.Point(485, 39);
-            this.lblSuppliersList.Name = "lblSuppliersList";
-            this.lblSuppliersList.Size = new System.Drawing.Size(187, 46);
-            this.lblSuppliersList.TabIndex = 25;
-            this.lblSuppliersList.Text = "Proveedores";
-            this.lblSuppliersList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cbActivos
-            // 
-            this.cbActivos.AutoSize = true;
-            this.cbActivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbActivos.ForeColor = System.Drawing.Color.Gray;
-            this.cbActivos.Location = new System.Drawing.Point(717, 109);
-            this.cbActivos.Name = "cbActivos";
-            this.cbActivos.Size = new System.Drawing.Size(116, 36);
-            this.cbActivos.TabIndex = 26;
-            this.cbActivos.Text = "Proveedores\r\nActivos";
-            this.cbActivos.UseVisualStyleBackColor = true;
-            // 
             // CsupplierName
             // 
             this.CsupplierName.DataPropertyName = "supplierName";
@@ -175,6 +138,46 @@
             this.CsupplierDescription.HeaderText = "Descripcion";
             this.CsupplierDescription.Name = "CsupplierDescription";
             this.CsupplierDescription.ReadOnly = true;
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(123)))), ((int)(((byte)(19)))));
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSelect.Location = new System.Drawing.Point(764, 673);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(324, 54);
+            this.btnSelect.TabIndex = 24;
+            this.btnSelect.Text = "Seleccionar";
+            this.btnSelect.UseVisualStyleBackColor = false;
+            // 
+            // lblSuppliersList
+            // 
+            this.lblSuppliersList.AutoSize = true;
+            this.lblSuppliersList.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuppliersList.ForeColor = System.Drawing.Color.Gray;
+            this.lblSuppliersList.Location = new System.Drawing.Point(485, 39);
+            this.lblSuppliersList.Name = "lblSuppliersList";
+            this.lblSuppliersList.Size = new System.Drawing.Size(187, 46);
+            this.lblSuppliersList.TabIndex = 25;
+            this.lblSuppliersList.Text = "Proveedores";
+            this.lblSuppliersList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cbActivos
+            // 
+            this.cbActivos.AutoSize = true;
+            this.cbActivos.Checked = true;
+            this.cbActivos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbActivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbActivos.ForeColor = System.Drawing.Color.Gray;
+            this.cbActivos.Location = new System.Drawing.Point(717, 109);
+            this.cbActivos.Name = "cbActivos";
+            this.cbActivos.Size = new System.Drawing.Size(116, 36);
+            this.cbActivos.TabIndex = 26;
+            this.cbActivos.Text = "Proveedores\r\nActivos";
+            this.cbActivos.UseVisualStyleBackColor = true;
+            this.cbActivos.CheckedChanged += new System.EventHandler(this.cbActivos_CheckedChanged);
             // 
             // SuppliersListForm
             // 

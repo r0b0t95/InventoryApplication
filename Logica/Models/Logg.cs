@@ -45,8 +45,6 @@ namespace Logica.Models
 
         public DataTable list( string filter = "", string from = "", string to = "" )
         {
-            DataTable dt = new DataTable();
-
             Connection conn = new Connection();
 
             DateTime fromDate = Convert.ToDateTime( from );
@@ -56,9 +54,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@fromDate", fromDate ) );
             conn.ParamList.Add( new SqlParameter( "@toDate", toDate ) );
 
-            dt = conn.PerformSelect( "LoggsList" );
-
-            return dt;
+            return conn.PerformSelect( "LoggsList" );
         }
 
     }

@@ -32,7 +32,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public void fillDgv()
         {
-            dtList = supplier.list( true, txtSearch.Text.Trim() );
+            dtList = supplier.list( cbActivos.Checked, txtSearch.Text.Trim() );
 
             dgvList.DataSource = dtList;
         }
@@ -62,11 +62,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void dgvList_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvList.SelectedRows.Count == 1)
+            if ( dgvList.SelectedRows.Count == 1 )
             {
                 DataGridViewRow row = dgvList.SelectedRows[0];
 
-                long supplierId = Convert.ToInt64(row.Cells["CsupplierId"].Value);
+                long supplierId = Convert.ToInt64( row.Cells["CsupplierId"].Value );
                 string supplierName = row.Cells["CsupplierName"].Value.ToString();
                 string supplierTel = row.Cells["CsupplierTel"].Value.ToString();
                 string supplierEmail = row.Cells["CsupplierEmail"].Value.ToString();
@@ -81,11 +81,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 DialogResult resp = supplierForm.ShowDialog();
 
-                if (resp == DialogResult.OK) fillDgv();
+                if ( resp == DialogResult.OK ) fillDgv();
 
             }
         }
 
-
+        private void cbActivos_CheckedChanged(object sender, EventArgs e)
+        {
+            fillDgv();
+        }
     }
 }

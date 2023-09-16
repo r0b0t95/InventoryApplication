@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logica.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,17 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
+            Globals.GlobalUser.userId = 1;
+
+            Globals.GlobalUser.name = "r0b0t95";
+
+            cleanFields();
+
+            new LoadingForm().Show();
+
+            this.Hide();
+
+            /*
             string validate = validateFields();
 
             user = new Logica.Models.User();
@@ -55,6 +67,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
             }
+            */
         }
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)

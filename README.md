@@ -1,20 +1,11 @@
 ### Data Base
 
-for management my advice is Microsoft SQL Server Management Studio
-
-<p align="center">
-<img src="README_FILES/SQL-Server-Microsoft.jpg"
-        alt="First"
-        style="float: left; margin-right: 50px;" />
-</p>
-
-**Microsoft SQL Server**
-
 ```SQL
 /* 
 Robert Chaves Perez (r0b0t95)
 2023
 */
+
 CREATE DATABASE InventoryDB
 GO
 
@@ -219,6 +210,19 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE [dbo].[DeleteClient] 
+	@clientId int,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Client] 
+	SET fkState = @fkState WHERE clientId = @clientId 
+END
+GO
+
+
 CREATE OR ALTER PROCEDURE [dbo].[ClientsList] 
 	@actives bit,
 	@filter varchar(255)
@@ -295,6 +299,19 @@ BEGIN
 	SET supplierName = @supplierName, supplierEmail = @supplierEmail, 
 		 supplierTel = @supplierTel, supplierDescription = @supplierDescription 
 		 WHERE supplierId = @supplierId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[DeleteSupplier] 
+	@supplierId int,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Supplier] 
+	SET fkState = @fkState WHERE supplierId = @supplierId
 END
 GO
 

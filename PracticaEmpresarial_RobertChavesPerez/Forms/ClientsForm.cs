@@ -173,12 +173,50 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 btnSave.Visible = true;
                 btnUpdate.Visible = false;
+                btnDelete.Visible = false;
             }
             else
             {
                 btnSave.Visible = false;
                 btnUpdate.Visible = true;
+                btnDelete.Visible = true;
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            client = new Logica.Models.Client();
+
+            client.clientId = tempId;
+            client.name = txtName.Text.Trim();
+            client.state.stateId = 2;
+
+            string text = "Quieres eliminar al cliente: {0} ?";
+
+            bool msg = validateYesOrNot( text, client.name );
+
+            if ( msg )
+            {
+                bool ok = client.deleteClient();
+
+                if (ok)
+                {
+                    string detail = string.Format( "Elimino al cliente: {0}", client.name );
+
+                    addLogEvent( detail );
+
+                    MessageBox.Show( "Cliente fue eliminado correctamente", ":)", MessageBoxButtons.OK );
+
+                    cleanFields();
+
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show( "No se elimino el cliente", ":(", MessageBoxButtons.OK );
+                }
+            }
+
         }
 
     }

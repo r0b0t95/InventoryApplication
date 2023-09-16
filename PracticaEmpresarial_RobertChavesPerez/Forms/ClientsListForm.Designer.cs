@@ -32,19 +32,21 @@
             this.lblClientsList = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.CclientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CclientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CclientTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CclientEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
             // cbActivos
             // 
             this.cbActivos.AutoSize = true;
+            this.cbActivos.Checked = true;
+            this.cbActivos.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbActivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbActivos.ForeColor = System.Drawing.Color.Gray;
             this.cbActivos.Location = new System.Drawing.Point(717, 109);
@@ -53,6 +55,7 @@
             this.cbActivos.TabIndex = 33;
             this.cbActivos.Text = "Clientes\r\nActivos";
             this.cbActivos.UseVisualStyleBackColor = true;
+            this.cbActivos.CheckedChanged += new System.EventHandler(this.cbActivos_CheckedChanged);
             // 
             // lblClientsList
             // 
@@ -99,6 +102,36 @@
             this.dgvList.TabIndex = 30;
             this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
             // 
+            // CclientName
+            // 
+            this.CclientName.DataPropertyName = "clientName";
+            this.CclientName.HeaderText = "Nombre";
+            this.CclientName.Name = "CclientName";
+            this.CclientName.ReadOnly = true;
+            // 
+            // CclientId
+            // 
+            this.CclientId.DataPropertyName = "clientId";
+            this.CclientId.HeaderText = "Id";
+            this.CclientId.Name = "CclientId";
+            this.CclientId.ReadOnly = true;
+            this.CclientId.Visible = false;
+            // 
+            // CclientTel
+            // 
+            this.CclientTel.DataPropertyName = "clientTel";
+            this.CclientTel.HeaderText = "Tel";
+            this.CclientTel.Name = "CclientTel";
+            this.CclientTel.ReadOnly = true;
+            // 
+            // CclientEmail
+            // 
+            this.CclientEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CclientEmail.DataPropertyName = "clientEmail";
+            this.CclientEmail.HeaderText = "Correo";
+            this.CclientEmail.Name = "CclientEmail";
+            this.CclientEmail.ReadOnly = true;
+            // 
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(1)))), ((int)(((byte)(16)))));
@@ -137,36 +170,6 @@
             this.txtSearch.Size = new System.Drawing.Size(366, 47);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // CclientName
-            // 
-            this.CclientName.DataPropertyName = "clientName";
-            this.CclientName.HeaderText = "Nombre";
-            this.CclientName.Name = "CclientName";
-            this.CclientName.ReadOnly = true;
-            // 
-            // CclientId
-            // 
-            this.CclientId.DataPropertyName = "clientId";
-            this.CclientId.HeaderText = "Id";
-            this.CclientId.Name = "CclientId";
-            this.CclientId.ReadOnly = true;
-            this.CclientId.Visible = false;
-            // 
-            // CclientTel
-            // 
-            this.CclientTel.DataPropertyName = "clientTel";
-            this.CclientTel.HeaderText = "Tel";
-            this.CclientTel.Name = "CclientTel";
-            this.CclientTel.ReadOnly = true;
-            // 
-            // CclientEmail
-            // 
-            this.CclientEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CclientEmail.DataPropertyName = "clientEmail";
-            this.CclientEmail.HeaderText = "Correo";
-            this.CclientEmail.Name = "CclientEmail";
-            this.CclientEmail.ReadOnly = true;
             // 
             // ClientsListForm
             // 
