@@ -37,7 +37,6 @@
             this.CsupplierTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CsupplierEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CsupplierDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.lblSuppliersList = new System.Windows.Forms.Label();
             this.cbActivos = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -60,7 +59,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnAdd.Location = new System.Drawing.Point(419, 673);
+            this.btnAdd.Location = new System.Drawing.Point(764, 673);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(324, 54);
             this.btnAdd.TabIndex = 21;
@@ -139,19 +138,6 @@
             this.CsupplierDescription.Name = "CsupplierDescription";
             this.CsupplierDescription.ReadOnly = true;
             // 
-            // btnSelect
-            // 
-            this.btnSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(123)))), ((int)(((byte)(19)))));
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSelect.Location = new System.Drawing.Point(764, 673);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(324, 54);
-            this.btnSelect.TabIndex = 24;
-            this.btnSelect.Text = "Seleccionar";
-            this.btnSelect.UseVisualStyleBackColor = false;
-            // 
             // lblSuppliersList
             // 
             this.lblSuppliersList.AutoSize = true;
@@ -187,7 +173,6 @@
             this.ClientSize = new System.Drawing.Size(1154, 774);
             this.Controls.Add(this.cbActivos);
             this.Controls.Add(this.lblSuppliersList);
-            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAdd);
@@ -209,7 +194,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.DataGridView dgvList;
-        private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Label lblSuppliersList;
         private System.Windows.Forms.CheckBox cbActivos;
         private System.Windows.Forms.DataGridViewTextBoxColumn CsupplierName;

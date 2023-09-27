@@ -1,6 +1,7 @@
 ### Data Base
 
 ```SQL
+
 /* 
 Robert Chaves Perez (r0b0t95)
 2023
@@ -41,17 +42,15 @@ CREATE TABLE Product (
 
 CREATE TABLE Purchase (
   purchaseId     bigint IDENTITY NOT NULL, 
-  purchaseDate   date NOT NULL, 
-  purchaseTime   time NOT NULL, 
-  purchaseDetail varchar(255) NULL, 
+  purchaseDate   datetime NOT NULL, 
+  purchaseDetail varchar(255) NOT NULL, 
   purchaseTotal  float(10) NULL, 
   fkSupplier     int NOT NULL, 
   PRIMARY KEY (purchaseId));
 
 CREATE TABLE Refund (
   refundId   bigint IDENTITY NOT NULL, 
-  refundDate date NULL, 
-  refundTime time NULL, 
+  refundDate datetime NULL, 
   SalesaleId bigint NOT NULL, 
   PRIMARY KEY (refundId));
 
@@ -85,14 +84,23 @@ CREATE TABLE [User] (
   userEmail varchar(255) NULL UNIQUE, 
   password  varchar(255) NOT NULL, 
   fkState   tinyint NOT NULL, 
+  fkRol     tinyint NOT NULL,
   PRIMARY KEY (userId));
 
+CREATE TABLE Rol (
+  rolId   tinyint IDENTITY NOT NULL, 
+  rolName char(50) NOT NULL UNIQUE, 
+  PRIMARY KEY (rolId));
+
+CREATE INDEX Rol_rolId 
+  ON Rol (rolId);
 
 CREATE INDEX Client_clientId 
   ON Client (clientId);
 
 CREATE INDEX Log_logId 
   ON Logg (logId);
+
 CREATE INDEX Product_productId 
   ON Product (productId);
 
@@ -101,6 +109,7 @@ CREATE INDEX Purchase_purchaseId
 
 CREATE INDEX Refund_refundId 
   ON Refund (refundId);
+
 CREATE INDEX Sale_saleId 
   ON Sale (saleId);
 
@@ -134,12 +143,22 @@ ALTER TABLE Client ADD CONSTRAINT CL_ST FOREIGN KEY (fkState) REFERENCES State (
 
 ALTER TABLE [User] ADD CONSTRAINT US_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
 
+ALTER TABLE [User] ADD CONSTRAINT US_RO FOREIGN KEY (fkRol) REFERENCES Rol (rolId);
+
+
+
 -- SOME INSERTS
 
 INSERT INTO [dbo].[State] ( stateName ) VALUES ( 'Active' )
 GO
 
 INSERT INTO [dbo].[State] ( stateName ) VALUES ( 'Inactive' )
+GO
+
+INSERT INTO [dbo].[Rol] ( rolName ) VALUES ( 'Administrador' )
+GO
+
+INSERT INTO [dbo].[Rol] ( rolName ) VALUES ( 'Usuario' )
 GO
 
 -- PROCEDURES
@@ -163,6 +182,77 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE [dbo].[UpdateUser] 
+	@userId int,
+	@userName varchar(100),
+	@userEmail varchar(255),
+	@fkRol tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[User] 
+	SET userName = @userName, userEmail = @userEmail, fkRol = @fkRol
+		 WHERE userId = @userId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[DeleteUser] 
+	@userId int,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[User] 
+	SET fkState = @fkState WHERE userId = @userId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdatePassword] 
+	@userId int,
+	@password varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[User] 
+	SET password = @password
+		 WHERE userId = @userId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[UsersList] 
+	@actives bit,
+	@filter varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+	
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT userId, userName, userEmail, rolName
+			FROM [dbo].[User] INNER JOIN [dbo].[Rol] ON fkRol = rolId
+			WHERE fkState = @actives 
+		END
+	ELSE
+		BEGIN
+			SET @filter = '%' + @filter + '%'
+
+			SELECT userId, userName, userEmail, rolName
+			FROM [dbo].[User] INNER JOIN [dbo].[Rol] ON fkRol = rolId
+			WHERE fkState = @actives  
+				  AND
+				  userName LIKE @filter OR 
+				  userEmail LIKE @filter 
+		END
+END
+GO
+
+
 CREATE OR ALTER PROCEDURE [dbo].[LoginUser] 
 	@userName varchar(100),
 	@password varchar(255)
@@ -170,7 +260,8 @@ AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	SELECT userId, userName FROM [dbo].[User] WHERE userName = @userName AND password = @password
+	SELECT userId, userName FROM [dbo].[User] 
+	WHERE userName = @userName AND password = @password
 END
 GO
 
@@ -389,6 +480,85 @@ BEGIN
 END
 GO
 
+
+-- PURCHASE PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[AddPurchase] 
+	@purchaseDate datetime,
+	@purchaseDetail varchar(255),
+	@purchaseTotal bigint,
+	@fkSupplier int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Purchase] 
+		( purchaseDate, purchaseDetail, purchaseTotal, fkSupplier ) 
+	VALUES 
+		( @purchaseDate, @purchaseDetail, @purchaseTotal, @fkSupplier )
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdatePurchase] 
+	@purchaseId bigint,
+	@purchaseDetail varchar(255),
+	@purchaseTotal real,
+	@fkSupplier int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Purchase] 
+	SET purchaseDetail = @purchaseDetail, purchaseTotal = @purchaseTotal 
+		 WHERE purchaseId = @purchaseId 
+END
+GO
+
+/*
+	@purchaseDate datetime,
+	@purchaseDetail varchar(255),
+	@purchaseTotal bigint,
+	@fkSupplier int
+*/
+
+CREATE OR ALTER PROCEDURE [dbo].[PurchasesList] 
+	@filter varchar(255),
+	@fromDate datetime,
+	@toDate datetime
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT purchaseId, purchaseDate, purchaseDetail, purchaseTotal, supplierName
+			FROM Purchase INNER  JOIN Supplier ON fkSupplier = supplierId
+			WHERE purchaseDate BETWEEN @fromDate AND @toDate
+		END
+	ELSE
+		BEGIN
+			SET @filter = '%' + @filter + '%'
+
+			SELECT purchaseId, purchaseDate, purchaseDetail, purchaseTotal, supplierName
+			FROM Purchase INNER  JOIN Supplier ON fkSupplier = supplierId
+			WHERE purchaseDetail LIKE @filter AND
+			purchaseDate BETWEEN @fromDate AND @toDate
+		END
+END
+GO
+
+
+-- ROLE PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[RoleList] 
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT rolId, rolName FROM Rol  
+END
+GO
 
 
 /*

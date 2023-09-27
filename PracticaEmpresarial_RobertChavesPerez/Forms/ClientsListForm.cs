@@ -28,7 +28,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
             ClientsForm clientForm = new ClientsForm();
 
             DialogResult resp = clientForm.ShowDialog();

@@ -6,45 +6,47 @@ using System.Threading.Tasks;
 
 namespace Logica.Models
 {
-    public class TodoList
+    public class Purchase
     {
 
         //ROBERT H. CHAVES PEREZ 2023
 
-        // -> TODOLIST ATTRIBUTES
+        // -> ORDER ATTRIBUTES
 
-        public long reminderId { get; set; }
+        public long orderId { get; set; }
 
         public string description { get; set; }
 
-        public State reminderState { get; set; }
+        public DateTime date { get; set; }
 
-        public TodoList() 
+        public State purchaseState { get; set; }
+
+        public Purchase()
         {
-            reminderState = new State();
+            purchaseState = new State();
         }
 
         // -> METHODS, DATABASE QUERIES
 
-        public bool addReminder()
+        public bool addPurchase()
         {
             bool R = false;
             return R;
         }
 
-        public bool updateReminder()
+        public bool updatePurchase()
         {
             bool R = false;
             return R;
         }
 
-        public bool deleteReminder()
+        public bool deletePurchase()
         {
             bool R = false;
             return R;
         }
 
-        //TODO: method -> reminders list
+        //TODO: method -> orders list
 
     }
 }

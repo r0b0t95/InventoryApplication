@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SuppliersForm));
-            this.lblRegisterSupplier = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -45,17 +45,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblRegisterSupplier
+            // lblTitle
             // 
-            this.lblRegisterSupplier.AutoSize = true;
-            this.lblRegisterSupplier.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegisterSupplier.ForeColor = System.Drawing.Color.Gray;
-            this.lblRegisterSupplier.Location = new System.Drawing.Point(100, 19);
-            this.lblRegisterSupplier.Name = "lblRegisterSupplier";
-            this.lblRegisterSupplier.Size = new System.Drawing.Size(289, 46);
-            this.lblRegisterSupplier.TabIndex = 6;
-            this.lblRegisterSupplier.Text = "Registrar Proveedor";
-            this.lblRegisterSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Gray;
+            this.lblTitle.Location = new System.Drawing.Point(100, 19);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(289, 46);
+            this.lblTitle.TabIndex = 6;
+            this.lblTitle.Text = "Registrar Proveedor";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblName
             // 
@@ -214,7 +214,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
-            this.Controls.Add(this.lblRegisterSupplier);
+            this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SuppliersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -228,7 +228,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblRegisterSupplier;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnExit;

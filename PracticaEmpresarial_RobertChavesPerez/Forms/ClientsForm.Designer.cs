@@ -36,7 +36,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.lblRegisterClient = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.txtTel = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.PictureBox();
@@ -124,17 +124,17 @@
             this.lblName.TabIndex = 18;
             this.lblName.Text = "Nombre*";
             // 
-            // lblRegisterClient
+            // lblTitle
             // 
-            this.lblRegisterClient.AutoSize = true;
-            this.lblRegisterClient.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegisterClient.ForeColor = System.Drawing.Color.Gray;
-            this.lblRegisterClient.Location = new System.Drawing.Point(119, 20);
-            this.lblRegisterClient.Name = "lblRegisterClient";
-            this.lblRegisterClient.Size = new System.Drawing.Size(254, 46);
-            this.lblRegisterClient.TabIndex = 17;
-            this.lblRegisterClient.Text = "Registrar Cliente";
-            this.lblRegisterClient.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Gray;
+            this.lblTitle.Location = new System.Drawing.Point(100, 19);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(254, 46);
+            this.lblTitle.TabIndex = 17;
+            this.lblTitle.Text = "Registrar Cliente";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtTel
             // 
@@ -190,7 +190,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
-            this.Controls.Add(this.lblRegisterClient);
+            this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ClientsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -208,7 +208,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblRegisterClient;
+        private System.Windows.Forms.Label lblTitle;
         public System.Windows.Forms.TextBox txtEmail;
         public System.Windows.Forms.TextBox txtName;
         public System.Windows.Forms.TextBox txtTel;

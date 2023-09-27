@@ -22,9 +22,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            Globals.GlobalUser.userId = 1;
+            Globals.GlobalUser.userId = 3;
 
-            Globals.GlobalUser.name = "r0b0t95";
+            Globals.GlobalUser.name = "robert";
 
             cleanFields();
 

@@ -63,7 +63,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@clientId", this.clientId ) );
-            conn.ParamList.Add(new SqlParameter( "@fkState", this.state.stateId ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
             int r = conn.PerformUpdateDeleteInsert( "DeleteClient" );
 
             return r > 0 ? true : false;

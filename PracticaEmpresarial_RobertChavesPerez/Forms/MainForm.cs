@@ -56,5 +56,27 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( r == DialogResult.OK ) MessageBox.Show( "Cliente seleccionado", ":)", MessageBoxButtons.OK );
         }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new UsersListForm().Show();
+        }
+
+        private void logsItem_Click_1(object sender, EventArgs e)
+        {
+            new LogsForm().Show();
+        }
+
+        private void usersItem_Click(object sender, EventArgs e)
+        {
+            new UsersListForm().Show();
+        }
+
+        private void changePasswordItem_Click(object sender, EventArgs e)
+        {
+            new UpdatePassword().Show();
+        }
+
+
     }
 }

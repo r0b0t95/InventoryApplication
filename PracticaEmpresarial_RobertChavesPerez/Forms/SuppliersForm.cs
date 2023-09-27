@@ -117,12 +117,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 btnSave.Visible = true;
                 btnUpdate.Visible = false;
                 btnDelete.Visible = false;
+                lblTitle.Text = "Registrar Proveedor";
             }
             else
             {
                 btnSave.Visible = false;
                 btnUpdate.Visible = true;
                 btnDelete.Visible = true;
+                lblTitle.Text = "Modificar Proveedor";
             }
         }
 

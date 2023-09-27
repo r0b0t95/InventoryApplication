@@ -35,9 +35,11 @@
             this.suppliersItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opetationsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Options = new System.Windows.Forms.ToolStripMenuItem();
             this.logsItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePasswordItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
@@ -54,7 +56,6 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.lblClientId = new System.Windows.Forms.Label();
             this.txtClientId = new System.Windows.Forms.TextBox();
-            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -67,8 +68,7 @@
             this.inventoryItem,
             this.suppliersItem,
             this.opetationsItem,
-            this.logsItem,
-            this.usuariosToolStripMenuItem});
+            this.Options});
             this.MainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
@@ -104,7 +104,6 @@
             // 
             this.opetationsItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.comprasToolStripMenuItem,
-            this.ventasToolStripMenuItem,
             this.devolucionesToolStripMenuItem});
             this.opetationsItem.Name = "opetationsItem";
             this.opetationsItem.Size = new System.Drawing.Size(134, 36);
@@ -116,24 +115,43 @@
             this.comprasToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
             this.comprasToolStripMenuItem.Text = "Compras";
             // 
-            // ventasToolStripMenuItem
-            // 
-            this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
-            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
-            this.ventasToolStripMenuItem.Text = "Ventas";
-            // 
             // devolucionesToolStripMenuItem
             // 
             this.devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
             this.devolucionesToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
             this.devolucionesToolStripMenuItem.Text = "Devoluciones";
             // 
+            // Options
+            // 
+            this.Options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logsItem,
+            this.usersItem,
+            this.changePasswordItem});
+            this.Options.Name = "Options";
+            this.Options.Size = new System.Drawing.Size(106, 36);
+            this.Options.Text = "Opciones";
+            this.Options.Click += new System.EventHandler(this.logsItem_Click);
+            // 
             // logsItem
             // 
             this.logsItem.Name = "logsItem";
-            this.logsItem.Size = new System.Drawing.Size(105, 36);
-            this.logsItem.Text = "Bitacoras";
-            this.logsItem.Click += new System.EventHandler(this.logsItem_Click);
+            this.logsItem.Size = new System.Drawing.Size(264, 30);
+            this.logsItem.Text = "Bitacora";
+            this.logsItem.Click += new System.EventHandler(this.logsItem_Click_1);
+            // 
+            // usersItem
+            // 
+            this.usersItem.Name = "usersItem";
+            this.usersItem.Size = new System.Drawing.Size(264, 30);
+            this.usersItem.Text = "Usuarios";
+            this.usersItem.Click += new System.EventHandler(this.usersItem_Click);
+            // 
+            // changePasswordItem
+            // 
+            this.changePasswordItem.Name = "changePasswordItem";
+            this.changePasswordItem.Size = new System.Drawing.Size(264, 30);
+            this.changePasswordItem.Text = "Cambiar Contraseña";
+            this.changePasswordItem.Click += new System.EventHandler(this.changePasswordItem_Click);
             // 
             // btnSelect
             // 
@@ -141,7 +159,7 @@
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSelect.Location = new System.Drawing.Point(205, 639);
+            this.btnSelect.Location = new System.Drawing.Point(210, 577);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(324, 54);
             this.btnSelect.TabIndex = 35;
@@ -191,7 +209,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnExit.Location = new System.Drawing.Point(564, 639);
+            this.btnExit.Location = new System.Drawing.Point(565, 591);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(324, 54);
             this.btnExit.TabIndex = 33;
@@ -204,7 +222,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnAdd.Location = new System.Drawing.Point(894, 639);
+            this.btnAdd.Location = new System.Drawing.Point(904, 591);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(324, 54);
             this.btnAdd.TabIndex = 32;
@@ -307,12 +325,6 @@
             this.txtClientId.TabIndex = 44;
             this.txtClientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // usuariosToolStripMenuItem
-            // 
-            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(101, 36);
-            this.usuariosToolStripMenuItem.Text = "Usuarios";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,9 +365,8 @@
         private System.Windows.Forms.ToolStripMenuItem opetationsItem;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolucionesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logsItem;
+        private System.Windows.Forms.ToolStripMenuItem Options;
         private System.Windows.Forms.ToolStripMenuItem exitItem;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.DataGridView dgvList;
@@ -372,6 +383,8 @@
         public System.Windows.Forms.TextBox txtClientName;
         private System.Windows.Forms.Label lblClientId;
         public System.Windows.Forms.TextBox txtClientId;
-        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logsItem;
+        private System.Windows.Forms.ToolStripMenuItem usersItem;
+        private System.Windows.Forms.ToolStripMenuItem changePasswordItem;
     }
 }
