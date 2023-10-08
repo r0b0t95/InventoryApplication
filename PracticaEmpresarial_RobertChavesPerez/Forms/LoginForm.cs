@@ -22,17 +22,19 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            Globals.GlobalUser.userId = 3;
+            
+            Globals.GlobalUser.userId = 1;
 
-            Globals.GlobalUser.name = "robert";
+            Globals.GlobalUser.name = "abdul";
 
             cleanFields();
 
             new LoadingForm().Show();
 
             this.Hide();
-
+            
             /*
+            
             string validate = validateFields();
 
             user = new Logica.Models.User();
@@ -68,6 +70,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
             }
             */
+            
         }
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -115,11 +118,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtPassword.Text = String.Empty;
             txtPassword.ForeColor = Color.Silver;
             txtPassword.UseSystemPasswordChar = true;
-        }
-
-        private void lblSignUp_Click(object sender, EventArgs e)
-        {
-            new SignUpForm().Show();
         }
 
         private string validateFields() 

@@ -32,14 +32,11 @@
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.suppliersItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.opetationsItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.devolucionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Options = new System.Windows.Forms.ToolStripMenuItem();
             this.logsItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
@@ -66,9 +63,8 @@
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitItem,
             this.inventoryItem,
-            this.suppliersItem,
-            this.opetationsItem,
-            this.Options});
+            this.Options,
+            this.ventasToolStripMenuItem});
             this.MainMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
@@ -92,34 +88,6 @@
             this.inventoryItem.Size = new System.Drawing.Size(116, 36);
             this.inventoryItem.Text = "Inventario";
             this.inventoryItem.Click += new System.EventHandler(this.inventoryItem_Click);
-            // 
-            // suppliersItem
-            // 
-            this.suppliersItem.Name = "suppliersItem";
-            this.suppliersItem.Size = new System.Drawing.Size(136, 36);
-            this.suppliersItem.Text = "Proveedores";
-            this.suppliersItem.Click += new System.EventHandler(this.suppliersItem_Click);
-            // 
-            // opetationsItem
-            // 
-            this.opetationsItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.comprasToolStripMenuItem,
-            this.devolucionesToolStripMenuItem});
-            this.opetationsItem.Name = "opetationsItem";
-            this.opetationsItem.Size = new System.Drawing.Size(134, 36);
-            this.opetationsItem.Text = "Operaciones";
-            // 
-            // comprasToolStripMenuItem
-            // 
-            this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
-            this.comprasToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
-            this.comprasToolStripMenuItem.Text = "Compras";
-            // 
-            // devolucionesToolStripMenuItem
-            // 
-            this.devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
-            this.devolucionesToolStripMenuItem.Size = new System.Drawing.Size(203, 30);
-            this.devolucionesToolStripMenuItem.Text = "Devoluciones";
             // 
             // Options
             // 
@@ -152,6 +120,12 @@
             this.changePasswordItem.Size = new System.Drawing.Size(264, 30);
             this.changePasswordItem.Text = "Cambiar Contraseña";
             this.changePasswordItem.Click += new System.EventHandler(this.changePasswordItem_Click);
+            // 
+            // ventasToolStripMenuItem
+            // 
+            this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
+            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(83, 36);
+            this.ventasToolStripMenuItem.Text = "Ventas";
             // 
             // btnSelect
             // 
@@ -245,7 +219,7 @@
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClientName.ForeColor = System.Drawing.Color.Gray;
-            this.lblClientName.Location = new System.Drawing.Point(223, 98);
+            this.lblClientName.Location = new System.Drawing.Point(259, 98);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(122, 18);
             this.lblClientName.TabIndex = 38;
@@ -256,7 +230,7 @@
             this.txtClientName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClientName.ForeColor = System.Drawing.Color.Silver;
-            this.txtClientName.Location = new System.Drawing.Point(226, 119);
+            this.txtClientName.Location = new System.Drawing.Point(262, 119);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.ReadOnly = true;
             this.txtClientName.Size = new System.Drawing.Size(385, 24);
@@ -321,7 +295,7 @@
             this.txtClientId.Location = new System.Drawing.Point(62, 119);
             this.txtClientId.Name = "txtClientId";
             this.txtClientId.ReadOnly = true;
-            this.txtClientId.Size = new System.Drawing.Size(138, 24);
+            this.txtClientId.Size = new System.Drawing.Size(172, 24);
             this.txtClientId.TabIndex = 44;
             this.txtClientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -361,11 +335,7 @@
         #endregion
         private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem inventoryItem;
-        private System.Windows.Forms.ToolStripMenuItem suppliersItem;
-        private System.Windows.Forms.ToolStripMenuItem opetationsItem;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem devolucionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Options;
         private System.Windows.Forms.ToolStripMenuItem exitItem;
         private System.Windows.Forms.Button btnSelect;
@@ -386,5 +356,6 @@
         private System.Windows.Forms.ToolStripMenuItem logsItem;
         private System.Windows.Forms.ToolStripMenuItem usersItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordItem;
+        private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
     }
 }

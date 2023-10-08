@@ -71,9 +71,9 @@
             this.lblTel.ForeColor = System.Drawing.Color.Gray;
             this.lblTel.Location = new System.Drawing.Point(58, 171);
             this.lblTel.Name = "lblTel";
-            this.lblTel.Size = new System.Drawing.Size(86, 20);
+            this.lblTel.Size = new System.Drawing.Size(79, 20);
             this.lblTel.TabIndex = 22;
-            this.lblTel.Text = "Telefono*";
+            this.lblTel.Text = "Telefono";
             // 
             // btnExit
             // 

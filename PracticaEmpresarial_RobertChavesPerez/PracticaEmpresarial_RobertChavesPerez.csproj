@@ -58,6 +58,12 @@
     <Compile Include="Forms\ClientsListForm.Designer.cs">
       <DependentUpon>ClientsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CodeForm.Designer.cs">
+      <DependentUpon>CodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InventoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,18 +100,6 @@
     <Compile Include="Forms\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SuppliersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuppliersForm.Designer.cs">
-      <DependentUpon>SuppliersForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SuppliersListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SuppliersListForm.Designer.cs">
-      <DependentUpon>SuppliersListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\UpdatePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +122,12 @@
     <EmbeddedResource Include="Forms\ClientsListForm.resx">
       <DependentUpon>ClientsListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CodeForm.resx">
+      <DependentUpon>CodeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryForm.resx">
+      <DependentUpon>InventoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoadingForm.resx">
       <DependentUpon>LoadingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,12 +142,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuppliersForm.resx">
-      <DependentUpon>SuppliersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SuppliersListForm.resx">
-      <DependentUpon>SuppliersListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UpdatePassword.resx">
       <DependentUpon>UpdatePassword.cs</DependentUpon>

@@ -19,6 +19,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public long tempId { get; set; }
 
+        private string tempEmail { get; set; }
+
+        private string tempTel { get; set; }
+
         public ClientsForm()
         {
             InitializeComponent();
@@ -31,14 +35,17 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string validate = validateFields();
-
             client = new Logica.Models.Client();
 
             client.name = txtName.Text.Trim();
             client.email = txtEmail.Text.Trim();
-            client.tel = Convert.ToInt64( txtTel.Text.Trim() );
+            if ( !string.IsNullOrWhiteSpace( txtTel.Text.Trim() ) )
+            {
+                client.tel = Convert.ToInt64( txtTel.Text.Trim() );
+            }
             client.state.stateId = 1;
+
+            string validate = validateFields( client );
 
             if ( string.IsNullOrEmpty( validate ) )
             {
@@ -74,13 +81,25 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
-        private string validateFields()
+        private string validateFields( Client client )
         {
             string responce = "El campo {0} esta vacio";
 
-            if ( string.IsNullOrWhiteSpace( txtName.Text ) )
+            if ( string.IsNullOrWhiteSpace( txtName.Text.Trim() ) )
             {
                 return string.Format( responce, "nombre" );
+            }
+
+            if ( client.consultClientTel() && !txtTel.Text.Trim().Equals( tempTel ) &&
+                !string.IsNullOrWhiteSpace( txtTel.Text.Trim() ) )
+            {
+                return string.Format( "El telefono {0} ya existe", txtTel.Text.Trim() );;
+            }
+
+            if ( client.consultClientEmail() && !txtEmail.Text.Trim().Equals( tempEmail ) &&
+                !string.IsNullOrWhiteSpace( txtEmail.Text.Trim() ) )
+            {
+                return string.Format( "El correo {0} ya existe", txtEmail.Text.Trim() );
             }
 
             return string.Empty;
@@ -119,14 +138,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string validate = validateFields();
-
             client = new Logica.Models.Client();
 
             client.clientId = tempId;
             client.name = txtName.Text.Trim();
             client.email = txtEmail.Text.Trim();
-            client.tel = Convert.ToInt64( txtTel.Text.Trim() );
+            client.tel = Convert.ToInt64(txtTel.Text.Trim());
+
+            string validate = validateFields( client );
 
             if ( string.IsNullOrEmpty( validate ) )
             {
@@ -182,7 +201,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 btnUpdate.Visible = true;
                 btnDelete.Visible = true;
                 lblTitle.Text = "Modificar Cliente";
+                fillTemporal();
             }
+        }
+
+        private void fillTemporal()
+        {
+            tempEmail = txtEmail.Text.Trim();
+            tempTel = txtTel.Text.Trim();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -221,5 +247,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
+        
     }
 }

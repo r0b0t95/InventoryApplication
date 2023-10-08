@@ -69,6 +69,36 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        public bool consultClientEmail()
+        {
+            Connection conn = new Connection();
+
+            conn.ParamList.Add(new SqlParameter( "@clientEmail", this.email ) );
+            DataTable responce = conn.PerformSelect( "ConsultClientEmail" );
+
+            if (responce != null && responce.Rows.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool consultClientTel()
+        {
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@clientTel", this.tel ) );
+            DataTable responce = conn.PerformSelect( "ConsultClientTel" );
+
+            if (responce != null && responce.Rows.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public DataTable list( bool actives = true, string filter = "" )
         {
             Connection conn = new Connection();

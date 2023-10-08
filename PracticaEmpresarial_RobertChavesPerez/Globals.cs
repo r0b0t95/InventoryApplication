@@ -18,8 +18,6 @@ namespace PracticaEmpresarial_RobertChavesPerez
 
         public static Forms.ClientsForm StcClientForm = new Forms.ClientsForm();
 
-        public static Forms.SuppliersForm StcSupplierForm = new Forms.SuppliersForm();
-
         public static Logica.Models.User GlobalUser = new Logica.Models.User();
 
         public static Logica.Models.Client GlobalClient = new Logica.Models.Client();

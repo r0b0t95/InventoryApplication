@@ -23,11 +23,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new LogsForm().Show();
         }
 
-        private void suppliersItem_Click(object sender, EventArgs e)
-        {
-            new SuppliersListForm().Show();
-        }
-
         private void inventoryItem_Click(object sender, EventArgs e)
         {
             new InventoryForm().Show();

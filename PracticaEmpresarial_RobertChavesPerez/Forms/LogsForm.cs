@@ -39,7 +39,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( compareDates() )
             {
-                dtList = log.list(txtSearch.Text.Trim(), fromDate, toDate);
+                dtList = log.list( txtSearch.Text.Trim(), fromDate, toDate );
                 dgvList.DataSource = dtList;
             }
             else

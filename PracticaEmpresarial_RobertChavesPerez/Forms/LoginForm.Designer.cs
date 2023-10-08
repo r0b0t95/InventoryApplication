@@ -33,8 +33,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.cbShowPassword = new System.Windows.Forms.CheckBox();
             this.lblForgotPassword = new System.Windows.Forms.Label();
-            this.lblNotUser = new System.Windows.Forms.Label();
-            this.lblSignUp = new System.Windows.Forms.Label();
             this.lblPolicies = new System.Windows.Forms.Label();
             this.lblLogo = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -107,30 +105,6 @@
             this.lblForgotPassword.Text = "Olvido la contraseña?";
             this.lblForgotPassword.Click += new System.EventHandler(this.lblForgotPassword_Click);
             // 
-            // lblNotUser
-            // 
-            this.lblNotUser.AutoSize = true;
-            this.lblNotUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotUser.ForeColor = System.Drawing.Color.Gray;
-            this.lblNotUser.Location = new System.Drawing.Point(118, 552);
-            this.lblNotUser.Name = "lblNotUser";
-            this.lblNotUser.Size = new System.Drawing.Size(131, 13);
-            this.lblNotUser.TabIndex = 10;
-            this.lblNotUser.Text = "No tienes un usuario?";
-            // 
-            // lblSignUp
-            // 
-            this.lblSignUp.AutoSize = true;
-            this.lblSignUp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblSignUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSignUp.ForeColor = System.Drawing.Color.White;
-            this.lblSignUp.Location = new System.Drawing.Point(255, 549);
-            this.lblSignUp.Name = "lblSignUp";
-            this.lblSignUp.Size = new System.Drawing.Size(79, 16);
-            this.lblSignUp.TabIndex = 11;
-            this.lblSignUp.Text = "Registrate";
-            this.lblSignUp.Click += new System.EventHandler(this.lblSignUp_Click);
-            // 
             // lblPolicies
             // 
             this.lblPolicies.AutoSize = true;
@@ -179,8 +153,6 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblLogo);
             this.Controls.Add(this.lblPolicies);
-            this.Controls.Add(this.lblSignUp);
-            this.Controls.Add(this.lblNotUser);
             this.Controls.Add(this.lblForgotPassword);
             this.Controls.Add(this.cbShowPassword);
             this.Controls.Add(this.txtPassword);
@@ -203,8 +175,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.CheckBox cbShowPassword;
         private System.Windows.Forms.Label lblForgotPassword;
-        private System.Windows.Forms.Label lblNotUser;
-        private System.Windows.Forms.Label lblSignUp;
         private System.Windows.Forms.Label lblPolicies;
         private System.Windows.Forms.Label lblLogo;
         private System.Windows.Forms.Button btnExit;

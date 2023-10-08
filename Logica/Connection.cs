@@ -46,7 +46,7 @@ namespace Logica
         {
             DataTable ReturnData = new DataTable();
 
-            using (SqlConnection MyCnn = new SqlConnection( ConnectionString ) )
+            using ( SqlConnection MyCnn = new SqlConnection( ConnectionString ) )
             {
                 SqlCommand MyCommand = new SqlCommand( SPName, MyCnn );
                 MyCommand.CommandType = CommandType.StoredProcedure;

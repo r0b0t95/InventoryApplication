@@ -1,7 +1,6 @@
 ### Data Base
 
 ```SQL
-
 /* 
 Robert Chaves Perez (r0b0t95)
 2023
@@ -13,137 +12,158 @@ GO
 USE InventoryDB
 GO
 
+
+
 -- TABLES
 
 CREATE TABLE Client (
-  clientId    int IDENTITY NOT NULL, 
-  clientName  varchar(100) NOT NULL, 
-  clientEmail varchar(255) NULL UNIQUE, 
-  clientTel   bigint NULL UNIQUE, 
-  fkState     tinyint NOT NULL, 
-  PRIMARY KEY (clientId));
+  clientId    INT IDENTITY NOT NULL, 
+  clientName  VARCHAR(100) NOT NULL, 
+  clientEmail VARCHAR(255) NULL, 
+  clientTel   BIGINT NULL, 
+  fkState     TINYINT NOT NULL )
+GO
 
 CREATE TABLE Logg (
-  logId     bigint IDENTITY NOT NULL, 
-  logDetail varchar(255) NOT NULL, 
-  logDate   datetime NOT NULL, 
-  fkUser    smallint NOT NULL, 
-  PRIMARY KEY (logId));
+  logId     BIGINT IDENTITY NOT NULL, 
+  logDetail VARCHAR(255) NOT NULL, 
+  logDate   DATETIME NOT NULL, 
+  fkUser    SMALLINT NOT NULL )
+GO
+
+CREATE TABLE Code (
+  codeId BIGINT IDENTITY NOT NULL,
+  code VARCHAR(100) )
+GO
 
 CREATE TABLE Product (
-  productId     int IDENTITY NOT NULL, 
-  code          varchar(100) NOT NULL UNIQUE, 
-  productDetail varchar(255) NOT NULL, 
-  cant          int NOT NULL, 
-  price         float(10) NOT NULL, 
-  fkState       tinyint NOT NULL, 
-  fkSupplier    int NOT NULL, 
-  PRIMARY KEY (productId));
-
-CREATE TABLE Purchase (
-  purchaseId     bigint IDENTITY NOT NULL, 
-  purchaseDate   datetime NOT NULL, 
-  purchaseDetail varchar(255) NOT NULL, 
-  purchaseTotal  float(10) NULL, 
-  fkSupplier     int NOT NULL, 
-  PRIMARY KEY (purchaseId));
-
-CREATE TABLE Refund (
-  refundId   bigint IDENTITY NOT NULL, 
-  refundDate datetime NULL, 
-  SalesaleId bigint NOT NULL, 
-  PRIMARY KEY (refundId));
+  productId     BIGINT IDENTITY NOT NULL, 
+  productDetail VARCHAR(500) NOT NULL, 
+  cant          INT NOT NULL, 
+  price         DECIMAL(10, 2) NOT NULL, 
+  fkCode        BIGINT NOT NULL,
+  fkState       TINYINT NOT NULL )
+GO
 
 CREATE TABLE Sale (
-  saleId         bigint IDENTITY NOT NULL, 
-  saleDetail     varchar(255) NOT NULL, 
-  saleDate       date NOT NULL, 
-  saleTime       time NOT NULL, 
-  saleTotal      int NOT NULL, 
-  fkUser         smallint NOT NULL, 
-  ClientclientId int NOT NULL, 
-  PRIMARY KEY (saleId));
+  saleId       BIGINT IDENTITY NOT NULL, 
+  saleDetail   VARCHAR(1500) NOT NULL, 
+  saleDate     DATETIME NOT NULL,
+  saleSubTotal DECIMAL(10, 2) NOT NULL,
+  saleDiscount DECIMAL(10, 2) NOT NULL,
+  saleTax      DECIMAL(10, 2) NOT NULL,
+  saleTotal    DECIMAL(10, 2) NOT NULL, 
+  fkUser       SMALLINT NOT NULL, 
+  fkClient     INT NOT NULL,
+  fkState      TINYINT NOT NULL )
+GO
 
 CREATE TABLE State (
-  stateId   tinyint IDENTITY NOT NULL, 
-  stateName char(50) NOT NULL UNIQUE, 
-  PRIMARY KEY (stateId));
-
-CREATE TABLE Supplier (
-  supplierId          int IDENTITY NOT NULL, 
-  supplierName        varchar(100) NULL UNIQUE, 
-  supplierTel         bigint NULL, 
-  supplierEmail       varchar(255) NULL, 
-  supplierDescription varchar(255) NULL, 
-  fkState             tinyint NOT NULL, 
-  PRIMARY KEY (supplierId));
+  stateId   TINYINT IDENTITY NOT NULL, 
+  stateName CHAR(50) NOT NULL UNIQUE )
+GO
 
 CREATE TABLE [User] (
-  userId    smallint IDENTITY NOT NULL, 
-  userName  varchar(100) NOT NULL, 
-  userEmail varchar(255) NULL UNIQUE, 
-  password  varchar(255) NOT NULL, 
-  fkState   tinyint NOT NULL, 
-  fkRol     tinyint NOT NULL,
-  PRIMARY KEY (userId));
+  userId    SMALLINT IDENTITY NOT NULL, 
+  userName  VARCHAR(100) NOT NULL, 
+  userEmail VARCHAR(255) NULL, 
+  password  VARCHAR(255) NOT NULL, 
+  fkState   TINYINT NOT NULL, 
+  fkRol     TINYINT NOT NULL )
+GO
 
 CREATE TABLE Rol (
   rolId   tinyint IDENTITY NOT NULL, 
-  rolName char(50) NOT NULL UNIQUE, 
-  PRIMARY KEY (rolId));
+  rolName char(50) NOT NULL UNIQUE )
+GO
+
+
+
+-- PRIMARY KEYs
+
+ALTER TABLE Client ADD PRIMARY KEY (clientId)
+GO
+
+ALTER TABLE Logg ADD PRIMARY KEY (logId)
+GO
+
+ALTER TABLE Code ADD PRIMARY KEY (codeId)
+GO
+
+ALTER TABLE Product ADD PRIMARY KEY (productId)
+GO
+
+ALTER TABLE Sale ADD PRIMARY KEY (saleId)
+GO
+
+ALTER TABLE State ADD PRIMARY KEY (stateId)
+GO
+
+ALTER TABLE [User] ADD PRIMARY KEY (userId)
+GO
+
+ALTER TABLE Rol ADD PRIMARY KEY (rolId)
+GO
+
+
+
+-- INDEXs
+
+CREATE INDEX Code_codeId 
+  ON Code (codeId)
+GO
 
 CREATE INDEX Rol_rolId 
-  ON Rol (rolId);
+  ON Rol (rolId)
+GO
 
 CREATE INDEX Client_clientId 
-  ON Client (clientId);
+  ON Client (clientId)
+GO
 
 CREATE INDEX Log_logId 
-  ON Logg (logId);
+  ON Logg (logId)
+GO
 
 CREATE INDEX Product_productId 
-  ON Product (productId);
+  ON Product (productId)
+GO
 
-CREATE INDEX Purchase_purchaseId 
-  ON Purchase (purchaseId);
-
-CREATE INDEX Refund_refundId 
-  ON Refund (refundId);
 
 CREATE INDEX Sale_saleId 
-  ON Sale (saleId);
+  ON Sale (saleId)
+GO
 
 CREATE INDEX State_stateId 
-  ON State (stateId);
-
-CREATE INDEX Supplier_supplierId 
-  ON Supplier (supplierId);
+  ON State (stateId)
+GO
 
 CREATE INDEX User_userId 
-  ON [User] (userId);
+  ON [User] (userId)
+GO
 
 
-ALTER TABLE Purchase ADD CONSTRAINT PU_SU FOREIGN KEY (fkSupplier) REFERENCES Supplier (supplierId);
 
-ALTER TABLE Refund ADD CONSTRAINT RE_SA FOREIGN KEY (SalesaleId) REFERENCES Sale (saleId);
+-- FOREIGN KEYs
 
-ALTER TABLE Sale ADD CONSTRAINT SA_CL FOREIGN KEY (ClientclientId) REFERENCES Client (clientId);
+
+ALTER TABLE Sale ADD CONSTRAINT SA_CL FOREIGN KEY (fkClient) REFERENCES Client (clientId);
 
 ALTER TABLE Sale ADD CONSTRAINT SA_US FOREIGN KEY (fkUser) REFERENCES [User] (userId);
 
+ALTER TABLE Sale ADD CONSTRAINT SA_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
+
 ALTER TABLE Logg ADD CONSTRAINT LO_US FOREIGN KEY (fkUser) REFERENCES [User] (userId);
 
-ALTER TABLE Product ADD CONSTRAINT PR_SU FOREIGN KEY (fkSupplier) REFERENCES Supplier (supplierId);
-
 ALTER TABLE Product ADD CONSTRAINT PR_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
-
-ALTER TABLE Supplier ADD CONSTRAINT SU_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
 
 ALTER TABLE Client ADD CONSTRAINT CL_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
 
 ALTER TABLE [User] ADD CONSTRAINT US_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
 
 ALTER TABLE [User] ADD CONSTRAINT US_RO FOREIGN KEY (fkRol) REFERENCES Rol (rolId);
+
+ALTER TABLE Product ADD CONSTRAINT PR_CO FOREIGN KEY (fkCode) REFERENCES Code (codeId);
 
 
 
@@ -161,6 +181,20 @@ GO
 INSERT INTO [dbo].[Rol] ( rolName ) VALUES ( 'Usuario' )
 GO
 
+INSERT INTO [User] 
+( userName, userEmail, password, fkState, fkRol )
+VALUES
+( 'abdul', '', 'HCNhE36R7pQLCD0B2cbVqQ==', 1, 1)
+GO
+
+
+INSERT INTO [User] 
+( userName, userEmail, password, fkState, fkRol )
+VALUES
+( 'robert', '', 'LHvf2IwkzNuocVwT+QeJzg==', 1, 2)
+GO
+
+
 -- PROCEDURES
 
 -- USER PROCEDURES
@@ -169,15 +203,16 @@ CREATE OR ALTER PROCEDURE [dbo].[AddUser]
 	@userName varchar(100),
 	@userEmail varchar(255),
 	@password varchar(255),
-	@fkState tinyint
+	@fkState tinyint,
+	@fkRol tinyint
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
 	INSERT INTO [dbo].[User] 
-		( userName, userEmail, password, fkState ) 
+		( userName, userEmail, password, fkState, fkRol ) 
 	VALUES 
-		( @userName, @userEmail, @password, @fkState )
+		( @userName, @userEmail, @password, @fkState, @fkRol )
 END
 GO
 
@@ -266,6 +301,29 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE [dbo].[ConsultUserName] 
+	@userName varchar(100)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT userId FROM [dbo].[User] 
+	WHERE userName = @userName 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[ConsultUserEmail] 
+	@userEmail varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT userId FROM [dbo].[User] 
+	WHERE userEmail = @userEmail 
+END
+GO
+
 -- CLIENT PROCEDURES
 
 CREATE OR ALTER PROCEDURE [dbo].[AddClient] 
@@ -342,96 +400,26 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE [dbo].[ClientObject] 
-	@id int,
-	@actives bit
+CREATE OR ALTER PROCEDURE [dbo].[ConsultClientEmail] 
+	@clientEmail varchar(255)
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	SELECT clientId, clientName
-	FROM [dbo].[Client]
-	WHERE fkState = @actives AND clientId = @id
+	SELECT clientId FROM [dbo].[Client] 
+	WHERE clientEmail = @clientEmail 
 END
 GO
 
 
--- SUPPLIER PROCEDURES
-
-CREATE OR ALTER PROCEDURE [dbo].[AddSupplier] 
-	@supplierName varchar(100),
-	@supplierEmail varchar(255),
-	@supplierTel bigint,
-	@supplierDescription varchar(255),
-	@fkState tinyint
+CREATE OR ALTER PROCEDURE [dbo].[ConsultClientTel] 
+	@clientTel varchar(100)
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	INSERT INTO [dbo].[Supplier] 
-		( supplierName, supplierEmail, supplierTel, supplierDescription, fkState ) 
-	VALUES 
-		( @supplierName, @supplierEmail, @supplierTel, @supplierDescription,@fkState )
-END
-GO
-
-
-CREATE OR ALTER PROCEDURE [dbo].[UpdateSupplier] 
-	@supplierId int,
-	@supplierName varchar(100),
-	@supplierEmail varchar(255),
-	@supplierTel bigint,
-	@supplierDescription varchar(255)
-AS
-BEGIN
-	SET NOCOUNT OFF;
-
-	UPDATE [dbo].[Supplier] 
-	SET supplierName = @supplierName, supplierEmail = @supplierEmail, 
-		 supplierTel = @supplierTel, supplierDescription = @supplierDescription 
-		 WHERE supplierId = @supplierId 
-END
-GO
-
-
-CREATE OR ALTER PROCEDURE [dbo].[DeleteSupplier] 
-	@supplierId int,
-	@fkState tinyint
-AS
-BEGIN
-	SET NOCOUNT OFF;
-
-	UPDATE [dbo].[Supplier] 
-	SET fkState = @fkState WHERE supplierId = @supplierId
-END
-GO
-
-
-CREATE OR ALTER PROCEDURE [dbo].[SuppliersList] 
-	@actives bit,
-	@filter varchar(255)
-AS
-BEGIN
-	SET NOCOUNT OFF;
-
-	IF @filter = '' OR @filter = NULL
-		BEGIN
-			SELECT supplierId, supplierName, supplierTel, supplierEmail, supplierDescription
-			FROM [dbo].[Supplier]
-			WHERE fkState = @actives
-		END
-	ELSE
-		BEGIN
-			SET @filter = '%' + @filter + '%'
-
-			SELECT supplierId, supplierName, supplierTel, supplierEmail, supplierDescription
-			FROM [dbo].[Supplier]
-			WHERE fkState = @actives AND
-				  supplierName LIKE @filter OR 
-				  supplierTel LIKE @filter OR
-				  supplierEmail LIKE @filter OR 
-				  supplierDescription LIKE @filter 
-		END
+	SELECT clientId FROM [dbo].[Client] 
+	WHERE clientTel = @clientTel 
 END
 GO
 
@@ -480,73 +468,152 @@ BEGIN
 END
 GO
 
+-- PRODUCT PROCEDURES
 
--- PURCHASE PROCEDURES
 
-CREATE OR ALTER PROCEDURE [dbo].[AddPurchase] 
-	@purchaseDate datetime,
-	@purchaseDetail varchar(255),
-	@purchaseTotal bigint,
-	@fkSupplier int
+CREATE OR ALTER PROCEDURE [dbo].[AddProduct] 
+	@productDetail varchar(255),
+	@cant int,
+	@price decimal(10, 2),
+	@fkCode bigint,
+	@fkState tinyint
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	INSERT INTO [dbo].[Purchase] 
-		( purchaseDate, purchaseDetail, purchaseTotal, fkSupplier ) 
-	VALUES 
-		( @purchaseDate, @purchaseDetail, @purchaseTotal, @fkSupplier )
+	INSERT INTO [dbo].[Product]  
+	( productDetail, cant, price, fkCode, fkState ) 
+	VALUES  
+	( @productDetail, @cant, @price, @fkCode, @fkState )
 END
 GO
 
 
-CREATE OR ALTER PROCEDURE [dbo].[UpdatePurchase] 
-	@purchaseId bigint,
-	@purchaseDetail varchar(255),
-	@purchaseTotal real,
-	@fkSupplier int
+CREATE OR ALTER PROCEDURE [dbo].[UpdateProduct] 
+	@productId bigint,
+	@productDetail varchar(255),
+	@cant int,
+	@price decimal(10, 2),
+	@fkCode bigint
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	UPDATE [dbo].[Purchase] 
-	SET purchaseDetail = @purchaseDetail, purchaseTotal = @purchaseTotal 
-		 WHERE purchaseId = @purchaseId 
+	UPDATE [dbo].[Product] 
+	SET productDetail = @productDetail, cant = @cant, 
+		 price = @price, fkCode = @fkCode 
+		 WHERE productId = @productId 
 END
 GO
 
-/*
-	@purchaseDate datetime,
-	@purchaseDetail varchar(255),
-	@purchaseTotal bigint,
-	@fkSupplier int
-*/
 
-CREATE OR ALTER PROCEDURE [dbo].[PurchasesList] 
-	@filter varchar(255),
-	@fromDate datetime,
-	@toDate datetime
+CREATE OR ALTER PROCEDURE [dbo].[DeleteProduct] 
+	@productId bigint,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Product] 
+	SET  fkState = @fkState 
+		 WHERE productId = @productId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[ProductsList] 
+	@actives bit,
+	@filter varchar(255)
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
 	IF @filter = '' OR @filter = NULL
 		BEGIN
-			SELECT purchaseId, purchaseDate, purchaseDetail, purchaseTotal, supplierName
-			FROM Purchase INNER  JOIN Supplier ON fkSupplier = supplierId
-			WHERE purchaseDate BETWEEN @fromDate AND @toDate
+			SELECT productId, productDetail, cant, price, code
+			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
+			ON fkCode = codeId
+			WHERE fkState = @actives
 		END
 	ELSE
 		BEGIN
 			SET @filter = '%' + @filter + '%'
 
-			SELECT purchaseId, purchaseDate, purchaseDetail, purchaseTotal, supplierName
-			FROM Purchase INNER  JOIN Supplier ON fkSupplier = supplierId
-			WHERE purchaseDetail LIKE @filter AND
-			purchaseDate BETWEEN @fromDate AND @toDate
+			SELECT productId, productDetail, cant, price, code
+			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
+			ON fkCode = codeId
+			WHERE fkState = @actives AND
+				  productDetail LIKE @filter OR 
+				  code LIKE @filter OR
+				  price LIKE @filter
 		END
 END
 GO
+
+
+
+-- CODE PROCEDURES
+
+
+CREATE OR ALTER PROCEDURE [dbo].[AddCode] 
+	@code varchar(100)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Code]  ( code ) 
+	VALUES  ( @code )
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[UpdateCode] 
+	@codeId bigint,
+	@code varchar(100)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Code] 
+	SET code = @code WHERE codeId = @codeId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[CodeList] 
+	@filter varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT codeId, code FROM Code  
+		END
+	ELSE
+		BEGIN
+			SET @filter = '%' + @filter + '%'
+
+			SELECT codeId, code FROM Code
+			WHERE code LIKE @filter 
+		END
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[ConsultCode] 
+	@code varchar(100)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT codeId FROM [dbo].[Code] 
+	WHERE code = @code 
+END
+GO
+
+
+-- SALE PROCEDURES
 
 
 -- ROLE PROCEDURES
@@ -560,27 +627,5 @@ BEGIN
 END
 GO
 
-
-/*
-ALTER TABLE Purchase DROP CONSTRAINT FKPurchase520850;
-ALTER TABLE Refund DROP CONSTRAINT FKRefund496037;
-ALTER TABLE Sale DROP CONSTRAINT FKSale550232;
-ALTER TABLE Sale DROP CONSTRAINT FKSale148848;
-ALTER TABLE Log DROP CONSTRAINT FKLog641589;
-ALTER TABLE Product DROP CONSTRAINT FKProduct310633;
-ALTER TABLE Product DROP CONSTRAINT FKProduct138986;
-ALTER TABLE Supplier DROP CONSTRAINT FKSupplier989295;
-ALTER TABLE Client DROP CONSTRAINT FKClient195508;
-ALTER TABLE [User] DROP CONSTRAINT FKUser298032;
-DROP TABLE Client;
-DROP TABLE Logg;
-DROP TABLE Product;
-DROP TABLE Purchase;
-DROP TABLE Refund;
-DROP TABLE Sale;
-DROP TABLE State;
-DROP TABLE Supplier;
-DROP TABLE [User];
-*/
 ```
 

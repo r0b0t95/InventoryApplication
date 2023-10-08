@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
@@ -23,6 +24,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         public long tempId { get; set; }
 
         public string tempRol { get; set; }
+
+        private string tempName { get; set; }
+
+        private string tempEmail { get; set; }
+
 
         public SignUpForm()
         {
@@ -50,15 +56,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string validate = validateFields();
-
             user = new Logica.Models.User();
 
             user.name = txtName.Text.Trim();
             user.email = txtEmail.Text.Trim();
             user.password = txtPassword.Text.Trim();
             user.state.stateId = 1;
-            user.rol.rolId = 1;
+            user.rol.rolId = cbUsersType.SelectedIndex + 1;
+
+            string validate = validateFields( user );
 
             if ( string.IsNullOrEmpty( validate ) )
             {
@@ -72,9 +78,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     if ( ok )
                     {
+                        string detail = string.Format("Agrego al cliente: {0}", user.name);
+
+                        addLogEvent( detail );
+
                         MessageBox.Show( "Usuario agregado correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
+
+                        this.DialogResult = DialogResult.OK;
                     }
                     else
                     {
@@ -90,13 +102,34 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
-        private string validateFields()
+        private string validateFields( User user )
         {
             string responce = "El campo {0} esta vacio";
 
-            if ( string.IsNullOrWhiteSpace( txtName.Text ) )
+            if ( string.IsNullOrWhiteSpace( txtName.Text.Trim() ) )
             {
                 return string.Format( responce, "nombre" );
+            }
+
+            if ( txtPassword.Text.Trim().Count() < 4 && lblTitle.Text.Equals( "Registrar Usuario" ) )
+            {
+                return string.Format(responce, "password debe ser minimo de 4 caracteres");
+            }
+
+            if ( !cbUsersType.SelectedIndex.Equals( 0 ) && !cbUsersType.SelectedIndex.Equals( 1 ) )
+            {
+                return string.Format( responce, "debe seleccionar el rol del usuario" );
+            }
+
+            if ( user.consultUserName() && !txtName.Text.Trim().Equals( tempName ) )
+            {
+                return string.Format( "El nombre {0} ya existe", txtName.Text.Trim() );
+            }
+
+            if ( user.consultUserEmail() && !txtEmail.Text.Trim().Equals( tempEmail ) && 
+                !string.IsNullOrWhiteSpace( txtEmail.Text.Trim() ) )
+            {
+                return string.Format( "El correo {0} ya existe", txtEmail.Text.Trim() );
             }
 
             return string.Empty;
@@ -137,14 +170,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string validate = validateFields();
-
             user = new Logica.Models.User();
 
             user.userId = tempId;
             user.name = txtName.Text.Trim();
             user.email = txtEmail.Text.Trim();
-            user.rol.rolId = Convert.ToInt16( cbUsersType.SelectedValue );
+            user.rol.rolId = cbUsersType.SelectedIndex + 1;
+        
+            string validate = validateFields( user );
 
             if ( string.IsNullOrEmpty( validate ) )
             {
@@ -209,7 +242,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 cbShowPassword.Enabled = false;
                 int item = chooseRole( tempRol.ToString() );
                 cbUsersType.SelectedIndex = item;
+                fillTemporal();
             }
+        }
+
+        private void fillTemporal()
+        {
+            tempName = txtName.Text.Trim();
+            tempEmail = txtEmail.Text.Trim();
         }
 
         private int chooseRole( string role )

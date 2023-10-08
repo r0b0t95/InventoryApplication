@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Logica.Models
@@ -114,9 +115,37 @@ namespace Logica.Models
             return r;
         }
 
-        //TODO: method -> consult by email
+        public bool consultUserName()
+        {
+            Connection conn = new Connection();
 
-        public DataTable list(bool actives = true, string filter = "")
+            conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
+            DataTable responce = conn.PerformSelect( "ConsultUserName" );
+
+            if ( responce != null && responce.Rows.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool consultUserEmail()
+        {
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@userEmail", this.email ) );
+            DataTable responce = conn.PerformSelect( "ConsultUserEmail" );
+
+            if ( responce != null && responce.Rows.Count > 0 )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public DataTable list( bool actives = true, string filter = "" )
         {
             Connection conn = new Connection();
 

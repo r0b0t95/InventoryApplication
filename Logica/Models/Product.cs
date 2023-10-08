@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,19 +17,22 @@ namespace Logica.Models
 
         public long productId { get; set; }
 
-        public string code { get; set; }
-
-        public string description { get; set; }
+        public string detail { get; set; }
 
         public int cant { get; set; }
 
         public double price { get; set; }
 
-        public State productState { get; set; }
+        public Code code { get; set; }
+
+        public State state { get; set; }
+
 
         public Product()
         {
-            productState = new State();
+            code = new Code();
+
+            state = new State();
         }
 
         // -> METHODS, DATABASE QUERIES
@@ -40,19 +45,38 @@ namespace Logica.Models
 
         public bool updateProduct()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@productId", this.productId ) );
+            conn.ParamList.Add( new SqlParameter( "@productDetail", this.detail ) );
+            conn.ParamList.Add( new SqlParameter( "@cant", this.cant ) );
+            conn.ParamList.Add( new SqlParameter( "@price", this.price ) );
+            conn.ParamList.Add( new SqlParameter( "@fkCode", this.code.codeId ) );
+            int r = conn.PerformUpdateDeleteInsert( "UpdateProduct" );
+
+            return r > 0 ? true : false;
         }
 
         public bool deleteProduct()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@productId", this.productId ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
+            int r = conn.PerformUpdateDeleteInsert( "DeleteProduct" );
+
+            return r > 0 ? true : false;
         }
 
-        //TODO: method -> code
+        public DataTable list( bool actives = true, string filter = "" )
+        {
+            Connection conn = new Connection();
 
-        //TODO: method -> description
+            conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
+            conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
+
+            return conn.PerformSelect( "ProductsList" );
+        }
 
     }
 }
