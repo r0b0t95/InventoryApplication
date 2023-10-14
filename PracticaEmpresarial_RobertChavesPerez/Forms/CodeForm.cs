@@ -29,6 +29,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            MessageBox.Show( "Recuerda oprimir refrescar en el boton del inventario", ":)", MessageBoxButtons.OK) ;
+
             this.Close();
         }
 

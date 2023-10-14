@@ -115,7 +115,7 @@ namespace Logica.Models
             return r;
         }
 
-        public bool consultUserName()
+        public bool consultName()
         {
             Connection conn = new Connection();
 
@@ -130,7 +130,7 @@ namespace Logica.Models
             return false;
         }
 
-        public bool consultUserEmail()
+        public bool consultEmail()
         {
             Connection conn = new Connection();
 

@@ -39,8 +39,16 @@ namespace Logica.Models
 
         public bool addProduct()
         {
-            bool R = false;
-            return R;
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@productDetail", this.detail ) );
+            conn.ParamList.Add( new SqlParameter( "@cant", this.cant ) );
+            conn.ParamList.Add( new SqlParameter( "@price", this.price ) );
+            conn.ParamList.Add( new SqlParameter( "@fkCode", this.code.codeId ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
+            int r = conn.PerformUpdateDeleteInsert( "AddProduct" );
+
+            return r > 0 ? true : false;
         }
 
         public bool updateProduct()

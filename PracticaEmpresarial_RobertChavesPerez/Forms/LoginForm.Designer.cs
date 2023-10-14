@@ -65,7 +65,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(366, 47);
             this.txtName.TabIndex = 2;
-            this.txtName.Text = "Nombre o Correo";
+            this.txtName.Text = "Nombre de usuario";
             this.txtName.Click += new System.EventHandler(this.txtName_Click);
             // 
             // txtPassword

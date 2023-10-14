@@ -530,7 +530,7 @@ BEGIN
 
 	IF @filter = '' OR @filter = NULL
 		BEGIN
-			SELECT productId, productDetail, cant, price, code
+			SELECT productId, productDetail, cant, price, codeId  AS pCodeId, code AS pCode
 			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
 			ON fkCode = codeId
 			WHERE fkState = @actives
@@ -626,6 +626,7 @@ BEGIN
 	SELECT rolId, rolName FROM Rol  
 END
 GO
+
 
 ```
 

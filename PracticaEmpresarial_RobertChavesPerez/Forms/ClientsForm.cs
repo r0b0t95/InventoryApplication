@@ -71,13 +71,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se agrego el cliente", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se agrego el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
 
@@ -90,13 +90,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 return string.Format( responce, "nombre" );
             }
 
-            if ( client.consultClientTel() && !txtTel.Text.Trim().Equals( tempTel ) &&
+            if ( client.consultTel() && !txtTel.Text.Trim().Equals( tempTel ) &&
                 !string.IsNullOrWhiteSpace( txtTel.Text.Trim() ) )
             {
                 return string.Format( "El telefono {0} ya existe", txtTel.Text.Trim() );;
             }
 
-            if ( client.consultClientEmail() && !txtEmail.Text.Trim().Equals( tempEmail ) &&
+            if ( client.consultEmail() && !txtEmail.Text.Trim().Equals( tempEmail ) &&
                 !string.IsNullOrWhiteSpace( txtEmail.Text.Trim() ) )
             {
                 return string.Format( "El correo {0} ya existe", txtEmail.Text.Trim() );
@@ -109,7 +109,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string msg = string.Format( text, description );
 
-            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
             return result == DialogResult.Yes ? true : false;
         }
@@ -143,8 +143,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             client.clientId = tempId;
             client.name = txtName.Text.Trim();
             client.email = txtEmail.Text.Trim();
-            client.tel = Convert.ToInt64(txtTel.Text.Trim());
-
+            if( !string.IsNullOrWhiteSpace( txtTel.Text.Trim() ) )
+            {
+                client.tel = Convert.ToInt64( txtTel.Text.Trim() );
+            }
+            else
+            {
+                client.tel = 0;
+            }
             string validate = validateFields( client );
 
             if ( string.IsNullOrEmpty( validate ) )
@@ -171,13 +177,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se actualizo el cliente", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se actualizo el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
 
@@ -241,7 +247,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
                 else
                 {
-                    MessageBox.Show( "No se elimino el cliente", ":(", MessageBoxButtons.OK );
+                    MessageBox.Show( "No se elimino el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
                 }
             }
 

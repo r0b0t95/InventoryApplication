@@ -25,7 +25,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void inventoryItem_Click(object sender, EventArgs e)
         {
-            new InventoryForm().Show();
+            Form inventory = new InventoryForm();
+
+            this.Visible = false;
+
+            inventory.ShowDialog();
+
+            this.Visible = true;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)

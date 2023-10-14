@@ -9,19 +9,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class InventoryForm : Form
     {
-        Logica.Models.Product product;
+        private Logica.Models.Product product;
 
-        Logica.Models.Code code;
+        private Logica.Models.Code code;
 
-        DataTable dtProductList { set; get; }
+        private Logica.Models.Logg log;
 
-        DataTable dtCodeList { set; get; }
+        private DataTable dtProductList { set; get; }
+
+        private DataTable dtCodeList { set; get; }
+
+        private long tempProductId { set; get; }
+
+        private long tempCodeId { set; get; }
 
         public InventoryForm()
         {
@@ -38,7 +45,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.DialogResult = DialogResult.OK;
         }
         
 
@@ -47,6 +54,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtProductList = product.list( cbActivos.Checked, txtSearchProduct.Text.Trim() );
 
             dgvList.DataSource = dtProductList;
+
+            refreshButtons();
         }
 
         public void fillCodeDgv()
@@ -79,6 +88,20 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtDetail.Text = string.Empty;
             txtSearchCode.Text = string.Empty;
             txtSearchProduct.Text = string.Empty;
+            cleanTemp();
+            refreshButtons();
+        }
+
+        private void cleanTemp()
+        {
+            tempProductId = 0;
+            tempCodeId = 0;
+        }
+
+        private void refreshButtons()
+        {
+            btnSave.Enabled = true;
+            btnUpdate.Enabled = false;
         }
 
         private void txtSearchCode_TextChanged(object sender, EventArgs e)
@@ -92,7 +115,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
-            new CodeForm().Show();
+            DialogResult result = MessageBox.Show( "Quieres agregar varios codigos?", "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
+
+            if ( result.Equals( DialogResult.Yes ) ) 
+            {
+                CodeForm codeForm = new CodeForm();
+
+                DialogResult resp = codeForm.ShowDialog();
+
+                if ( resp == DialogResult.OK ) fillCodeDgv();
+            }
+            else
+            {
+                new CodeForm().Show();
+            }
+
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -108,6 +145,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 DataGridViewRow row = dgvCodeList.SelectedRows[0];
 
+                tempCodeId = Convert.ToInt64( row.Cells["CcodeId"].Value );
                 string code = row.Cells["Ccode"].Value.ToString();
 
                 txtCode.Text = code;
@@ -138,6 +176,216 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string validate = validateFields();
+
+            if ( string.IsNullOrEmpty( validate ) && tempProductId <= 0 )
+            {
+                product = new Logica.Models.Product();
+
+                product.detail = txtDetail.Text.Trim();
+                product.cant = Convert.ToInt32( txtCant.Text.Trim() );
+                product.price = ( double ) Convert.ToDecimal( txtPrice.Text.Trim() );
+                product.code.codeId = tempCodeId;
+                product.state.stateId = 1;
+
+                string text = "Quieres agregar al producto: {0} ?";
+
+                bool msg = validateYesOrNot( text, product.detail );
+
+                if ( msg )
+                {
+                    bool ok = product.addProduct();
+
+                    if ( ok )
+                    {
+                        string detail = string.Format( "Agrego al producto: {0}", product.detail );
+
+                        addLogEvent(detail);
+
+                        MessageBox.Show( "Producto agregado correctamente", ":)", MessageBoxButtons.OK );
+
+                        cleanFields();
+
+                        fillProductDgv();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No se agrego el producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+        }
+
+        private void addLogEvent( string detail )
+        {
+            log = new Logica.Models.Logg();
+            log.user.userId = Globals.GlobalUser.userId;
+            log.logDetail = detail;
+            log.logDate = DateTime.Now;
+
+            log.addLog();
+        }
+
+        private string validateFields()
+        {
+            string responce = "El campo {0} esta vacio";
+
+            if ( string.IsNullOrWhiteSpace( txtCode.Text.Trim() ) )
+            {
+                return string.Format( responce, "codigo" );
+            }
+
+            if ( string.IsNullOrWhiteSpace( txtPrice.Text.Trim() ) )
+            {
+                return string.Format( responce, "precio" );
+            }
+
+            if ( string.IsNullOrWhiteSpace( txtCant.Text.Trim() ) )
+            {
+                return string.Format( responce, "cantidad" );
+            }
+
+            if ( string.IsNullOrWhiteSpace( txtDetail.Text.Trim() ) )
+            {
+                return string.Format( responce, "detalle" );
+            }
+
+            return string.Empty;
+        }
+
+        private bool validateYesOrNot( string text, string description )
+        {
+            string msg = string.Format( text, description );
+
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
+
+            return result == DialogResult.Yes ? true : false;
+        }
+
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
+        }
+
+        private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            product = new Logica.Models.Product();
+
+            product.productId = tempProductId;
+            product.detail = txtDetail.Text.Trim();
+            product.cant = Convert.ToInt32(txtCant.Text.Trim());
+            product.price = (double)Convert.ToDecimal(txtPrice.Text.Trim());
+            product.code.codeId = tempCodeId; ;
+            product.state.stateId = 1;
+
+            string validate = validateFields();
+
+            if ( string.IsNullOrEmpty( validate ) && tempProductId > 0 )
+            {
+                string text = "Quieres actualizar al producto: {0} ?";
+
+                bool msg = validateYesOrNot( text, product.detail );
+
+                if ( msg )
+                {
+                    bool ok = product.updateProduct();
+
+                    if ( ok )
+                    {
+                        string detail = string.Format( "Actualizo al producto: {0}", product.detail );
+
+                        addLogEvent(detail);
+
+                        MessageBox.Show( "Producto actualizado correctamente", ":)", MessageBoxButtons.OK ) ;
+
+                        cleanFields();
+
+                        fillProductDgv();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No se actualizo el Producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+        }
+
+
+        private void dgvList_DoubleClick(object sender, EventArgs e)
+        {
+            if ( dgvList.SelectedRows.Count == 1 )
+            {
+                DataGridViewRow row = dgvList.SelectedRows[0];
+
+                tempProductId = Convert.ToInt64( row.Cells["CproductId"].Value );
+                txtCode.Text = row.Cells["CpCode"].Value.ToString().Trim();
+                txtDetail.Text = row.Cells["CproductDetail"].Value.ToString().Trim();
+                txtCant.Text = row.Cells["Ccant"].Value.ToString().Trim();
+                txtPrice.Text = row.Cells["Cprice"].Value.ToString().Trim();
+                tempCodeId = Convert.ToInt64( row.Cells["CpCodeId"].Value );
+
+                btnSave.Enabled = false;
+                btnUpdate.Enabled = true;
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if( tempProductId > 0 )
+            {
+                product = new Logica.Models.Product();
+
+                product.productId = tempProductId;
+                product.detail = txtDetail.Text.Trim();
+                product.state.stateId = 2;
+                
+                string text = "Quieres eliminar al producto: {0} ?";
+
+                bool msg = validateYesOrNot( text, product.detail );
+
+                if ( msg )
+                {
+                    bool ok = product.deleteProduct();
+
+                    if ( ok )
+                    {
+                        string detail = string.Format( "Elimino al producto: {0}", product.detail );
+
+                        addLogEvent(detail);
+
+                        MessageBox.Show( "Producto fue eliminado correctamente", ":)", MessageBoxButtons.OK );
+
+                        cleanFields();
+
+                        fillProductDgv();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No se elimino el producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show( "Selecciona el producto que desea eliminar", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            } 
+
+        }
 
     }
 }

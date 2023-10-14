@@ -51,7 +51,9 @@
             this.CcodeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.CfkCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CpCodeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CpCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CproductDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +71,7 @@
             this.btnDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.btnDelete.TabIndex = 40;
             this.btnDelete.TabStop = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -82,6 +85,7 @@
             this.btnUpdate.TabIndex = 39;
             this.btnUpdate.Text = "Actualizar";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtCant
             // 
@@ -92,6 +96,7 @@
             this.txtCant.Name = "txtCant";
             this.txtCant.Size = new System.Drawing.Size(393, 47);
             this.txtCant.TabIndex = 38;
+            this.txtCant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCant_KeyPress);
             // 
             // txtPrice
             // 
@@ -102,6 +107,7 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(393, 47);
             this.txtPrice.TabIndex = 37;
+            this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
             // 
             // lblPrice
             // 
@@ -151,6 +157,7 @@
             this.btnSave.TabIndex = 33;
             this.btnSave.Text = "Guardar";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtCode
             // 
@@ -159,6 +166,7 @@
             this.txtCode.ForeColor = System.Drawing.Color.Silver;
             this.txtCode.Location = new System.Drawing.Point(141, 535);
             this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(393, 47);
             this.txtCode.TabIndex = 32;
             // 
@@ -227,7 +235,9 @@
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CfkCode,
+            this.CpCodeId,
+            this.CproductId,
+            this.CpCode,
             this.Ccant,
             this.Cprice,
             this.CproductDetail});
@@ -237,6 +247,7 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1249, 421);
             this.dgvList.TabIndex = 44;
+            this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
             // 
             // txtSearchProduct
             // 
@@ -318,16 +329,33 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(130, 54);
             this.btnRefresh.TabIndex = 49;
-            this.btnRefresh.Text = "Recargar";
+            this.btnRefresh.Text = "Refrescar";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // CfkCode
+            // CpCodeId
             // 
-            this.CfkCode.DataPropertyName = "fkCode";
-            this.CfkCode.HeaderText = "Codigo";
-            this.CfkCode.Name = "CfkCode";
-            this.CfkCode.ReadOnly = true;
+            this.CpCodeId.DataPropertyName = "pCodeId";
+            this.CpCodeId.HeaderText = "IdCodigo";
+            this.CpCodeId.Name = "CpCodeId";
+            this.CpCodeId.ReadOnly = true;
+            this.CpCodeId.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CpCodeId.Visible = false;
+            // 
+            // CproductId
+            // 
+            this.CproductId.DataPropertyName = "productId";
+            this.CproductId.HeaderText = "productId";
+            this.CproductId.Name = "CproductId";
+            this.CproductId.ReadOnly = true;
+            this.CproductId.Visible = false;
+            // 
+            // CpCode
+            // 
+            this.CpCode.DataPropertyName = "pCode";
+            this.CpCode.HeaderText = "Codigo";
+            this.CpCode.Name = "CpCode";
+            this.CpCode.ReadOnly = true;
             // 
             // Ccant
             // 
@@ -414,7 +442,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CcodeId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ccode;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CfkCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CpCodeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CproductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CpCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ccant;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn CproductDetail;

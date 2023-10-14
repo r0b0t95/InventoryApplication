@@ -69,7 +69,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
-        public bool consultClientEmail()
+        public bool consultEmail()
         {
             Connection conn = new Connection();
 
@@ -84,7 +84,7 @@ namespace Logica.Models
             return false;
         }
 
-        public bool consultClientTel()
+        public bool consultTel()
         {
             Connection conn = new Connection();
 

@@ -121,12 +121,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 return string.Format( responce, "debe seleccionar el rol del usuario" );
             }
 
-            if ( user.consultUserName() && !txtName.Text.Trim().Equals( tempName ) )
+            if ( user.consultName() && !txtName.Text.Trim().Equals( tempName ) )
             {
                 return string.Format( "El nombre {0} ya existe", txtName.Text.Trim() );
             }
 
-            if ( user.consultUserEmail() && !txtEmail.Text.Trim().Equals( tempEmail ) && 
+            if ( user.consultEmail() && !txtEmail.Text.Trim().Equals( tempEmail ) && 
                 !string.IsNullOrWhiteSpace( txtEmail.Text.Trim() ) )
             {
                 return string.Format( "El correo {0} ya existe", txtEmail.Text.Trim() );

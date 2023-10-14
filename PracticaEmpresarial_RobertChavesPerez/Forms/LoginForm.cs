@@ -32,7 +32,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new LoadingForm().Show();
 
             this.Hide();
-            
             /*
             
             string validate = validateFields();
@@ -61,13 +60,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
                 else
                 {
-                    MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK );
+                    MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
                 }
 
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
             */
             
@@ -124,9 +123,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string responce = "El campo {0} esta vacio";
 
-            if ( string.IsNullOrWhiteSpace( txtName.Text ) || txtName.Text.Trim() == "Nombre o Correo" )
+            if ( string.IsNullOrWhiteSpace( txtName.Text ) || txtName.Text.Trim() == "Nombre de usuario" )
             {
-                return string.Format(responce, "Nombre o Correo");
+                return string.Format(responce, "Nombre de usuario");
             }
 
             if( string.IsNullOrWhiteSpace( txtPassword.Text ) || txtPassword.Text.Trim() == "Contraseña" )
@@ -145,9 +144,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                              "el programa tiene la base de datos local \n" +
                              "solo el administrador puede tener acceso a la \n" +
                              "base de datos \n \n" +
-                             "actualizar el respaldo del inventario de hace de \n" +
+                             "actualizar el respaldo del inventario se hace de \n" +
                              "forma manual si el usuario lo olvida es responsabilidad \n" +
-                             "del usuario \n \n \n" +
+                             "del usuario \n \n" +
+                             "el usuario administrador tiene mas privilegios en el \n" +
+                             "usuario regular \n \n \n" +
                              "Creado por Robert Chaves Perez v1 2023";
 
             MessageBox.Show( message, "Politicas", MessageBoxButtons.OK );
