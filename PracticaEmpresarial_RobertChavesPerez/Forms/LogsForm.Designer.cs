@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblLogsList = new System.Windows.Forms.Label();
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -48,7 +51,7 @@
             this.lblLogsList.AutoSize = true;
             this.lblLogsList.Font = new System.Drawing.Font("Papyrus", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogsList.ForeColor = System.Drawing.Color.Gray;
-            this.lblLogsList.Location = new System.Drawing.Point(323, 40);
+            this.lblLogsList.Location = new System.Drawing.Point(536, 40);
             this.lblLogsList.Name = "lblLogsList";
             this.lblLogsList.Size = new System.Drawing.Size(140, 46);
             this.lblLogsList.TabIndex = 36;
@@ -60,16 +63,41 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CuserName,
             this.ClogDate,
             this.ClogDetail});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvList.Location = new System.Drawing.Point(62, 224);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvList.RowHeadersVisible = false;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvList.Size = new System.Drawing.Size(682, 445);
+            this.dgvList.Size = new System.Drawing.Size(1071, 445);
             this.dgvList.TabIndex = 35;
             // 
             // txtSearch
@@ -85,54 +113,54 @@
             // 
             // fromDTPicker
             // 
-            this.fromDTPicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fromDTPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fromDTPicker.Location = new System.Drawing.Point(489, 129);
+            this.fromDTPicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromDTPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromDTPicker.Location = new System.Drawing.Point(844, 89);
             this.fromDTPicker.Name = "fromDTPicker";
-            this.fromDTPicker.Size = new System.Drawing.Size(255, 21);
+            this.fromDTPicker.Size = new System.Drawing.Size(289, 24);
             this.fromDTPicker.TabIndex = 37;
             this.fromDTPicker.ValueChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // toDTPicker
             // 
-            this.toDTPicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toDTPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toDTPicker.Location = new System.Drawing.Point(489, 184);
+            this.toDTPicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toDTPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toDTPicker.Location = new System.Drawing.Point(844, 164);
             this.toDTPicker.Name = "toDTPicker";
-            this.toDTPicker.Size = new System.Drawing.Size(255, 21);
+            this.toDTPicker.Size = new System.Drawing.Size(289, 24);
             this.toDTPicker.TabIndex = 38;
             this.toDTPicker.ValueChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFrom.ForeColor = System.Drawing.Color.Gray;
-            this.lblFrom.Location = new System.Drawing.Point(490, 108);
+            this.lblFrom.Location = new System.Drawing.Point(844, 66);
             this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(107, 18);
+            this.lblFrom.Size = new System.Drawing.Size(116, 20);
             this.lblFrom.TabIndex = 39;
             this.lblFrom.Text = "Fecha Desde";
             // 
             // lblTo
             // 
             this.lblTo.AutoSize = true;
-            this.lblTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTo.ForeColor = System.Drawing.Color.Gray;
-            this.lblTo.Location = new System.Drawing.Point(490, 163);
+            this.lblTo.Location = new System.Drawing.Point(844, 141);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(103, 18);
+            this.lblTo.Size = new System.Drawing.Size(112, 20);
             this.lblTo.TabIndex = 40;
             this.lblTo.Text = "Fecha Hasta";
             // 
             // lblDetail
             // 
             this.lblDetail.AutoSize = true;
-            this.lblDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetail.ForeColor = System.Drawing.Color.Gray;
-            this.lblDetail.Location = new System.Drawing.Point(59, 108);
+            this.lblDetail.Location = new System.Drawing.Point(58, 106);
             this.lblDetail.Name = "lblDetail";
-            this.lblDetail.Size = new System.Drawing.Size(60, 18);
+            this.lblDetail.Size = new System.Drawing.Size(66, 20);
             this.lblDetail.TabIndex = 41;
             this.lblDetail.Text = "Detalle";
             // 
@@ -142,7 +170,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnExit.Location = new System.Drawing.Point(234, 701);
+            this.btnExit.Location = new System.Drawing.Point(440, 703);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(324, 54);
             this.btnExit.TabIndex = 42;
@@ -152,19 +180,21 @@
             // 
             // CuserName
             // 
+            this.CuserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.CuserName.DataPropertyName = "userName";
             this.CuserName.HeaderText = "Usuario";
             this.CuserName.Name = "CuserName";
             this.CuserName.ReadOnly = true;
+            this.CuserName.Width = 118;
             // 
             // ClogDate
             // 
-            this.ClogDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ClogDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.ClogDate.DataPropertyName = "logDate";
             this.ClogDate.HeaderText = "Fecha";
             this.ClogDate.Name = "ClogDate";
             this.ClogDate.ReadOnly = true;
-            this.ClogDate.Width = 150;
+            this.ClogDate.Width = 102;
             // 
             // ClogDetail
             // 
@@ -179,7 +209,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(803, 808);
+            this.ClientSize = new System.Drawing.Size(1185, 808);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblDetail);
             this.Controls.Add(this.lblTo);

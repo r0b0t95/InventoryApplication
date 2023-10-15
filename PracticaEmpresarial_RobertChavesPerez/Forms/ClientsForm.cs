@@ -23,9 +23,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private string tempTel { get; set; }
 
+        public int tempState { get; set; }
+
+        private string[] deleteVector { get; set; }
+
         public ClientsForm()
         {
             InitializeComponent();
+
+            deleteVector = new string[4];
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -119,6 +125,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtName.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtTel.Text = string.Empty;
+            tempState = 0;
         }
 
         private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
@@ -196,19 +203,29 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             if ( this.tempId.Equals( 0 ) )
             {
-                btnSave.Visible = true;
-                btnUpdate.Visible = false;
-                btnDelete.Visible = false;
-                lblTitle.Text = "Registrar Cliente";
+                loadRegister();
             }
             else
             {
-                btnSave.Visible = false;
-                btnUpdate.Visible = true;
-                btnDelete.Visible = true;
-                lblTitle.Text = "Modificar Cliente";
-                fillTemporal();
+                loadModified();
             }
+        }
+
+        private void loadRegister()
+        {
+            btnSave.Visible = true;
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            lblTitle.Text = "Registrar Cliente";
+        }
+
+        private void loadModified()
+        {
+            btnSave.Visible = false;
+            btnUpdate.Visible = true;
+            btnDelete.Visible = true;
+            lblTitle.Text = "Modificar Cliente";
+            fillTemporal();
         }
 
         private void fillTemporal()
@@ -223,9 +240,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             client.clientId = tempId;
             client.name = txtName.Text.Trim();
-            client.state.stateId = 2;
+            client.state.stateId = tempState;
 
-            string text = "Quieres eliminar al cliente: {0} ?";
+            deleteMethod();
+
+            string text = "Quieres" + deleteVector[0] + "al cliente: {0} ?";
 
             bool msg = validateYesOrNot( text, client.name );
 
@@ -233,13 +252,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 bool ok = client.deleteClient();
 
-                if (ok)
+                if ( ok )
                 {
-                    string detail = string.Format( "Elimino al cliente: {0}", client.name );
+                    string detail = string.Format( deleteVector[1] + "al cliente: {0}", client.name );
 
                     addLogEvent( detail );
 
-                    MessageBox.Show( "Cliente fue eliminado correctamente", ":)", MessageBoxButtons.OK );
+                    MessageBox.Show( "Cliente fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
                     cleanFields();
 
@@ -247,12 +266,33 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
                 else
                 {
-                    MessageBox.Show( "No se elimino el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                    MessageBox.Show( "No se" + deleteVector[3] + "el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
                 }
             }
 
         }
 
-        
+        private void deleteMethod()
+        {
+            if ( tempState.Equals( 2 ) )
+            {
+                deleteVector[0] = " eliminar ";
+                deleteVector[1] = " Elimino ";
+                deleteVector[2] = " eliminado ";
+                deleteVector[3] = " elimino ";
+            }
+            else
+            {
+                deleteVector[0] = " volver activar ";
+                deleteVector[1] = " Has activado ";
+                deleteVector[2] = " activado ";
+                deleteVector[3] = " activo ";
+            }
+        }
+
+
+
+
+
     }
 }

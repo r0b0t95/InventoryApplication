@@ -92,9 +92,9 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
-        public int loginUser()
+        public int[] loginUser()
         {
-            int r = 0;
+            int[] r = {0, 0};
 
             Connection conn = new Connection();
 
@@ -104,12 +104,14 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
             conn.ParamList.Add( new SqlParameter( "@password", hash ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
             DataTable responce = conn.PerformSelect( "LoginUser" );
 
             if ( responce != null && responce.Rows.Count > 0 )
             {
                 DataRow row = responce.Rows[0];
-                r = Convert.ToInt32( row["userId"] );
+                r[0] = Convert.ToInt32( row["userId"] );
+                r[1] = Convert.ToInt32( row["fkState"] );
             }
 
             return r;
@@ -145,7 +147,7 @@ namespace Logica.Models
             return false;
         }
 
-        public DataTable list( bool actives = true, string filter = "" )
+        public DataTable list( int actives, string filter = "" )
         {
             Connection conn = new Connection();
 

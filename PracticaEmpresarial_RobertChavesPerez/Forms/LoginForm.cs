@@ -22,7 +22,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            
+            /*
             Globals.GlobalUser.userId = 1;
 
             Globals.GlobalUser.name = "abdul";
@@ -32,7 +32,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new LoadingForm().Show();
 
             this.Hide();
-            /*
+            */            
             
             string validate = validateFields();
 
@@ -40,27 +40,35 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user.name = txtName.Text.Trim();
             user.password = txtPassword.Text.Trim();
+            user.state.stateId = 1;
 
             if ( string.IsNullOrEmpty( validate ) )
             {
 
-                int userId = user.loginUser();
+                int[] lUser = user.loginUser();
 
-                if ( userId > 0 )
+                if ( lUser[1] > 0 )
                 {
-                    Globals.GlobalUser.userId = userId;
+                    if ( lUser[0] > 0 )
+                    {
+                        Globals.GlobalUser.userId = lUser[0];
 
-                    Globals.GlobalUser.name = txtName.Text.Trim();
+                        Globals.GlobalUser.name = txtName.Text.Trim();
 
-                    cleanFields();
-                   
-                    new LoadingForm().Show();
+                        cleanFields();
 
-                    this.Hide();
+                        new LoadingForm().Show();
+
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                    }
                 }
                 else
                 {
-                    MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                    MessageBox.Show( "Usuario desactivado", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
                 }
 
             }
@@ -68,7 +76,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
-            */
+            
             
         }
 

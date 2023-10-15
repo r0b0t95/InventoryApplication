@@ -261,7 +261,7 @@ GO
 
 
 CREATE OR ALTER PROCEDURE [dbo].[UsersList] 
-	@actives bit,
+	@actives tinyint,
 	@filter varchar(255)
 AS
 BEGIN
@@ -290,13 +290,14 @@ GO
 
 CREATE OR ALTER PROCEDURE [dbo].[LoginUser] 
 	@userName varchar(100),
-	@password varchar(255)
+	@password varchar(255),
+	@fkState tinyint
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	SELECT userId, userName FROM [dbo].[User] 
-	WHERE userName = @userName AND password = @password
+	SELECT userId, userName, fkState FROM [dbo].[User] 
+	WHERE userName = @userName AND password = @password AND fkState = 1
 END
 GO
 
@@ -373,7 +374,7 @@ GO
 
 
 CREATE OR ALTER PROCEDURE [dbo].[ClientsList] 
-	@actives bit,
+	@actives tinyint,
 	@filter varchar(255)
 AS
 BEGIN
@@ -381,7 +382,7 @@ BEGIN
 
 	IF @filter = '' OR @filter = NULL
 		BEGIN
-			SELECT clientId, clientName, clientEmail, clientTel
+			SELECT clientId, clientName, clientTel, clientEmail
 			FROM [dbo].[Client]
 			WHERE fkState = @actives
 		END
@@ -389,7 +390,7 @@ BEGIN
 		BEGIN
 			SET @filter = '%' + @filter + '%'
 
-			SELECT clientId, clientName, clientEmail, clientTel
+			SELECT clientId, clientName, clientTel, clientEmail
 			FROM [dbo].[Client]
 			WHERE fkState = @actives AND
 				  clientName LIKE @filter OR 
@@ -452,7 +453,7 @@ BEGIN
 
 	IF @filter = '' OR @filter = NULL
 		BEGIN
-			SELECT logDetail, logDate, userName
+			SELECT userName, logDate, logDetail
 			FROM Logg INNER  JOIN [dbo].[User] ON fkUser = userId
 			WHERE logDate BETWEEN @fromDate AND @toDate
 		END
@@ -460,7 +461,7 @@ BEGIN
 		BEGIN
 			SET @filter = '%' + @filter + '%'
 
-			SELECT logDetail, logDate, userName
+			SELECT userName, logDate, logDetail
 			FROM Logg INNER  JOIN [dbo].[User] ON fkUser = userId
 			WHERE logDetail LIKE @filter AND
 			logDate BETWEEN @fromDate AND @toDate
@@ -522,7 +523,7 @@ GO
 
 
 CREATE OR ALTER PROCEDURE [dbo].[ProductsList] 
-	@actives bit,
+	@actives tinyint,
 	@filter varchar(255)
 AS
 BEGIN
@@ -530,7 +531,7 @@ BEGIN
 
 	IF @filter = '' OR @filter = NULL
 		BEGIN
-			SELECT productId, productDetail, cant, price, codeId  AS pCodeId, code AS pCode
+			SELECT productId, cant, price, productDetail, codeId  AS pCodeId, code AS pCode
 			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
 			ON fkCode = codeId
 			WHERE fkState = @actives
@@ -615,6 +616,39 @@ GO
 
 -- SALE PROCEDURES
 
+CREATE OR ALTER PROCEDURE [dbo].[AddSale] 
+	@saleDetail varchar(1500),
+	@saleDate datetime,
+	@saleSubTotal decimal(10, 2),
+	@saleDiscount decimal(10, 2),
+	@saleTax decimal(10, 2),
+	@saleTotal decimal(10, 2),
+	@fkUser smallint,
+	@fkClient int,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Sale]  ( saleDetail, saleDate, saleSubTotal,
+		saleDiscount, saleTax, saleTotal, fkUser, fkClient, fkState ) 
+	VALUES  ( @saleDetail, @saleDate, @saleSubTotal, @saleDiscount,
+		@saleTax, @saleTotal, @fkUser, @fkClient, @fkState)
+END
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[DeleteSale] 
+	@saleId bigint,
+	@fkState tinyint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Sale] 
+	SET  fkState = @fkState 
+		 WHERE saleId = @saleId
+END
+GO
 
 -- ROLE PROCEDURES
 
@@ -626,6 +660,7 @@ BEGIN
 	SELECT rolId, rolName FROM Rol  
 END
 GO
+
 
 
 ```

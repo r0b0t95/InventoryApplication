@@ -76,7 +76,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
-        public DataTable list( bool actives = true, string filter = "" )
+        public DataTable list( int actives, string filter = "" )
         {
             Connection conn = new Connection();
 
@@ -85,6 +85,7 @@ namespace Logica.Models
 
             return conn.PerformSelect( "ProductsList" );
         }
+
 
     }
 }

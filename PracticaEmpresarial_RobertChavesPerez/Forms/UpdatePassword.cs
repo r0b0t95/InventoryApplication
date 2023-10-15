@@ -53,8 +53,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user.name = Globals.GlobalUser.name;
             user.password = txtCurrentPass.Text.Trim();
+            user.state.stateId = 1;
 
-            int userId = user.loginUser();
+            int[] lUser = user.loginUser();
 
             if ( string.IsNullOrWhiteSpace( txtCurrentPass.Text ) )
             {
@@ -63,7 +64,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( string.IsNullOrWhiteSpace( txtNewPass.Text ) )
             {
-                return string.Format(responce, "Nueva Contraseña");
+                return string.Format( responce, "Nueva Contraseña" );
             }
              
             if ( string.IsNullOrWhiteSpace( txtConNewPass.Text ) )
@@ -71,10 +72,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 return string.Format( responce, "Confirmacion Nueva Contraseña" );
             }
 
-            //if ( userId <= 0 )
-            //{
-            //    return "Contraseña actual es incorrecta";
-            //}
+            if ( lUser[0] <= 0 )
+            {
+                return "Contraseña actual es incorrecta";
+            }
 
             if ( !txtNewPass.Text.Trim().Equals( txtConNewPass.Text.Trim() ) )
             {
@@ -89,7 +90,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string msg = string.Format( text, description );
 
-            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
             return result == DialogResult.Yes ? true : false;
         }
@@ -135,13 +136,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se actualizo la contraseña", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se actualizo la contraseña", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
 
         }

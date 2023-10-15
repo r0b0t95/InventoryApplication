@@ -30,6 +30,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private long tempCodeId { set; get; }
 
+        private int tempState { set; get; }
+
+        private string[] deleteVector { get; set; }
+
         public InventoryForm()
         {
             InitializeComponent();
@@ -41,6 +45,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtProductList = new DataTable();
 
             dtCodeList = new DataTable();
+
+            deleteVector = new string[4];
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -51,7 +57,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public void fillProductDgv()
         {
-            dtProductList = product.list( cbActivos.Checked, txtSearchProduct.Text.Trim() );
+            int active = cbActive();
+
+            dtProductList = product.list( active, txtSearchProduct.Text.Trim() );
 
             dgvList.DataSource = dtProductList;
 
@@ -117,19 +125,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             DialogResult result = MessageBox.Show( "Quieres agregar varios codigos?", "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
-            if ( result.Equals( DialogResult.Yes ) ) 
+            
+            CodeForm codeForm = new CodeForm();
+
+            if ( result.Equals(DialogResult.Yes ) )
             {
-                CodeForm codeForm = new CodeForm();
-
-                DialogResult resp = codeForm.ShowDialog();
-
-                if ( resp == DialogResult.OK ) fillCodeDgv();
+                codeForm.tempBool = true;
             }
             else
             {
-                new CodeForm().Show();
+                codeForm.tempBool = false;
             }
 
+            DialogResult resp = codeForm.ShowDialog();
+
+            if ( resp == DialogResult.OK ) fillCodeDgv();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -164,6 +174,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 CodeForm codeForm = new CodeForm();
                 codeForm.tempId = codeId;
                 codeForm.txtCode.Text = code;
+                codeForm.tempBool = false;
 
                 DialogResult resp = codeForm.ShowDialog();
 
@@ -352,9 +363,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 product.productId = tempProductId;
                 product.detail = txtDetail.Text.Trim();
-                product.state.stateId = 2;
+                product.state.stateId = tempState;
+
+                deleteMethod();
                 
-                string text = "Quieres eliminar al producto: {0} ?";
+                string text = "Quieres" + deleteVector[0] + "al producto: {0} ?";
 
                 bool msg = validateYesOrNot( text, product.detail );
 
@@ -364,11 +377,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     if ( ok )
                     {
-                        string detail = string.Format( "Elimino al producto: {0}", product.detail );
+                        string detail = string.Format( deleteVector[1] + "al producto: {0}", product.detail );
 
                         addLogEvent(detail);
 
-                        MessageBox.Show( "Producto fue eliminado correctamente", ":)", MessageBoxButtons.OK );
+                        MessageBox.Show( "Producto fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
 
@@ -376,16 +389,56 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se elimino el producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                        MessageBox.Show( "No se" + deleteVector[3] + "el producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( "Selecciona el producto que desea eliminar", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show( "Selecciona el producto que desea" + deleteVector[0], ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
             } 
 
         }
+
+        private void deleteMethod()
+        {
+            if ( tempState.Equals( 2 ) )
+            {
+                deleteVector[0] = " eliminar ";
+                deleteVector[1] = " Elimino ";
+                deleteVector[2] = " eliminado ";
+                deleteVector[3] = " elimino ";
+            }
+            else
+            {
+                deleteVector[0] = " volver activar ";
+                deleteVector[1] = " Has activado ";
+                deleteVector[2] = " activado ";
+                deleteVector[3] = " activo ";
+            }
+        }
+
+        private void cbActivos_CheckedChanged(object sender, EventArgs e)
+        {
+            fillProductDgv();
+
+            cbActive();
+        }
+
+        private int cbActive()
+        {
+            if ( cbActivos.Checked )
+            {
+                tempState = 2;
+                return 1;
+            }
+            else
+            {
+                tempState = 1;
+                return 2;
+            }
+        }
+
 
     }
 }

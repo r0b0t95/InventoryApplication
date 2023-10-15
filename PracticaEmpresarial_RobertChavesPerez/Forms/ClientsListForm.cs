@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         Logica.Models.Client client;
 
         DataTable dtList { set; get; }
+
+        private int tempState {  get; set; }
 
         public ClientsListForm()
         {
@@ -47,7 +50,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public void fillDgv()
         {
-            dtList = client.list( cbActivos.Checked, txtSearch.Text.Trim() );
+            int active = cbActive();
+
+            dtList = client.list( active, txtSearch.Text.Trim() );
 
             dgvList.DataSource = dtList;
         }
@@ -94,6 +99,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 clientForm.txtName.Text = clientName.ToString();
                 clientForm.txtTel.Text = clientTel.ToString();
                 clientForm.txtEmail.Text = clientEmail.ToString();
+                clientForm.tempState = tempState;
 
                 DialogResult resp = clientForm.ShowDialog();
 
@@ -106,6 +112,22 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
             fillDgv();
+
+            cbActive();
+        }
+
+        private int cbActive()
+        {
+            if ( cbActivos.Checked )
+            {
+                tempState = 2;
+                return 1;
+            }
+            else
+            {
+                tempState = 1;
+                return 2;
+            }
         }
 
     }

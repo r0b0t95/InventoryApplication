@@ -22,6 +22,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private string tempCode { get; set; }
 
+        public bool tempBool { get; set; }
+
         public CodeForm()
         {
             InitializeComponent();
@@ -29,9 +31,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show( "Recuerda oprimir refrescar en el boton del inventario", ":)", MessageBoxButtons.OK) ;
-
-            this.Close();
+            this.DialogResult = DialogResult.OK;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -62,17 +62,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                         cleanFields();
 
-                        this.DialogResult = DialogResult.OK;
+                        if ( !tempBool )
+                        {
+                            this.DialogResult = DialogResult.OK;
+                        }
+
                     }
                     else
                     {
-                        MessageBox.Show( "No se agrego el cliente", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se agrego el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
 
@@ -85,17 +89,27 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             if (this.tempId.Equals(0))
             {
-                btnSave.Visible = true;
-                btnUpdate.Visible = false;
-                lblTitle.Text = "Registrar Codigo";
+                loadRegister();
             }
             else
             {
-                btnSave.Visible = false;
-                btnUpdate.Visible = true;
-                lblTitle.Text = "Modificar Codigo";
-                fillTemporal();
+                loadModified();
             }
+        }
+
+        private void loadRegister()
+        {
+            btnSave.Visible = true;
+            btnUpdate.Visible = false;
+            lblTitle.Text = "Registrar Codigo";
+        }
+
+        private void loadModified()
+        {
+            btnSave.Visible = false;
+            btnUpdate.Visible = true;
+            lblTitle.Text = "Modificar Codigo";
+            fillTemporal();
         }
 
         private void fillTemporal()
@@ -107,7 +121,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string msg = string.Format( text, description );
 
-            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
             return result == DialogResult.Yes ? true : false;
         }
@@ -160,13 +174,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se actualizo el cliente", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se actualizo el cliente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
          

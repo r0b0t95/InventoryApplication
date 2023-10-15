@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,21 +40,30 @@
             this.changePasswordItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnSelect = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.CclientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CclientTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CclientEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnExit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblSeller = new System.Windows.Forms.Label();
             this.lblClientName = new System.Windows.Forms.Label();
             this.txtClientName = new System.Windows.Forms.TextBox();
             this.btnSearchClient = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnRemoveProduct = new System.Windows.Forms.Button();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.lblClientId = new System.Windows.Forms.Label();
             this.txtClientId = new System.Windows.Forms.TextBox();
+            this.btnAddProduct = new System.Windows.Forms.Button();
+            this.btnUpdateProduct = new System.Windows.Forms.Button();
+            this.txtSubTotal = new System.Windows.Forms.TextBox();
+            this.lblSubTotal = new System.Windows.Forms.Label();
+            this.lblDiscount = new System.Windows.Forms.Label();
+            this.lblTax = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtDiscount = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CproductDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -127,101 +138,72 @@
             this.ventasToolStripMenuItem.Size = new System.Drawing.Size(83, 36);
             this.ventasToolStripMenuItem.Text = "Ventas";
             // 
-            // btnSelect
-            // 
-            this.btnSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(123)))), ((int)(((byte)(19)))));
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSelect.Location = new System.Drawing.Point(210, 577);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(324, 54);
-            this.btnSelect.TabIndex = 35;
-            this.btnSelect.Text = "Seleccionar";
-            this.btnSelect.UseVisualStyleBackColor = false;
-            // 
             // dgvList
             // 
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CclientName,
-            this.CclientTel,
-            this.CclientEmail});
-            this.dgvList.Location = new System.Drawing.Point(64, 249);
+            this.CproductId,
+            this.CproductDetail,
+            this.Ccant,
+            this.Cprice});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvList.Location = new System.Drawing.Point(62, 225);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
-            this.dgvList.Size = new System.Drawing.Size(1200, 360);
+            this.dgvList.RowHeadersVisible = false;
+            this.dgvList.Size = new System.Drawing.Size(1200, 366);
             this.dgvList.TabIndex = 34;
-            // 
-            // CclientName
-            // 
-            this.CclientName.DataPropertyName = "clientName";
-            this.CclientName.HeaderText = "Nombre";
-            this.CclientName.Name = "CclientName";
-            this.CclientName.ReadOnly = true;
-            // 
-            // CclientTel
-            // 
-            this.CclientTel.DataPropertyName = "clientTel";
-            this.CclientTel.HeaderText = "Tel";
-            this.CclientTel.Name = "CclientTel";
-            this.CclientTel.ReadOnly = true;
-            // 
-            // CclientEmail
-            // 
-            this.CclientEmail.DataPropertyName = "clientEmail";
-            this.CclientEmail.HeaderText = "Correo";
-            this.CclientEmail.Name = "CclientEmail";
-            this.CclientEmail.ReadOnly = true;
-            // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(1)))), ((int)(((byte)(16)))));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnExit.Location = new System.Drawing.Point(565, 591);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(324, 54);
-            this.btnExit.TabIndex = 33;
-            this.btnExit.Text = "Salir";
-            this.btnExit.UseVisualStyleBackColor = false;
             // 
             // btnAdd
             // 
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(131)))), ((int)(((byte)(237)))));
+            this.btnAdd.BackColor = System.Drawing.Color.Purple;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnAdd.Location = new System.Drawing.Point(904, 591);
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnAdd.Location = new System.Drawing.Point(939, 734);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(324, 54);
             this.btnAdd.TabIndex = 32;
-            this.btnAdd.Text = "Agregar Cliente";
+            this.btnAdd.Text = "Crear Venta";
             this.btnAdd.UseVisualStyleBackColor = false;
             // 
             // lblSeller
             // 
             this.lblSeller.AutoSize = true;
-            this.lblSeller.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeller.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSeller.ForeColor = System.Drawing.Color.Gray;
-            this.lblSeller.Location = new System.Drawing.Point(59, 728);
+            this.lblSeller.Location = new System.Drawing.Point(59, 764);
             this.lblSeller.Name = "lblSeller";
-            this.lblSeller.Size = new System.Drawing.Size(89, 18);
+            this.lblSeller.Size = new System.Drawing.Size(97, 20);
             this.lblSeller.TabIndex = 36;
             this.lblSeller.Text = "Vendedor: ";
             // 
             // lblClientName
             // 
             this.lblClientName.AutoSize = true;
-            this.lblClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClientName.ForeColor = System.Drawing.Color.Gray;
             this.lblClientName.Location = new System.Drawing.Point(259, 98);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(122, 18);
+            this.lblClientName.Size = new System.Drawing.Size(129, 20);
             this.lblClientName.TabIndex = 38;
             this.lblClientName.Text = "Nombre cliente";
             // 
@@ -241,49 +223,49 @@
             // 
             this.btnSearchClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(123)))), ((int)(((byte)(19)))));
             this.btnSearchClient.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSearchClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnSearchClient.Location = new System.Drawing.Point(64, 71);
+            this.btnSearchClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchClient.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSearchClient.Location = new System.Drawing.Point(65, 62);
             this.btnSearchClient.Name = "btnSearchClient";
-            this.btnSearchClient.Size = new System.Drawing.Size(70, 24);
+            this.btnSearchClient.Size = new System.Drawing.Size(84, 33);
             this.btnSearchClient.TabIndex = 40;
             this.btnSearchClient.Text = "Buscar";
             this.btnSearchClient.UseVisualStyleBackColor = false;
             this.btnSearchClient.Click += new System.EventHandler(this.btnSearchClient_Click);
             // 
-            // btnRemove
+            // btnRemoveProduct
             // 
-            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(1)))), ((int)(((byte)(16)))));
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnRemove.Location = new System.Drawing.Point(64, 200);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(142, 33);
-            this.btnRemove.TabIndex = 41;
-            this.btnRemove.Text = "Quitar Producto";
-            this.btnRemove.UseVisualStyleBackColor = false;
+            this.btnRemoveProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(1)))), ((int)(((byte)(16)))));
+            this.btnRemoveProduct.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveProduct.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRemoveProduct.Location = new System.Drawing.Point(421, 186);
+            this.btnRemoveProduct.Name = "btnRemoveProduct";
+            this.btnRemoveProduct.Size = new System.Drawing.Size(172, 33);
+            this.btnRemoveProduct.TabIndex = 41;
+            this.btnRemoveProduct.Text = "Quitar Producto x";
+            this.btnRemoveProduct.UseVisualStyleBackColor = false;
             // 
             // txtUser
             // 
             this.txtUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.txtUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.ForeColor = System.Drawing.Color.Silver;
-            this.txtUser.Location = new System.Drawing.Point(143, 728);
+            this.txtUser.Location = new System.Drawing.Point(150, 762);
             this.txtUser.Name = "txtUser";
             this.txtUser.ReadOnly = true;
-            this.txtUser.Size = new System.Drawing.Size(279, 24);
+            this.txtUser.Size = new System.Drawing.Size(279, 26);
             this.txtUser.TabIndex = 42;
             this.txtUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblClientId
             // 
             this.lblClientId.AutoSize = true;
-            this.lblClientId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClientId.ForeColor = System.Drawing.Color.Gray;
             this.lblClientId.Location = new System.Drawing.Point(61, 98);
             this.lblClientId.Name = "lblClientId";
-            this.lblClientId.Size = new System.Drawing.Size(139, 18);
+            this.lblClientId.Size = new System.Drawing.Size(148, 20);
             this.lblClientId.TabIndex = 43;
             this.lblClientId.Text = "Codigo de cliente";
             // 
@@ -299,23 +281,188 @@
             this.txtClientId.TabIndex = 44;
             this.txtClientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // btnAddProduct
+            // 
+            this.btnAddProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(131)))), ((int)(((byte)(237)))));
+            this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAddProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddProduct.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnAddProduct.Location = new System.Drawing.Point(65, 186);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(172, 33);
+            this.btnAddProduct.TabIndex = 45;
+            this.btnAddProduct.Text = "Agregar Producto +";
+            this.btnAddProduct.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdateProduct
+            // 
+            this.btnUpdateProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.btnUpdateProduct.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnUpdateProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateProduct.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnUpdateProduct.Location = new System.Drawing.Point(243, 186);
+            this.btnUpdateProduct.Name = "btnUpdateProduct";
+            this.btnUpdateProduct.Size = new System.Drawing.Size(172, 33);
+            this.btnUpdateProduct.TabIndex = 46;
+            this.btnUpdateProduct.Text = "Modificar Producto -";
+            this.btnUpdateProduct.UseVisualStyleBackColor = false;
+            this.btnUpdateProduct.Visible = false;
+            // 
+            // txtSubTotal
+            // 
+            this.txtSubTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubTotal.ForeColor = System.Drawing.Color.Silver;
+            this.txtSubTotal.Location = new System.Drawing.Point(65, 637);
+            this.txtSubTotal.Name = "txtSubTotal";
+            this.txtSubTotal.ReadOnly = true;
+            this.txtSubTotal.Size = new System.Drawing.Size(273, 38);
+            this.txtSubTotal.TabIndex = 48;
+            this.txtSubTotal.Text = "0";
+            this.txtSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblSubTotal
+            // 
+            this.lblSubTotal.AutoSize = true;
+            this.lblSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTotal.ForeColor = System.Drawing.Color.Gray;
+            this.lblSubTotal.Location = new System.Drawing.Point(156, 614);
+            this.lblSubTotal.Name = "lblSubTotal";
+            this.lblSubTotal.Size = new System.Drawing.Size(101, 20);
+            this.lblSubTotal.TabIndex = 47;
+            this.lblSubTotal.Text = "SUBTOTAL";
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.AutoSize = true;
+            this.lblDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiscount.ForeColor = System.Drawing.Color.Gray;
+            this.lblDiscount.Location = new System.Drawing.Point(451, 614);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(118, 20);
+            this.lblDiscount.TabIndex = 49;
+            this.lblDiscount.Text = "DESCUENTO";
+            // 
+            // lblTax
+            // 
+            this.lblTax.AutoSize = true;
+            this.lblTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTax.ForeColor = System.Drawing.Color.Gray;
+            this.lblTax.Location = new System.Drawing.Point(764, 615);
+            this.lblTax.Name = "lblTax";
+            this.lblTax.Size = new System.Drawing.Size(112, 20);
+            this.lblTax.TabIndex = 50;
+            this.lblTax.Text = "IMPUESTOS";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.Gray;
+            this.lblTotal.Location = new System.Drawing.Point(1099, 614);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(64, 20);
+            this.lblTotal.TabIndex = 51;
+            this.lblTotal.Text = "TOTAL";
+            // 
+            // txtDiscount
+            // 
+            this.txtDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.txtDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiscount.ForeColor = System.Drawing.Color.Silver;
+            this.txtDiscount.Location = new System.Drawing.Point(375, 638);
+            this.txtDiscount.Name = "txtDiscount";
+            this.txtDiscount.Size = new System.Drawing.Size(273, 38);
+            this.txtDiscount.TabIndex = 52;
+            this.txtDiscount.Text = "0";
+            this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.Silver;
+            this.textBox2.Location = new System.Drawing.Point(684, 638);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(273, 38);
+            this.textBox2.TabIndex = 53;
+            this.textBox2.Text = "0";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.ForeColor = System.Drawing.Color.Yellow;
+            this.textBox3.Location = new System.Drawing.Point(990, 637);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(273, 38);
+            this.textBox3.TabIndex = 54;
+            this.textBox3.Text = "0";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // CproductId
+            // 
+            this.CproductId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CproductId.DataPropertyName = "productId";
+            this.CproductId.HeaderText = "COD";
+            this.CproductId.Name = "CproductId";
+            this.CproductId.ReadOnly = true;
+            this.CproductId.Width = 79;
+            // 
+            // CproductDetail
+            // 
+            this.CproductDetail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CproductDetail.DataPropertyName = "productDetail";
+            this.CproductDetail.HeaderText = "ITEM";
+            this.CproductDetail.Name = "CproductDetail";
+            this.CproductDetail.ReadOnly = true;
+            // 
+            // Ccant
+            // 
+            this.Ccant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Ccant.DataPropertyName = "cant";
+            this.Ccant.HeaderText = "CANTIDAD";
+            this.Ccant.Name = "Ccant";
+            this.Ccant.ReadOnly = true;
+            this.Ccant.Width = 138;
+            // 
+            // Cprice
+            // 
+            this.Cprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Cprice.DataPropertyName = "price";
+            this.Cprice.HeaderText = "PRECIO";
+            this.Cprice.Name = "Cprice";
+            this.Cprice.ReadOnly = true;
+            this.Cprice.Width = 111;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(1326, 785);
+            this.ClientSize = new System.Drawing.Size(1326, 815);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtDiscount);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.lblTax);
+            this.Controls.Add(this.lblDiscount);
+            this.Controls.Add(this.txtSubTotal);
+            this.Controls.Add(this.lblSubTotal);
+            this.Controls.Add(this.btnUpdateProduct);
+            this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.txtClientId);
             this.Controls.Add(this.lblClientId);
             this.Controls.Add(this.txtUser);
-            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnRemoveProduct);
             this.Controls.Add(this.btnSearchClient);
             this.Controls.Add(this.txtClientName);
             this.Controls.Add(this.lblClientName);
             this.Controls.Add(this.lblSeller);
-            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.dgvList);
-            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.MainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -338,17 +485,12 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem Options;
         private System.Windows.Forms.ToolStripMenuItem exitItem;
-        private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.DataGridView dgvList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CclientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CclientTel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CclientEmail;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblSeller;
         private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.Button btnSearchClient;
-        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnRemoveProduct;
         private System.Windows.Forms.TextBox txtUser;
         public System.Windows.Forms.TextBox txtClientName;
         private System.Windows.Forms.Label lblClientId;
@@ -357,5 +499,19 @@
         private System.Windows.Forms.ToolStripMenuItem usersItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordItem;
         private System.Windows.Forms.ToolStripMenuItem ventasToolStripMenuItem;
+        private System.Windows.Forms.Button btnAddProduct;
+        private System.Windows.Forms.Button btnUpdateProduct;
+        public System.Windows.Forms.TextBox txtSubTotal;
+        private System.Windows.Forms.Label lblSubTotal;
+        private System.Windows.Forms.Label lblDiscount;
+        private System.Windows.Forms.Label lblTax;
+        private System.Windows.Forms.Label lblTotal;
+        public System.Windows.Forms.TextBox txtDiscount;
+        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CproductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CproductDetail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ccant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cprice;
     }
 }

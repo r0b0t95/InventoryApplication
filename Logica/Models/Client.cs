@@ -99,7 +99,7 @@ namespace Logica.Models
             return false;
         }
 
-        public DataTable list( bool actives = true, string filter = "" )
+        public DataTable list( int actives, string filter = "" )
         {
             Connection conn = new Connection();
 
@@ -108,6 +108,8 @@ namespace Logica.Models
 
             return conn.PerformSelect( "ClientsList" );
         }
+
+        
 
     }
 }

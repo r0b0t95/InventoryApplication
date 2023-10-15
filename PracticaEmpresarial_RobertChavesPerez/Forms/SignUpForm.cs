@@ -29,12 +29,18 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private string tempEmail { get; set; }
 
+        public int tempState { get; set; }
+
+        private string[] deleteVector { get; set; }
+
 
         public SignUpForm()
         {
             InitializeComponent();
 
             rol = new Logica.Models.Rol();
+
+            deleteVector = new string[4]; 
         }
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -90,7 +96,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se agrego el usuario", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se agrego el usuario", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
 
                 }
@@ -98,7 +104,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
 
@@ -151,6 +157,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtEmail.Text = string.Empty;
             txtPassword.Text = string.Empty;
             cbUsersType.SelectedIndex = -1;
+            tempState = 0;
         }
 
         public void fillUsersType()
@@ -203,13 +210,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "No se actualizo el usuario", ":(", MessageBoxButtons.OK );
+                        MessageBox.Show( "No se actualizo el usuario", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
             else
             {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK );
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
 
@@ -224,26 +231,42 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( this.tempId.Equals( 0 ) )
             {
-                btnSave.Visible = true;
-                btnUpdate.Visible = false;
-                btnDelete.Visible = false;
-                lblTitle.Text = "Registrar Usuario";
-                txtPassword.Enabled = true;
-                cbShowPassword.Enabled = true;
-                cbUsersType.SelectedIndex = -1;
+                loadRegister();
             }
             else
             {
-                btnSave.Visible = false;
-                btnUpdate.Visible = true;
-                btnDelete.Visible = true;
-                lblTitle.Text = "Modificar Usuario";
-                txtPassword.Enabled = false;
-                cbShowPassword.Enabled = false;
-                int item = chooseRole( tempRol.ToString() );
-                cbUsersType.SelectedIndex = item;
-                fillTemporal();
+                loadModified();
             }
+        }
+
+        private void loadRegister() 
+        {
+            btnSave.Visible = true;
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            lblTitle.Text = "Registrar Usuario";
+            txtPassword.Enabled = true;
+            cbShowPassword.Enabled = true;
+            cbUsersType.SelectedIndex = -1;
+            lblPassword.Visible = true;
+            txtPassword.Visible = true;
+            cbShowPassword.Visible = true;
+        }
+
+        private void loadModified()
+        {
+            btnSave.Visible = false;
+            btnUpdate.Visible = true;
+            btnDelete.Visible = true;
+            lblTitle.Text = "Modificar Usuario";
+            txtPassword.Enabled = false;
+            cbShowPassword.Enabled = false;
+            int item = chooseRole(tempRol.ToString());
+            cbUsersType.SelectedIndex = item;
+            fillTemporal();
+            lblPassword.Visible = false;
+            txtPassword.Visible = false;
+            cbShowPassword.Visible = false;
         }
 
         private void fillTemporal()
@@ -263,9 +286,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user.userId = tempId;
             user.name = txtName.Text.Trim();
-            user.state.stateId = 2;
+            user.state.stateId = tempState;
 
-            string text = "Quieres eliminar al usuario: {0} ?";
+            deleteMethod();
+
+            string text = "Quieres" + deleteVector[0] + "al usuario: {0} ?";
 
             bool msg = validateYesOrNot( text, user.name );
 
@@ -275,11 +300,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 if ( ok )
                 {
-                    string detail = string.Format( "Elimino al usuario: {0}", user.name );
+                    deleteMethod();
+
+                    string detail = string.Format( deleteVector[1] + "al usuario: {0}", user.name );
 
                     addLogEvent( detail );
 
-                    MessageBox.Show( "Usuario fue eliminado correctamente", ":)", MessageBoxButtons.OK );
+                    MessageBox.Show( "Usuario fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
                     cleanFields();
 
@@ -287,8 +314,26 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
                 else
                 {
-                    MessageBox.Show( "No se elimino el usuario", ":(", MessageBoxButtons.OK );
+                    MessageBox.Show( "No se" + deleteVector[3] + "el usuario", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                 }
+            }
+        }
+
+        private void deleteMethod()
+        {
+            if ( tempState.Equals( 2 ) )
+            {
+                deleteVector[0] = " eliminar ";
+                deleteVector[1] = " Elimino ";
+                deleteVector[2] = " eliminado ";
+                deleteVector[3] = " elimino ";
+            }
+            else
+            {
+                deleteVector[0] = " volver activar ";
+                deleteVector[1] = " Has activado ";
+                deleteVector[2] = " activado ";
+                deleteVector[3] = " activo ";
             }
         }
 

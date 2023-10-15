@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbActivos = new System.Windows.Forms.CheckBox();
             this.lblClientsList = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.CclientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CclientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CclientTel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CclientEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,49 +90,36 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CclientName,
             this.CclientId,
             this.CclientTel,
             this.CclientEmail});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvList.Location = new System.Drawing.Point(71, 199);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
+            this.dgvList.RowHeadersVisible = false;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1017, 445);
             this.dgvList.TabIndex = 30;
             this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
-            // 
-            // CclientName
-            // 
-            this.CclientName.DataPropertyName = "clientName";
-            this.CclientName.HeaderText = "Nombre";
-            this.CclientName.Name = "CclientName";
-            this.CclientName.ReadOnly = true;
-            // 
-            // CclientId
-            // 
-            this.CclientId.DataPropertyName = "clientId";
-            this.CclientId.HeaderText = "Id";
-            this.CclientId.Name = "CclientId";
-            this.CclientId.ReadOnly = true;
-            this.CclientId.Visible = false;
-            // 
-            // CclientTel
-            // 
-            this.CclientTel.DataPropertyName = "clientTel";
-            this.CclientTel.HeaderText = "Tel";
-            this.CclientTel.Name = "CclientTel";
-            this.CclientTel.ReadOnly = true;
-            // 
-            // CclientEmail
-            // 
-            this.CclientEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CclientEmail.DataPropertyName = "clientEmail";
-            this.CclientEmail.HeaderText = "Correo";
-            this.CclientEmail.Name = "CclientEmail";
-            this.CclientEmail.ReadOnly = true;
             // 
             // btnExit
             // 
@@ -170,6 +159,40 @@
             this.txtSearch.Size = new System.Drawing.Size(366, 47);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // CclientName
+            // 
+            this.CclientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CclientName.DataPropertyName = "clientName";
+            this.CclientName.HeaderText = "Nombre";
+            this.CclientName.Name = "CclientName";
+            this.CclientName.ReadOnly = true;
+            this.CclientName.Width = 118;
+            // 
+            // CclientId
+            // 
+            this.CclientId.DataPropertyName = "clientId";
+            this.CclientId.HeaderText = "Id";
+            this.CclientId.Name = "CclientId";
+            this.CclientId.ReadOnly = true;
+            this.CclientId.Visible = false;
+            // 
+            // CclientTel
+            // 
+            this.CclientTel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CclientTel.DataPropertyName = "clientTel";
+            this.CclientTel.HeaderText = "Telefono";
+            this.CclientTel.Name = "CclientTel";
+            this.CclientTel.ReadOnly = true;
+            this.CclientTel.Width = 129;
+            // 
+            // CclientEmail
+            // 
+            this.CclientEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CclientEmail.DataPropertyName = "clientEmail";
+            this.CclientEmail.HeaderText = "Correo";
+            this.CclientEmail.Name = "CclientEmail";
+            this.CclientEmail.ReadOnly = true;
             // 
             // ClientsListForm
             // 
