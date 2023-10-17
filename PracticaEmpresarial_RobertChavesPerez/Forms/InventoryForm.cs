@@ -34,6 +34,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private string[] deleteVector { get; set; }
 
+        public bool showItems { get; set; }
+
         public InventoryForm()
         {
             InitializeComponent();
@@ -75,8 +77,69 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void InventoryForm_Load(object sender, EventArgs e)
         {
+            showItemsMethod();
             fillCodeDgv();
             fillProductDgv();
+        }
+
+        private void showItemsMethod()
+        {
+            if ( showItems )
+            {
+                inventory();
+            }
+            else
+            {
+                chooseItem();
+            }
+        }
+
+        private void inventory()
+        {
+            lblCode.Visible = true;
+            lblPrice.Visible = true;
+            lblCant.Visible = true;
+            lblDetail.Visible = true;
+            btnUpdate.Visible = true;
+            btnAddCode.Visible = true;
+            btnSave.Visible = true;
+            btnRemoveCode.Visible = true;
+            txtCode.Visible = true;
+            txtPrice.Visible = true;
+            txtCant.Visible = true;
+            txtDetail.Visible = true;
+            txtSearchCode.Visible = true;
+            dgvCodeList.Visible = true;
+            btnRefresh.BackColor = Color.FromArgb( 192, 192, 0 );
+            btnRefresh.ForeColor = Color.FromArgb( 30, 30, 30);
+            btnRefresh.Location = new System.Drawing.Point( 989, 21 );
+            btnRefresh.Text = "Refrescar";
+            btnRefresh.Enabled = true;
+            dgvList.Size = new System.Drawing.Size( 1249, 421 );
+        }
+
+        private void chooseItem()
+        {
+            lblCode.Visible = false;
+            lblPrice.Visible = false;
+            lblCant.Visible = false;
+            lblDetail.Visible = false;
+            btnUpdate.Visible = false;
+            btnAddCode.Visible = false;
+            btnSave.Visible = false;
+            btnRemoveCode.Visible = false;
+            txtCode.Visible = false;
+            txtPrice.Visible = false;
+            txtCant.Visible = false;
+            txtDetail.Visible = false;
+            txtSearchCode.Visible = false;
+            dgvCodeList.Visible = false;
+            btnRefresh.BackColor = Color.FromArgb( 60, 60, 60 );
+            btnRefresh.ForeColor = Color.FromArgb( 224, 224, 224 );
+            btnRefresh.Location = new System.Drawing.Point( 1100, 776 );
+            btnRefresh.Text = "Seleccionar";
+            btnRefresh.Enabled = false;
+            dgvList.Size = new System.Drawing.Size( 1249, 662 );
         }
 
         private void txtSearchProduct_TextChanged(object sender, EventArgs e)
@@ -128,7 +191,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             
             CodeForm codeForm = new CodeForm();
 
-            if ( result.Equals(DialogResult.Yes ) )
+            if ( result.Equals( DialogResult.Yes ) )
             {
                 codeForm.tempBool = true;
             }
@@ -144,9 +207,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            fillCodeDgv();
-            fillProductDgv();
-            cleanFields();
+            if ( btnRefresh.Text.Equals( "Refrescar" ) )
+            {
+                fillCodeDgv();
+                fillProductDgv();
+                cleanFields();
+            }
+            else
+            {
+                selectItem();
+            }
         }
 
         private void dgvCodeList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -191,14 +261,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string validate = validateFields();
 
-            if ( string.IsNullOrEmpty( validate ) && tempProductId <= 0 )
+            if ( string.IsNullOrEmpty( validate ) )
             {
                 product = new Logica.Models.Product();
 
                 product.detail = txtDetail.Text.Trim();
                 product.cant = Convert.ToInt32( txtCant.Text.Trim() );
                 product.price = ( double ) Convert.ToDecimal( txtPrice.Text.Trim() );
-                product.code.codeId = tempCodeId;
+                if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
+                {
+                    product.code.codeId = 2;
+                }
+                else
+                {
+                    product.code.codeId = tempCodeId;
+                }
                 product.state.stateId = 1;
 
                 string text = "Quieres agregar al producto: {0} ?";
@@ -247,11 +324,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string responce = "El campo {0} esta vacio";
 
-            if ( string.IsNullOrWhiteSpace( txtCode.Text.Trim() ) )
-            {
-                return string.Format( responce, "codigo" );
-            }
-
             if ( string.IsNullOrWhiteSpace( txtPrice.Text.Trim() ) )
             {
                 return string.Format( responce, "precio" );
@@ -291,19 +363,26 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            product = new Logica.Models.Product();
-
-            product.productId = tempProductId;
-            product.detail = txtDetail.Text.Trim();
-            product.cant = Convert.ToInt32(txtCant.Text.Trim());
-            product.price = (double)Convert.ToDecimal(txtPrice.Text.Trim());
-            product.code.codeId = tempCodeId; ;
-            product.state.stateId = 1;
-
             string validate = validateFields();
 
             if ( string.IsNullOrEmpty( validate ) && tempProductId > 0 )
             {
+                product = new Logica.Models.Product();
+
+                product.productId = tempProductId;
+                product.detail = txtDetail.Text.Trim();
+                product.cant = Convert.ToInt32( txtCant.Text.Trim() );
+                product.price = (double) Convert.ToDecimal( txtPrice.Text.Trim() );
+                if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
+                {
+                    product.code.codeId = 2;
+                }
+                else
+                {
+                    product.code.codeId = tempCodeId;
+                }
+                product.state.stateId = 1;
+
                 string text = "Quieres actualizar al producto: {0} ?";
 
                 bool msg = validateYesOrNot( text, product.detail );
@@ -339,20 +418,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void dgvList_DoubleClick(object sender, EventArgs e)
         {
-            if ( dgvList.SelectedRows.Count == 1 )
-            {
-                DataGridViewRow row = dgvList.SelectedRows[0];
-
-                tempProductId = Convert.ToInt64( row.Cells["CproductId"].Value );
-                txtCode.Text = row.Cells["CpCode"].Value.ToString().Trim();
-                txtDetail.Text = row.Cells["CproductDetail"].Value.ToString().Trim();
-                txtCant.Text = row.Cells["Ccant"].Value.ToString().Trim();
-                txtPrice.Text = row.Cells["Cprice"].Value.ToString().Trim();
-                tempCodeId = Convert.ToInt64( row.Cells["CpCodeId"].Value );
-
-                btnSave.Enabled = false;
-                btnUpdate.Enabled = true;
-            }
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -439,6 +505,83 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+        private void btnRemoveCode_Click(object sender, EventArgs e)
+        {
+            if ( btnRefresh.Text.Equals( "Refrescar" ) )
+            {
+                txtCode.Text = string.Empty;
+                tempCodeId = 2;
+            }
+            else
+            {
+                selectItem();
+            }
+        }
 
+        private void selectItem()
+        {
+            if ( dgvList.SelectedRows.Count == 1 )
+            {
+                DataGridViewRow row = dgvList.SelectedRows[0];
+
+                long productId = Convert.ToInt64( row.Cells["CproductId"].Value );
+                string code = row.Cells["CpCode"].Value.ToString().Trim();
+                string productName = row.Cells["CproductDetail"].Value.ToString().Trim();
+
+                //TODO: doesn't repeat items 
+
+                if (!validateRepeatedItem(productId))
+                {
+
+                    DataRow drSale = Globals.StcMainForm.dtListItems.NewRow();
+
+                    //Globals.StcMainForm.dtListItems.
+
+                    //drSale.Cells.Add( new  );
+                    //drSale["Ccode"] = code;
+                    //drSale["productDetail"] = productName;
+
+                    //Globals.StcMainForm.dtListItems.Rows.Add( drSale );
+
+                this.DialogResult = DialogResult.OK;
+
+                }
+            }
+            else
+            {
+                MessageBox.Show( "Producto repetido", "Error :(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+
+        }
+
+        private bool validateRepeatedItem( long id )
+        {
+            return Globals.StcMainForm.dtListItems.Select().ToList().Exists( row => row["productId"].ToString().Equals( id ) );
+        }
+
+        private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if ( dgvList.SelectedRows.Count.Equals( 1 ) )
+            {
+                DataGridViewRow row = dgvList.SelectedRows[0];
+
+                tempProductId = Convert.ToInt64( row.Cells["CproductId"].Value );
+                txtCode.Text = row.Cells["CpCode"].Value.ToString().Trim();
+                txtDetail.Text = row.Cells["CproductDetail"].Value.ToString().Trim();
+                txtCant.Text = row.Cells["Ccant"].Value.ToString().Trim();
+                txtPrice.Text = row.Cells["Cprice"].Value.ToString().Trim();
+                tempCodeId = Convert.ToInt64( row.Cells["CpCodeId"].Value );
+
+                btnSave.Enabled = false;
+                btnUpdate.Enabled = true;
+
+                if (btnRefresh.Text.Equals("Seleccionar"))
+                {
+                    btnRefresh.Enabled = true;
+                    btnRefresh.BackColor = Color.FromArgb(16, 123, 19);
+                }
+
+            }
+        }
     }
 }

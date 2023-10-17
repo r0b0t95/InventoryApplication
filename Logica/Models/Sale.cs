@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logica.Models
 {
-    internal class Sale
+    public class Sale
     {
     }
 }

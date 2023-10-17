@@ -61,6 +61,7 @@
             this.CcodeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnRemoveCode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeList)).BeginInit();
@@ -269,6 +270,7 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1249, 421);
             this.dgvList.TabIndex = 3;
+            this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
             this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
             // 
             // CpCodeId
@@ -419,13 +421,27 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnRefresh.Location = new System.Drawing.Point(1035, 17);
+            this.btnRefresh.Location = new System.Drawing.Point(989, 21);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(130, 54);
+            this.btnRefresh.Size = new System.Drawing.Size(200, 54);
             this.btnRefresh.TabIndex = 49;
             this.btnRefresh.Text = "Refrescar";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnRemoveCode
+            // 
+            this.btnRemoveCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(1)))), ((int)(((byte)(16)))));
+            this.btnRemoveCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRemoveCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRemoveCode.Location = new System.Drawing.Point(540, 535);
+            this.btnRemoveCode.Name = "btnRemoveCode";
+            this.btnRemoveCode.Size = new System.Drawing.Size(56, 47);
+            this.btnRemoveCode.TabIndex = 50;
+            this.btnRemoveCode.Text = "X";
+            this.btnRemoveCode.UseVisualStyleBackColor = false;
+            this.btnRemoveCode.Click += new System.EventHandler(this.btnRemoveCode_Click);
             // 
             // InventoryForm
             // 
@@ -433,6 +449,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1345, 852);
+            this.Controls.Add(this.btnRemoveCode);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.dgvCodeList);
             this.Controls.Add(this.btnAddCode);
@@ -496,5 +513,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Ccant;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn CproductDetail;
+        private System.Windows.Forms.Button btnRemoveCode;
     }
 }

@@ -119,7 +119,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( txtPassword.Text.Trim().Count() < 4 && lblTitle.Text.Equals( "Registrar Usuario" ) )
             {
-                return string.Format(responce, "password debe ser minimo de 4 caracteres");
+                return string.Format(responce, "contraseña debe ser minimo de 4 caracteres");
             }
 
             if ( !cbUsersType.SelectedIndex.Equals( 0 ) && !cbUsersType.SelectedIndex.Equals( 1 ) )
@@ -146,7 +146,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             string msg = string.Format( text, description );
 
-            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo );
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
             return result == DialogResult.Yes ? true : false;
         }

@@ -12,10 +12,18 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class MainForm : Form
     {
+        public Logica.Models.Sale sale { get; set; }
+
+        public DataTable dtListItems { get; set; }
+
 
         public MainForm()
         {
             InitializeComponent();
+
+            sale = new Logica.Models.Sale();
+
+            dtListItems = new DataTable();
         }
 
         private void logsItem_Click(object sender, EventArgs e)
@@ -25,10 +33,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void inventoryItem_Click(object sender, EventArgs e)
         {
-            Form inventory = new InventoryForm();
+            InventoryForm inventory = new InventoryForm();
 
             this.Visible = false;
 
+            inventory.showItems = true;
             inventory.ShowDialog();
 
             this.Visible = true;
@@ -76,6 +85,28 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new UpdatePassword().Show();
         }
 
-        
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            InventoryForm inventory = new InventoryForm();
+
+            inventory.showItems = false;
+
+            DialogResult resp = inventory.ShowDialog();
+
+            if ( resp.Equals( DialogResult.OK ))
+            {
+                MessageBox.Show("good",  ":)");
+            }
+        }
+
+        private void btnUpdateProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveProduct_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

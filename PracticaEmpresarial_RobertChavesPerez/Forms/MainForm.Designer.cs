@@ -60,7 +60,7 @@
             this.txtDiscount = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CproductDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -153,7 +153,7 @@
             this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CproductId,
+            this.Ccode,
             this.CproductDetail,
             this.Ccant,
             this.Cprice});
@@ -171,6 +171,7 @@
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.Size = new System.Drawing.Size(1200, 366);
             this.dgvList.TabIndex = 34;
+            this.dgvList.VirtualMode = true;
             // 
             // btnAdd
             // 
@@ -245,6 +246,7 @@
             this.btnRemoveProduct.TabIndex = 41;
             this.btnRemoveProduct.Text = "Quitar Producto x";
             this.btnRemoveProduct.UseVisualStyleBackColor = false;
+            this.btnRemoveProduct.Click += new System.EventHandler(this.btnRemoveProduct_Click);
             // 
             // txtUser
             // 
@@ -293,6 +295,7 @@
             this.btnAddProduct.TabIndex = 45;
             this.btnAddProduct.Text = "Agregar Producto +";
             this.btnAddProduct.UseVisualStyleBackColor = false;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
             // btnUpdateProduct
             // 
@@ -306,7 +309,7 @@
             this.btnUpdateProduct.TabIndex = 46;
             this.btnUpdateProduct.Text = "Modificar Producto -";
             this.btnUpdateProduct.UseVisualStyleBackColor = false;
-            this.btnUpdateProduct.Visible = false;
+            this.btnUpdateProduct.Click += new System.EventHandler(this.btnUpdateProduct_Click);
             // 
             // txtSubTotal
             // 
@@ -403,14 +406,14 @@
             this.textBox3.Text = "0";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // CproductId
+            // Ccode
             // 
-            this.CproductId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CproductId.DataPropertyName = "productId";
-            this.CproductId.HeaderText = "COD";
-            this.CproductId.Name = "CproductId";
-            this.CproductId.ReadOnly = true;
-            this.CproductId.Width = 79;
+            this.Ccode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Ccode.DataPropertyName = "code";
+            this.Ccode.HeaderText = "COD";
+            this.Ccode.Name = "Ccode";
+            this.Ccode.ReadOnly = true;
+            this.Ccode.Width = 79;
             // 
             // CproductDetail
             // 
@@ -485,7 +488,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem Options;
         private System.Windows.Forms.ToolStripMenuItem exitItem;
-        private System.Windows.Forms.DataGridView dgvList;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblSeller;
         private System.Windows.Forms.Label lblClientName;
@@ -509,9 +511,10 @@
         public System.Windows.Forms.TextBox txtDiscount;
         public System.Windows.Forms.TextBox textBox2;
         public System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CproductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ccode;
         private System.Windows.Forms.DataGridViewTextBoxColumn CproductDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ccant;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cprice;
+        public System.Windows.Forms.DataGridView dgvList;
     }
 }

@@ -45,7 +45,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void dgvList_DoubleClick(object sender, EventArgs e)
         {
-            if ( dgvList.SelectedRows.Count == 1 )
+            if ( dgvList.SelectedRows.Count.Equals( 1 ) )
             {
                 DataGridViewRow row = dgvList.SelectedRows[0];
 

@@ -30,16 +30,17 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbActivos = new System.Windows.Forms.CheckBox();
             this.lblUsersList = new System.Windows.Forms.Label();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.CuserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CuserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CrolName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CuserEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,11 +102,54 @@
             this.dgvList.Location = new System.Drawing.Point(71, 199);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvList.RowHeadersVisible = false;
+            this.dgvList.RowTemplate.Height = 30;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(1017, 445);
             this.dgvList.TabIndex = 37;
             this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
+            // 
+            // CuserId
+            // 
+            this.CuserId.DataPropertyName = "userId";
+            this.CuserId.HeaderText = "Id";
+            this.CuserId.Name = "CuserId";
+            this.CuserId.ReadOnly = true;
+            this.CuserId.Visible = false;
+            // 
+            // CuserName
+            // 
+            this.CuserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CuserName.DataPropertyName = "userName";
+            this.CuserName.HeaderText = "Nombre";
+            this.CuserName.Name = "CuserName";
+            this.CuserName.ReadOnly = true;
+            this.CuserName.Width = 118;
+            // 
+            // CrolName
+            // 
+            this.CrolName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CrolName.DataPropertyName = "rolName";
+            this.CrolName.HeaderText = "Rol";
+            this.CrolName.Name = "CrolName";
+            this.CrolName.ReadOnly = true;
+            this.CrolName.Width = 72;
+            // 
+            // CuserEmail
+            // 
+            this.CuserEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CuserEmail.DataPropertyName = "userEmail";
+            this.CuserEmail.HeaderText = "Correo";
+            this.CuserEmail.Name = "CuserEmail";
+            this.CuserEmail.ReadOnly = true;
             // 
             // btnExit
             // 
@@ -145,40 +189,6 @@
             this.txtSearch.Size = new System.Drawing.Size(366, 47);
             this.txtSearch.TabIndex = 34;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // CuserId
-            // 
-            this.CuserId.DataPropertyName = "userId";
-            this.CuserId.HeaderText = "Id";
-            this.CuserId.Name = "CuserId";
-            this.CuserId.ReadOnly = true;
-            this.CuserId.Visible = false;
-            // 
-            // CuserName
-            // 
-            this.CuserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CuserName.DataPropertyName = "userName";
-            this.CuserName.HeaderText = "Nombre";
-            this.CuserName.Name = "CuserName";
-            this.CuserName.ReadOnly = true;
-            this.CuserName.Width = 118;
-            // 
-            // CrolName
-            // 
-            this.CrolName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CrolName.DataPropertyName = "rolName";
-            this.CrolName.HeaderText = "Rol";
-            this.CrolName.Name = "CrolName";
-            this.CrolName.ReadOnly = true;
-            this.CrolName.Width = 72;
-            // 
-            // CuserEmail
-            // 
-            this.CuserEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CuserEmail.DataPropertyName = "userEmail";
-            this.CuserEmail.HeaderText = "Correo";
-            this.CuserEmail.Name = "CuserEmail";
-            this.CuserEmail.ReadOnly = true;
             // 
             // UsersListForm
             // 

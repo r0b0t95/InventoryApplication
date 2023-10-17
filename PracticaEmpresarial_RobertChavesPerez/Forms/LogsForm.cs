@@ -34,7 +34,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void fillDgv()
         {
-            string fromDate = fromDTPicker.Text.ToString();
+            string fromDate = fromDTPicker.Value.ToString();
             string toDate = toDTPicker.Value.ToString();
 
             if ( compareDates() )
