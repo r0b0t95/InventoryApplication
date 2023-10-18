@@ -181,6 +181,9 @@ GO
 INSERT INTO [dbo].[Rol] ( rolName ) VALUES ( 'Usuario' )
 GO
 
+INSERT INTO [dbo].[Code] ( code ) VALUES ( '' )
+GO
+
 INSERT INTO [User] 
 ( userName, userEmail, password, fkState, fkRol )
 VALUES
@@ -650,6 +653,19 @@ BEGIN
 END
 GO
 
+
+CREATE OR ALTER PROCEDURE [dbo].[BillDetailsScheme] 
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT  productId, code, productDetail AS item, cant, price
+			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
+			ON fkCode = codeId WHERE productId = 0
+END
+GO
+
+
 -- ROLE PROCEDURES
 
 CREATE OR ALTER PROCEDURE [dbo].[RoleList] 
@@ -660,8 +676,5 @@ BEGIN
 	SELECT rolId, rolName FROM Rol  
 END
 GO
-
-
-
 ```
 

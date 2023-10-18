@@ -36,6 +36,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public bool showItems { get; set; }
 
+
         public InventoryForm()
         {
             InitializeComponent();
@@ -44,12 +45,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             code = new Logica.Models.Code();
 
+            log = new Logica.Models.Logg();
+
             dtProductList = new DataTable();
 
             dtCodeList = new DataTable();
 
             deleteVector = new string[4];
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -68,6 +72,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             refreshButtons();
         }
 
+
         public void fillCodeDgv()
         {
             dtCodeList = code.list( txtSearchCode.Text.Trim() );
@@ -75,12 +80,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dgvCodeList.DataSource = dtCodeList;
         }
 
+
         private void InventoryForm_Load(object sender, EventArgs e)
         {
             showItemsMethod();
             fillCodeDgv();
             fillProductDgv();
         }
+
 
         private void showItemsMethod()
         {
@@ -94,11 +101,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void inventory()
         {
             lblCode.Visible = true;
             lblPrice.Visible = true;
-            lblCant.Visible = true;
             lblDetail.Visible = true;
             btnUpdate.Visible = true;
             btnAddCode.Visible = true;
@@ -106,9 +113,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             btnRemoveCode.Visible = true;
             txtCode.Visible = true;
             txtPrice.Visible = true;
-            txtCant.Visible = true;
             txtDetail.Visible = true;
             txtSearchCode.Visible = true;
+            txtCant.Location = new System.Drawing.Point( 141, 651 );
+            lblCant.Location = new System.Drawing.Point( 47, 660 );
             dgvCodeList.Visible = true;
             btnRefresh.BackColor = Color.FromArgb( 192, 192, 0 );
             btnRefresh.ForeColor = Color.FromArgb( 30, 30, 30);
@@ -118,11 +126,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dgvList.Size = new System.Drawing.Size( 1249, 421 );
         }
 
+
         private void chooseItem()
         {
             lblCode.Visible = false;
             lblPrice.Visible = false;
-            lblCant.Visible = false;
             lblDetail.Visible = false;
             btnUpdate.Visible = false;
             btnAddCode.Visible = false;
@@ -130,9 +138,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             btnRemoveCode.Visible = false;
             txtCode.Visible = false;
             txtPrice.Visible = false;
-            txtCant.Visible = false;
             txtDetail.Visible = false;
             txtSearchCode.Visible = false;
+            txtCant.Location = new System.Drawing.Point( 662, 776 );
+            lblCant.Location = new System.Drawing.Point( 568, 790 );
             dgvCodeList.Visible = false;
             btnRefresh.BackColor = Color.FromArgb( 60, 60, 60 );
             btnRefresh.ForeColor = Color.FromArgb( 224, 224, 224 );
@@ -141,6 +150,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             btnRefresh.Enabled = false;
             dgvList.Size = new System.Drawing.Size( 1249, 662 );
         }
+
 
         private void txtSearchProduct_TextChanged(object sender, EventArgs e)
         {
@@ -151,7 +161,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void cleanFields()
+        {
+            cleanTextFields();
+            cleanTemp();
+            refreshButtons();
+        }
+
+
+        private void cleanTextFields()
         {
             txtCode.Text = string.Empty;
             txtCant.Text = string.Empty;
@@ -159,9 +178,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtDetail.Text = string.Empty;
             txtSearchCode.Text = string.Empty;
             txtSearchProduct.Text = string.Empty;
-            cleanTemp();
-            refreshButtons();
         }
+
 
         private void cleanTemp()
         {
@@ -169,11 +187,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             tempCodeId = 0;
         }
 
+
         private void refreshButtons()
         {
             btnSave.Enabled = true;
             btnUpdate.Enabled = false;
         }
+
 
         private void txtSearchCode_TextChanged(object sender, EventArgs e)
         {
@@ -183,6 +203,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 fillCodeDgv();
             }
         }
+
 
         private void btnAddCode_Click(object sender, EventArgs e)
         {
@@ -202,26 +223,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             DialogResult resp = codeForm.ShowDialog();
 
-            if ( resp == DialogResult.OK ) fillCodeDgv();
+            if ( resp.Equals( DialogResult.OK ) ) fillCodeDgv();
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            if ( btnRefresh.Text.Equals( "Refrescar" ) )
-            {
-                fillCodeDgv();
-                fillProductDgv();
-                cleanFields();
-            }
-            else
-            {
-                selectItem();
-            }
-        }
 
         private void dgvCodeList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if ( dgvCodeList.SelectedRows.Count == 1 )
+            if ( dgvCodeList.SelectedRows.Count.Equals( 1 ) )
             {
                 DataGridViewRow row = dgvCodeList.SelectedRows[0];
 
@@ -232,9 +240,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void dgvCodeList_DoubleClick(object sender, EventArgs e)
         {
-            if ( dgvCodeList.SelectedRows.Count == 1 )
+            if ( dgvCodeList.SelectedRows.Count.Equals( 1 ) )
             {
                 DataGridViewRow row = dgvCodeList.SelectedRows[0];
 
@@ -248,14 +257,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 DialogResult resp = codeForm.ShowDialog();
 
-                if ( resp == DialogResult.OK ) {
+                if ( resp.Equals( DialogResult.OK) ) {
                     fillCodeDgv();
                     txtCode.Text = string.Empty;
                 }
-
             }
-
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -267,7 +275,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 product.detail = txtDetail.Text.Trim();
                 product.cant = Convert.ToInt32( txtCant.Text.Trim() );
-                product.price = ( double ) Convert.ToDecimal( txtPrice.Text.Trim() );
+                product.price = Convert.ToDouble( txtPrice.Text.Trim() );
                 if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
                 {
                     product.code.codeId = 2;
@@ -290,7 +298,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Agrego al producto: {0}", product.detail );
 
-                        addLogEvent(detail);
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Producto agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -310,15 +318,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
-        private void addLogEvent( string detail )
-        {
-            log = new Logica.Models.Logg();
-            log.user.userId = Globals.GlobalUser.userId;
-            log.logDetail = detail;
-            log.logDate = DateTime.Now;
-
-            log.addLog();
-        }
 
         private string validateFields()
         {
@@ -342,24 +341,28 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return string.Empty;
         }
 
+
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
 
             DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
-            return result == DialogResult.Yes ? true : false;
+            return result.Equals( DialogResult.Yes ) ? true : false;
         }
+
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
+
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
+
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -372,7 +375,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 product.productId = tempProductId;
                 product.detail = txtDetail.Text.Trim();
                 product.cant = Convert.ToInt32( txtCant.Text.Trim() );
-                product.price = (double) Convert.ToDecimal( txtPrice.Text.Trim() );
+                product.price = Convert.ToDouble( txtPrice.Text.Trim() );
                 if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
                 {
                     product.code.codeId = 2;
@@ -395,7 +398,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al producto: {0}", product.detail );
 
-                        addLogEvent(detail);
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Producto actualizado correctamente", ":)", MessageBoxButtons.OK ) ;
 
@@ -415,11 +418,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
-
-        private void dgvList_DoubleClick(object sender, EventArgs e)
-        {
-            
-        }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -445,7 +443,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( deleteVector[1] + "al producto: {0}", product.detail );
 
-                        addLogEvent(detail);
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Producto fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -466,6 +464,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
+
         private void deleteMethod()
         {
             if ( tempState.Equals( 2 ) )
@@ -484,12 +483,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
             fillProductDgv();
 
             cbActive();
         }
+
 
         private int cbActive()
         {
@@ -505,12 +506,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void btnRemoveCode_Click(object sender, EventArgs e)
+        {
+            txtCode.Text = string.Empty;
+            tempCodeId = 2;
+        }
+
+
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
             if ( btnRefresh.Text.Equals( "Refrescar" ) )
             {
-                txtCode.Text = string.Empty;
-                tempCodeId = 2;
+                fillCodeDgv();
+                fillProductDgv();
+                cleanFields();
             }
             else
             {
@@ -518,70 +528,131 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void selectItem()
-        {
-            if ( dgvList.SelectedRows.Count == 1 )
-            {
-                DataGridViewRow row = dgvList.SelectedRows[0];
-
-                long productId = Convert.ToInt64( row.Cells["CproductId"].Value );
-                string code = row.Cells["CpCode"].Value.ToString().Trim();
-                string productName = row.Cells["CproductDetail"].Value.ToString().Trim();
-
-                //TODO: doesn't repeat items 
-
-                if (!validateRepeatedItem(productId))
-                {
-
-                    DataRow drSale = Globals.StcMainForm.dtListItems.NewRow();
-
-                    //Globals.StcMainForm.dtListItems.
-
-                    //drSale.Cells.Add( new  );
-                    //drSale["Ccode"] = code;
-                    //drSale["productDetail"] = productName;
-
-                    //Globals.StcMainForm.dtListItems.Rows.Add( drSale );
-
-                this.DialogResult = DialogResult.OK;
-
-                }
-            }
-            else
-            {
-                MessageBox.Show( "Producto repetido", "Error :(", MessageBoxButtons.OK, MessageBoxIcon.Error );
-            }
-
-        }
-
-        private bool validateRepeatedItem( long id )
-        {
-            return Globals.StcMainForm.dtListItems.Select().ToList().Exists( row => row["productId"].ToString().Equals( id ) );
-        }
-
-        private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
             {
                 DataGridViewRow row = dgvList.SelectedRows[0];
 
-                tempProductId = Convert.ToInt64( row.Cells["CproductId"].Value );
-                txtCode.Text = row.Cells["CpCode"].Value.ToString().Trim();
-                txtDetail.Text = row.Cells["CproductDetail"].Value.ToString().Trim();
-                txtCant.Text = row.Cells["Ccant"].Value.ToString().Trim();
-                txtPrice.Text = row.Cells["Cprice"].Value.ToString().Trim();
-                tempCodeId = Convert.ToInt64( row.Cells["CpCodeId"].Value );
+                string productId = row.Cells["CproductId"].Value.ToString().Trim();
+                string code = row.Cells["CpCode"].Value.ToString().Trim();
+                string item = row.Cells["CproductDetail"].Value.ToString().Trim();
+                int cant = Convert.ToInt32( row.Cells["Ccant"].Value );
+                double price = Convert.ToDouble( row.Cells["Cprice"].Value );
 
-                btnSave.Enabled = false;
-                btnUpdate.Enabled = true;
 
+                string validate = validateQuantity( item, cant );
+
+                if ( string.IsNullOrWhiteSpace( validate ) )
+                {
+
+                    if ( !validateRepeatedItem( productId, code ) )
+                    {
+
+                        DataRow drSale = Globals.StcMainForm.dtListItems.NewRow();
+
+                        drSale["code"] = code;
+                        drSale["productId"] = productId;
+                        drSale["item"] = item;
+                        drSale["price"] = price;
+                        drSale["cant"] = Convert.ToInt32( txtCant.Text.Trim() );
+
+                        Globals.StcMainForm.dtListItems.Rows.Add( drSale );
+
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show( "Item repetido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                    }
+                }
+                else
+                {
+                    MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                }
+            }
+        }
+
+
+        private string validateQuantity( string item, int cant )
+        {
+            int quantity = Convert.ToInt32( txtCant.Text.Trim() );
+
+            if ( cant.Equals( 0 ) )
+            {
+                return string.Format( "No hay {0} disponibles :(", item );
+            }
+
+            if ( quantity <= 0 )
+            {
+                return string.Format( "Seleccione de 1 unidada para arriba de {0}", item );
+            }
+
+            if ( quantity > cant )
+            {
+                return string.Format( "Cantidad deseada es mayor a la disponible de {0}", item );
+            }
+
+            return string.Empty;
+        }
+
+
+        private bool validateRepeatedItem( string productId, string code )
+        {
+            bool codeRepeated = Globals.StcMainForm.dtListItems.Select().ToList().Exists( row => row["code"].ToString().Equals( code ) );
+
+            bool idRepeated = Globals.StcMainForm.dtListItems.Select().ToList().Exists( row => row["productId"].ToString().Equals( productId ) );
+        
+            if ( string.IsNullOrWhiteSpace( code ) && idRepeated )
+            {
+                return true;
+            }
+
+            if ( codeRepeated && idRepeated )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if ( dgvList.SelectedRows.Count.Equals( 1 ) )
+            {
                 if (btnRefresh.Text.Equals("Seleccionar"))
                 {
                     btnRefresh.Enabled = true;
-                    btnRefresh.BackColor = Color.FromArgb(16, 123, 19);
+                    btnRefresh.BackColor = Color.FromArgb( 16, 123, 19 );
+                    txtCant.Text = "1";
                 }
-
+                else
+                {
+                    selectCell();
+                }
+                
             }
         }
+
+        private void selectCell()
+        {
+            DataGridViewRow row = dgvList.SelectedRows[0];
+
+            tempProductId = Convert.ToInt64(row.Cells["CproductId"].Value);
+            txtCode.Text = row.Cells["CpCode"].Value.ToString().Trim();
+            txtDetail.Text = row.Cells["CproductDetail"].Value.ToString().Trim();
+            txtCant.Text = row.Cells["Ccant"].Value.ToString().Trim();
+            txtPrice.Text = row.Cells["Cprice"].Value.ToString().Trim();
+            tempCodeId = Convert.ToInt64(row.Cells["CpCodeId"].Value);
+
+            btnSave.Enabled = false;
+            btnUpdate.Enabled = true;
+
+            
+        }
+
+        
     }
 }

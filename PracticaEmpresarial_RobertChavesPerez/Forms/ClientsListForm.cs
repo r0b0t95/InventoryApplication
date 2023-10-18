@@ -20,6 +20,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private int tempState {  get; set; }
 
+
         public ClientsListForm()
         {
             InitializeComponent();
@@ -29,24 +30,28 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtList = new DataTable();
         }
 
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ClientsForm clientForm = new ClientsForm();
 
             DialogResult resp = clientForm.ShowDialog();
 
-            if ( resp == DialogResult.OK ) fillDgv();
+            if ( resp.Equals( DialogResult.OK ) ) fillDgv();
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
         private void ClientsListForm_Load(object sender, EventArgs e)
         {
             fillDgv();
         }
+
 
         public void fillDgv()
         {
@@ -57,6 +62,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dgvList.DataSource = dtList;
         }
 
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearch.Text.Count() > 2 ||
@@ -65,6 +71,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 fillDgv();
             }
         }
+
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
@@ -80,8 +87,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 this.DialogResult = DialogResult.OK;
             }
-
         }
+
 
         private void dgvList_DoubleClick(object sender, EventArgs e)
         {
@@ -103,11 +110,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 DialogResult resp = clientForm.ShowDialog();
 
-                if ( resp == DialogResult.OK ) fillDgv();
-
+                if ( resp.Equals( DialogResult.OK ) ) fillDgv();
             }
-
         }
+
 
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
@@ -115,6 +121,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             cbActive();
         }
+
 
         private int cbActive()
         {
@@ -129,6 +136,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 return 2;
             }
         }
+
 
     }
 }

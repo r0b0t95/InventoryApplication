@@ -40,8 +40,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             rol = new Logica.Models.Rol();
 
+            log = new Logica.Models.Logg();
+
             deleteVector = new string[4]; 
         }
+
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
@@ -55,10 +58,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -86,7 +91,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format("Agrego al cliente: {0}", user.name);
 
-                        addLogEvent( detail );
+                        log.addLogEvent( detail, Globals.GlobalUser.userId ); 
 
                         MessageBox.Show( "Usuario agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -98,15 +103,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         MessageBox.Show( "No se agrego el usuario", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
-
                 }
-
             }
             else
             {
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
+
 
         private string validateFields( User user )
         {
@@ -148,8 +152,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
-            return result == DialogResult.Yes ? true : false;
+            return result.Equals( DialogResult.Yes ) ? true : false;
         }
+
 
         private void cleanFields()
         {
@@ -159,6 +164,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             cbUsersType.SelectedIndex = -1;
             tempState = 0;
         }
+
 
         public void fillUsersType()
         {
@@ -174,6 +180,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 cbUsersType.SelectedIndex = -1;
             }
         }
+
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -200,7 +207,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al usuario: {0}", user.name );
 
-                        addLogEvent( detail );
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Usuario actualizado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -220,10 +227,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void SignUpForm_Load(object sender, EventArgs e)
         {
             loadForm();
         }
+
 
         private void loadForm()
         {
@@ -239,6 +248,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void loadRegister() 
         {
             btnSave.Visible = true;
@@ -252,6 +262,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtPassword.Visible = true;
             cbShowPassword.Visible = true;
         }
+
 
         private void loadModified()
         {
@@ -269,16 +280,19 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             cbShowPassword.Visible = false;
         }
 
+
         private void fillTemporal()
         {
             tempName = txtName.Text.Trim();
             tempEmail = txtEmail.Text.Trim();
         }
 
+
         private int chooseRole( string role )
         {
             return role.Equals( "Administrador" ) ? 0 : 1;
         }
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -304,7 +318,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     string detail = string.Format( deleteVector[1] + "al usuario: {0}", user.name );
 
-                    addLogEvent( detail );
+                    log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                     MessageBox.Show( "Usuario fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -318,6 +332,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
             }
         }
+
 
         private void deleteMethod()
         {
@@ -336,17 +351,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 deleteVector[3] = " activo ";
             }
         }
-
-        private void addLogEvent( string detail )
-        {
-            log = new Logica.Models.Logg();
-            log.user.userId = Globals.GlobalUser.userId;
-            log.logDetail = detail;
-            log.logDate = DateTime.Now;
-
-            log.addLog();
-        }
-
 
 
 

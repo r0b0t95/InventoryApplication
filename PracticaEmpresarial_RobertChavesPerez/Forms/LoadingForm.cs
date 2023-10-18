@@ -23,7 +23,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             timerLoading.Stop();
 
-            Globals.StcMainForm = new MainForm();
+            //Globals.StcMainForm = new MainForm();
 
             Globals.StcMainForm.Show();
 

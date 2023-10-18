@@ -27,10 +27,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtList = new DataTable();
         }
 
+
         private void LogsForm_Load(object sender, EventArgs e)
         {
             fillDgv();
         }
+
 
         private void fillDgv()
         {
@@ -46,8 +48,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 MessageBox.Show( "La fecha desde no puede ser mayor que la fecha hasta", ":)", MessageBoxButtons.OK );
             }
-
         }
+
 
         private bool compareDates()
         {
@@ -61,6 +63,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return false;
         }
 
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearch.Text.Count() > 2 ||
@@ -70,10 +73,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
     }
 }

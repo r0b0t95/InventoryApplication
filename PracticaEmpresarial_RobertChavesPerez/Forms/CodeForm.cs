@@ -24,15 +24,20 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public bool tempBool { get; set; }
 
+
         public CodeForm()
         {
             InitializeComponent();
+
+            log = new Logica.Models.Logg();
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -56,7 +61,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Agrego al codigo: {0}", code.code );
 
-                        addLogEvent( detail );
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Codigo agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -66,7 +71,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                         {
                             this.DialogResult = DialogResult.OK;
                         }
-
                     }
                     else
                     {
@@ -80,14 +84,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void CodeForm_Load(object sender, EventArgs e)
         {
             loadForm();
         }
 
+
         private void loadForm()
         {
-            if (this.tempId.Equals(0))
+            if ( this.tempId.Equals( 0 ) )
             {
                 loadRegister();
             }
@@ -97,12 +103,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void loadRegister()
         {
             btnSave.Visible = true;
             btnUpdate.Visible = false;
             lblTitle.Text = "Registrar Codigo";
         }
+
 
         private void loadModified()
         {
@@ -112,10 +120,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             fillTemporal();
         }
 
+
         private void fillTemporal()
         {
             tempCode = txtCode.Text.Trim();
         }
+
 
         private bool validateYesOrNot( string text, string description )
         {
@@ -126,20 +136,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return result == DialogResult.Yes ? true : false;
         }
 
+
         private void cleanFields()
         {
             txtCode.Text = string.Empty;
         }
 
-        private void addLogEvent(string detail)
-        {
-            log = new Logica.Models.Logg();
-            log.user.userId = Globals.GlobalUser.userId;
-            log.logDetail = detail;
-            log.logDate = DateTime.Now;
-
-            log.addLog();
-        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -164,7 +166,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al codigo: {0}", code.code );
 
-                        addLogEvent( detail );
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Codigo actualizado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -184,6 +186,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
          
+
         private string validateFields( Code code )
         {
             string responce = "El campo {0} esta vacio";

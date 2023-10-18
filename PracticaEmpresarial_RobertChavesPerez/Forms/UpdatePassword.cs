@@ -21,7 +21,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         public UpdatePassword()
         {
             InitializeComponent();
+
+            log = new Logica.Models.Logg();
         }
+
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
@@ -39,15 +42,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
         private string validateFields()
         {
             string responce = "El campo {0} esta vacio";
-
 
             user = new Logica.Models.User();
 
@@ -92,8 +96,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
-            return result == DialogResult.Yes ? true : false;
+            return result.Equals( DialogResult.Yes ) ? true : false;
         }
+
 
         private void cleanFields()
         {
@@ -101,6 +106,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtNewPass.Text = string.Empty;
             txtConNewPass.Text= string.Empty;
         }
+
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -122,11 +128,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 {
                     bool ok = user.updatePassword();
 
-                    if (ok)
+                    if ( ok )
                     {
                         string detail = string.Format( "Actualizo su propia contraseña: {0}", name );
 
-                        addLogEvent(detail);
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Contraseña actualizada correctamente", ":)", MessageBoxButtons.OK );
 
@@ -147,16 +153,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
-        private void addLogEvent( string detail )
-        {
-            log = new Logica.Models.Logg();
-            log.user.userId = Globals.GlobalUser.userId;
-            log.logDetail = detail;
-            log.logDate = DateTime.Now;
-
-            log.addLog();
-        }
-
+       
 
     }
 }

@@ -22,7 +22,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            /*
+            
             Globals.GlobalUser.userId = 1;
 
             Globals.GlobalUser.name = "abdul";
@@ -32,8 +32,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new LoadingForm().Show();
 
             this.Hide();
-            */            
+                       
             
+            /*
             string validate = validateFields();
 
             user = new Logica.Models.User();
@@ -76,9 +77,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
-            
+            */
             
         }
+
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
@@ -92,10 +94,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
 
         }
+
 
         private void txtName_Click(object sender, EventArgs e)
         {
@@ -105,14 +109,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void txtPassword_Click(object sender, EventArgs e)
         {
-            //contraseña
             if ( txtPassword.ForeColor == Color.FromArgb( 64, 64, 64 ) )
             {
                 textPassword();
             }
         }
+
 
         private void textName()
         {
@@ -120,12 +125,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtName.ForeColor = Color.Silver;
         }
 
+
         private void textPassword()
         {
             txtPassword.Text = String.Empty;
             txtPassword.ForeColor = Color.Silver;
             txtPassword.UseSystemPasswordChar = true;
         }
+
 
         private string validateFields() 
         {
@@ -143,6 +150,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             return string.Empty;
         }
+
 
         private void lblPolicies_Click(object sender, EventArgs e)
         {
@@ -162,10 +170,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             MessageBox.Show( message, "Politicas", MessageBoxButtons.OK );
         }
 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
         private void cleanFields()
         {

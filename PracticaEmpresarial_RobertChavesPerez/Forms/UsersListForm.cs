@@ -40,7 +40,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             DialogResult resp = userForm.ShowDialog();
 
-            if ( resp == DialogResult.OK ) fillDgv();
+            if ( resp.Equals( DialogResult.OK ) ) fillDgv();
         }
 
         private void dgvList_DoubleClick(object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 DialogResult resp = userForm.ShowDialog();
 
-                if ( resp == DialogResult.OK ) fillDgv();
+                if ( resp.Equals( DialogResult.OK ) ) fillDgv();
 
             }
 

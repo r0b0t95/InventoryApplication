@@ -57,5 +57,16 @@ namespace Logica.Models
             return conn.PerformSelect( "LoggsList" );
         }
 
+        public void addLogEvent( string detail, long userId )
+        {
+            Logg log = new Logg();
+            log.user.userId = userId;
+            log.logDetail = detail;
+            log.logDate = DateTime.Now;
+
+            log.addLog();
+        }
+
+
     }
 }

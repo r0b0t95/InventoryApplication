@@ -271,7 +271,6 @@
             this.dgvList.Size = new System.Drawing.Size(1249, 421);
             this.dgvList.TabIndex = 3;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
-            this.dgvList.DoubleClick += new System.EventHandler(this.dgvList_DoubleClick);
             // 
             // CpCodeId
             // 

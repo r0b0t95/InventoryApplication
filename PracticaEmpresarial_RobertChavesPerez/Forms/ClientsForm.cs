@@ -27,17 +27,22 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private string[] deleteVector { get; set; }
 
+
         public ClientsForm()
         {
             InitializeComponent();
 
+            log = new Logica.Models.Logg();
+
             deleteVector = new string[4];
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -67,7 +72,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Agrego al cliente: {0}", client.name );
 
-                        addLogEvent( detail );
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Cliente agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -86,6 +91,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
+
 
         private string validateFields( Client client )
         {
@@ -117,8 +123,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
 
-            return result == DialogResult.Yes ? true : false;
+            return result.Equals( DialogResult.Yes ) ? true : false;
         }
+
 
         private void cleanFields()
         {
@@ -128,20 +135,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             tempState = 0;
         }
 
+
         private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
-        private void addLogEvent( string detail )
-        {
-            log = new Logica.Models.Logg();
-            log.user.userId = Globals.GlobalUser.userId;
-            log.logDetail = detail;
-            log.logDate = DateTime.Now;
-
-            log.addLog();
-        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -174,7 +173,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al cliente: {0}", client.name );
 
-                        addLogEvent( detail );
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Cliente actualizado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -194,10 +193,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void ClientsForm_Load(object sender, EventArgs e)
         {
             loadForm();
         }
+
 
         private void loadForm()
         {
@@ -211,6 +212,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void loadRegister()
         {
             btnSave.Visible = true;
@@ -218,6 +220,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             btnDelete.Visible = false;
             lblTitle.Text = "Registrar Cliente";
         }
+
 
         private void loadModified()
         {
@@ -228,11 +231,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             fillTemporal();
         }
 
+
         private void fillTemporal()
         {
             tempEmail = txtEmail.Text.Trim();
             tempTel = txtTel.Text.Trim();
         }
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -256,7 +261,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 {
                     string detail = string.Format( deleteVector[1] + "al cliente: {0}", client.name );
 
-                    addLogEvent( detail );
+                    log.addLogEvent( detail, Globals.GlobalUser.userId );
 
                     MessageBox.Show( "Cliente fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -271,6 +276,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
 
         }
+
 
         private void deleteMethod()
         {
@@ -289,8 +295,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 deleteVector[3] = " activo ";
             }
         }
-
-
 
 
 
