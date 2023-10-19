@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,11 +41,6 @@
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Citem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblSeller = new System.Windows.Forms.Label();
             this.lblClientName = new System.Windows.Forms.Label();
@@ -65,6 +60,15 @@
             this.txtDiscount = new System.Windows.Forms.TextBox();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
+            this.txtTax = new System.Windows.Forms.TextBox();
+            this.lblTax = new System.Windows.Forms.Label();
+            this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Citem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbIVA = new System.Windows.Forms.CheckBox();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -144,29 +148,30 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Ccode,
             this.CproductId,
             this.Citem,
             this.Ccant,
+            this.Cquantity,
             this.Cprice});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvList.Location = new System.Drawing.Point(44, 225);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
@@ -176,49 +181,6 @@
             this.dgvList.TabIndex = 34;
             this.dgvList.VirtualMode = true;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
-            // 
-            // Ccode
-            // 
-            this.Ccode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Ccode.DataPropertyName = "code";
-            this.Ccode.HeaderText = "COD";
-            this.Ccode.Name = "Ccode";
-            this.Ccode.ReadOnly = true;
-            this.Ccode.Width = 79;
-            // 
-            // CproductId
-            // 
-            this.CproductId.DataPropertyName = "productId";
-            this.CproductId.HeaderText = "ID";
-            this.CproductId.Name = "CproductId";
-            this.CproductId.ReadOnly = true;
-            this.CproductId.Visible = false;
-            // 
-            // Citem
-            // 
-            this.Citem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Citem.DataPropertyName = "item";
-            this.Citem.HeaderText = "ITEM";
-            this.Citem.Name = "Citem";
-            this.Citem.ReadOnly = true;
-            // 
-            // Ccant
-            // 
-            this.Ccant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Ccant.DataPropertyName = "cant";
-            this.Ccant.HeaderText = "CANTIDAD";
-            this.Ccant.Name = "Ccant";
-            this.Ccant.ReadOnly = true;
-            this.Ccant.Width = 138;
-            // 
-            // Cprice
-            // 
-            this.Cprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Cprice.DataPropertyName = "price";
-            this.Cprice.HeaderText = "PRECIO";
-            this.Cprice.Name = "Cprice";
-            this.Cprice.ReadOnly = true;
-            this.Cprice.Width = 111;
             // 
             // btnAdd
             // 
@@ -239,7 +201,7 @@
             this.lblSeller.AutoSize = true;
             this.lblSeller.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSeller.ForeColor = System.Drawing.Color.Gray;
-            this.lblSeller.Location = new System.Drawing.Point(59, 764);
+            this.lblSeller.Location = new System.Drawing.Point(47, 762);
             this.lblSeller.Name = "lblSeller";
             this.lblSeller.Size = new System.Drawing.Size(97, 20);
             this.lblSeller.TabIndex = 36;
@@ -259,12 +221,12 @@
             // txtClientName
             // 
             this.txtClientName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClientName.ForeColor = System.Drawing.Color.Silver;
             this.txtClientName.Location = new System.Drawing.Point(235, 119);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.ReadOnly = true;
-            this.txtClientName.Size = new System.Drawing.Size(385, 24);
+            this.txtClientName.Size = new System.Drawing.Size(385, 26);
             this.txtClientName.TabIndex = 39;
             this.txtClientName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -301,7 +263,7 @@
             this.txtUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.txtUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUser.ForeColor = System.Drawing.Color.Silver;
-            this.txtUser.Location = new System.Drawing.Point(150, 762);
+            this.txtUser.Location = new System.Drawing.Point(135, 761);
             this.txtUser.Name = "txtUser";
             this.txtUser.ReadOnly = true;
             this.txtUser.Size = new System.Drawing.Size(319, 26);
@@ -322,12 +284,12 @@
             // txtClientId
             // 
             this.txtClientId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.txtClientId.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClientId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClientId.ForeColor = System.Drawing.Color.Silver;
             this.txtClientId.Location = new System.Drawing.Point(44, 119);
             this.txtClientId.Name = "txtClientId";
             this.txtClientId.ReadOnly = true;
-            this.txtClientId.Size = new System.Drawing.Size(172, 24);
+            this.txtClientId.Size = new System.Drawing.Size(172, 26);
             this.txtClientId.TabIndex = 44;
             this.txtClientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -362,12 +324,12 @@
             // txtSubTotal
             // 
             this.txtSubTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSubTotal.ForeColor = System.Drawing.Color.Silver;
-            this.txtSubTotal.Location = new System.Drawing.Point(44, 660);
+            this.txtSubTotal.Location = new System.Drawing.Point(391, 660);
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.ReadOnly = true;
-            this.txtSubTotal.Size = new System.Drawing.Size(273, 38);
+            this.txtSubTotal.Size = new System.Drawing.Size(273, 44);
             this.txtSubTotal.TabIndex = 48;
             this.txtSubTotal.Text = "0";
             this.txtSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -377,7 +339,7 @@
             this.lblSubTotal.AutoSize = true;
             this.lblSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubTotal.ForeColor = System.Drawing.Color.Gray;
-            this.lblSubTotal.Location = new System.Drawing.Point(135, 637);
+            this.lblSubTotal.Location = new System.Drawing.Point(471, 637);
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(101, 20);
             this.lblSubTotal.TabIndex = 47;
@@ -388,7 +350,7 @@
             this.lblDiscount.AutoSize = true;
             this.lblDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiscount.ForeColor = System.Drawing.Color.Gray;
-            this.lblDiscount.Location = new System.Drawing.Point(470, 637);
+            this.lblDiscount.Location = new System.Drawing.Point(814, 637);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(118, 20);
             this.lblDiscount.TabIndex = 49;
@@ -401,9 +363,9 @@
             this.lblCant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
             this.lblCant.Location = new System.Drawing.Point(1022, 177);
             this.lblCant.Name = "lblCant";
-            this.lblCant.Size = new System.Drawing.Size(81, 40);
+            this.lblCant.Size = new System.Drawing.Size(86, 40);
             this.lblCant.TabIndex = 50;
-            this.lblCant.Text = "Nueva\r\nCantidad\r\n";
+            this.lblCant.Text = "Nueva\r\nCantidad:";
             this.lblCant.Visible = false;
             // 
             // lblTotal
@@ -420,21 +382,23 @@
             // txtDiscount
             // 
             this.txtDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.txtDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiscount.ForeColor = System.Drawing.Color.Silver;
-            this.txtDiscount.Location = new System.Drawing.Point(393, 660);
+            this.txtDiscount.Location = new System.Drawing.Point(736, 660);
             this.txtDiscount.Name = "txtDiscount";
-            this.txtDiscount.Size = new System.Drawing.Size(273, 38);
+            this.txtDiscount.Size = new System.Drawing.Size(273, 44);
             this.txtDiscount.TabIndex = 52;
             this.txtDiscount.Text = "0";
             this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
+            this.txtDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiscount_KeyPress);
             // 
             // txtCant
             // 
             this.txtCant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.txtCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
-            this.txtCant.Location = new System.Drawing.Point(1109, 179);
+            this.txtCant.Location = new System.Drawing.Point(1105, 179);
             this.txtCant.Name = "txtCant";
             this.txtCant.Size = new System.Drawing.Size(106, 38);
             this.txtCant.TabIndex = 53;
@@ -446,15 +410,106 @@
             // txtTotal
             // 
             this.txtTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotal.ForeColor = System.Drawing.Color.Yellow;
             this.txtTotal.Location = new System.Drawing.Point(1077, 660);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
-            this.txtTotal.Size = new System.Drawing.Size(273, 38);
+            this.txtTotal.Size = new System.Drawing.Size(273, 44);
             this.txtTotal.TabIndex = 54;
             this.txtTotal.Text = "0";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtTax
+            // 
+            this.txtTax.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.txtTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTax.ForeColor = System.Drawing.Color.Silver;
+            this.txtTax.Location = new System.Drawing.Point(44, 660);
+            this.txtTax.Name = "txtTax";
+            this.txtTax.ReadOnly = true;
+            this.txtTax.Size = new System.Drawing.Size(273, 44);
+            this.txtTax.TabIndex = 55;
+            this.txtTax.Text = "0";
+            this.txtTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lblTax
+            // 
+            this.lblTax.AutoSize = true;
+            this.lblTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTax.ForeColor = System.Drawing.Color.Gray;
+            this.lblTax.Location = new System.Drawing.Point(131, 639);
+            this.lblTax.Name = "lblTax";
+            this.lblTax.Size = new System.Drawing.Size(100, 20);
+            this.lblTax.TabIndex = 56;
+            this.lblTax.Text = "IMPUESTO";
+            // 
+            // Ccode
+            // 
+            this.Ccode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Ccode.DataPropertyName = "code";
+            this.Ccode.HeaderText = "COD";
+            this.Ccode.Name = "Ccode";
+            this.Ccode.ReadOnly = true;
+            this.Ccode.Width = 79;
+            // 
+            // CproductId
+            // 
+            this.CproductId.DataPropertyName = "productId";
+            this.CproductId.HeaderText = "ID";
+            this.CproductId.Name = "CproductId";
+            this.CproductId.ReadOnly = true;
+            this.CproductId.Visible = false;
+            // 
+            // Citem
+            // 
+            this.Citem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Citem.DataPropertyName = "item";
+            this.Citem.HeaderText = "DESCRIPCION DEL PRODUCTO";
+            this.Citem.Name = "Citem";
+            this.Citem.ReadOnly = true;
+            // 
+            // Ccant
+            // 
+            this.Ccant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Ccant.DataPropertyName = "cant";
+            this.Ccant.HeaderText = "CANT";
+            this.Ccant.Name = "Ccant";
+            this.Ccant.ReadOnly = true;
+            this.Ccant.Width = 91;
+            // 
+            // Cquantity
+            // 
+            this.Cquantity.DataPropertyName = "quantity";
+            this.Cquantity.HeaderText = "CANT_TEMP";
+            this.Cquantity.Name = "Cquantity";
+            this.Cquantity.ReadOnly = true;
+            this.Cquantity.Visible = false;
+            // 
+            // Cprice
+            // 
+            this.Cprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Cprice.DataPropertyName = "price";
+            this.Cprice.HeaderText = "PRECIO";
+            this.Cprice.Name = "Cprice";
+            this.Cprice.ReadOnly = true;
+            this.Cprice.Width = 111;
+            // 
+            // cbIVA
+            // 
+            this.cbIVA.AutoSize = true;
+            this.cbIVA.Checked = true;
+            this.cbIVA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbIVA.ForeColor = System.Drawing.Color.IndianRed;
+            this.cbIVA.Location = new System.Drawing.Point(44, 642);
+            this.cbIVA.Name = "cbIVA";
+            this.cbIVA.Size = new System.Drawing.Size(46, 17);
+            this.cbIVA.TabIndex = 57;
+            this.cbIVA.Text = "IVA\r\n";
+            this.cbIVA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbIVA.UseVisualStyleBackColor = true;
+            this.cbIVA.CheckedChanged += new System.EventHandler(this.cbIVA_CheckedChanged);
             // 
             // MainForm
             // 
@@ -462,6 +517,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1395, 815);
+            this.Controls.Add(this.cbIVA);
+            this.Controls.Add(this.lblTax);
+            this.Controls.Add(this.txtTax);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.txtCant);
             this.Controls.Add(this.txtDiscount);
@@ -527,10 +585,14 @@
         public System.Windows.Forms.TextBox txtCant;
         public System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.DataGridView dgvList;
+        public System.Windows.Forms.TextBox txtTax;
+        private System.Windows.Forms.Label lblTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ccode;
         private System.Windows.Forms.DataGridViewTextBoxColumn CproductId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Citem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ccant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cquantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cprice;
+        private System.Windows.Forms.CheckBox cbIVA;
     }
 }

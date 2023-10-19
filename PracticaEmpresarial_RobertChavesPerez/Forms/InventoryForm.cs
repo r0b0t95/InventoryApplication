@@ -538,11 +538,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 string productId = row.Cells["CproductId"].Value.ToString().Trim();
                 string code = row.Cells["CpCode"].Value.ToString().Trim();
                 string item = row.Cells["CproductDetail"].Value.ToString().Trim();
-                int cant = Convert.ToInt32( row.Cells["Ccant"].Value );
+                int quantity = Convert.ToInt32( row.Cells["Ccant"].Value );
                 double price = Convert.ToDouble( row.Cells["Cprice"].Value );
 
 
-                string validate = validateQuantity( item, cant );
+                string validate = validateQuantity( item, quantity );
 
                 if ( string.IsNullOrWhiteSpace( validate ) )
                 {
@@ -557,6 +557,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                         drSale["item"] = item;
                         drSale["price"] = price;
                         drSale["cant"] = Convert.ToInt32( txtCant.Text.Trim() );
+                        drSale["quantity"] = quantity;
 
                         Globals.StcMainForm.dtListItems.Rows.Add( drSale );
 
@@ -586,12 +587,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( quantity <= 0 )
             {
-                return string.Format( "Seleccione de 1 unidada para arriba de {0}", item );
+                return string.Format( "Seleccione de 1 unidada para arriba de: {0}", item );
             }
 
             if ( quantity > cant )
             {
-                return string.Format( "Cantidad deseada es mayor a la disponible de {0}", item );
+                return string.Format( "Cantidad deseada es mayor a la disponible de: {0}", item );
             }
 
             return string.Empty;

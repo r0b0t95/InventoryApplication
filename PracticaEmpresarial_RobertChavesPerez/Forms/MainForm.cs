@@ -18,6 +18,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         public DataTable dtListItems { get; set; }
 
+        private int tempQuantity { get; set; }
+
+        private string tempProduct { get; set; }
 
         public MainForm()
         {
@@ -107,10 +110,18 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             btnAdd.Enabled = false;
         }
 
+
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
+
+
+        private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
+        }
+
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
@@ -130,66 +141,123 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
         }
 
+
         private void calculateAmount()
         {
-            double tax = 0;
             double discount = 0;
             double subTotal = 0;
             double total = 0;
+            double IVA = 1;
+            double tax = 0;
+            int quantity = 0;
 
-            if( dgvList.SelectedRows.Count > 0 )
+            if ( dtListItems.Rows.Count > 0 )
             {
                 foreach ( DataRow item in dtListItems.Rows )
                 {
+                    quantity = Convert.ToInt32( item["cant"] );
                     subTotal += Convert.ToDouble( item["price"] );
+
+                    subTotal *= quantity;
                 }
             }
 
+
+            discount = discountMethod();
+
+
+            if ( cbIVA.Checked ) IVA = 1.13;
+
+            total = ( subTotal * IVA ) - discount;
+
+            if ( cbIVA.Checked )
+            {
+                tax = ( subTotal ) * 0.13;
+            }
+            else
+            {
+                tax = 0;
+            }
+
+            txtTax.Text = tax.ToString();
             txtSubTotal.Text = subTotal.ToString();
-            txtCant.Text = tax.ToString();
-            txtDiscount.Text = discount.ToString();
             txtTotal.Text = total.ToString();
+        }
+
+        private double discountMethod()
+        {
+            if (string.IsNullOrWhiteSpace( txtDiscount.Text.Trim() ) )
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToDouble( txtDiscount.Text.Trim() );
+            }
         }
 
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
 
-            if ( quantity() )
-            {
-                if (dgvList.SelectedRows.Count.Equals(1))
-                {
-                    DataGridViewRow dgvr = dgvList.SelectedRows[0];
+             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
+             {
+                 string validate = quantity();
 
-                    int dgvIndex = dgvr.Index;
+                 if ( string.IsNullOrEmpty( validate ) )
+                 {
+                     DataGridViewRow dgvr = dgvList.SelectedRows[0];
 
-                    dtListItems.Rows[dgvr.Index][3] = txtCant.Text.Trim();
+                     int dgvIndex = dgvr.Index;
 
-                    dgvList.DataSource = dtListItems;
+                     dtListItems.Rows[dgvr.Index][3] = txtCant.Text.Trim();
 
-                    dgvList.ClearSelection();
+                     dgvList.DataSource = dtListItems;
 
-                    calculateAmount();
+                     dgvList.ClearSelection();
 
-                    dontShowQuantity();
-                }
-                else
-                {
-                    MessageBox.Show( "Debes seleccionar una fila de un item", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
-                }
-            }
-            else
-            {
-                MessageBox.Show( "Cantidad debe ser mayor a 0", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
-            }
+                     calculateAmount();
+
+                     dontShowQuantity();
+                 }
+                 else
+                 {
+                     MessageBox.Show( validate, ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                 }
+             }
+             else
+             {
+                 MessageBox.Show( "Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+             }
+            
         }
 
-        private bool quantity()
+
+        private string quantity()
         {
             int quantity = Convert.ToInt32( txtCant.Text.Trim() );
 
-            if ( quantity > 0 ) return true;
+            if ( quantity <= 0 )
+            {
+                return "Cantidad debe ser mayor a 0";
+            }
 
-            return false;
+            if ( quantity > tempQuantity )
+            {
+                return string.Format( "Cantidad deseada es mayor a la disponible de: {0}", tempProduct );
+            }
+
+            return string.Empty;
+        }
+
+
+        private void cbIVA_CheckedChanged(object sender, EventArgs e)
+        {
+            calculateAmount();
+        }
+
+        private void txtDiscount_TextChanged(object sender, EventArgs e)
+        {
+            calculateAmount();
         }
 
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -200,7 +268,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 int dgvIndex = dgvr.Index;
 
+                tempProduct = Convert.ToString( dtListItems.Rows[dgvr.Index][2] );
+
                 txtCant.Text = Convert.ToString( dtListItems.Rows[dgvr.Index][3] );
+
+                tempQuantity = Convert.ToInt32( dtListItems.Rows[dgvr.Index][5] );
             }
 
             showQuantity();
@@ -241,7 +313,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
             else
             {
-                MessageBox.Show( "Debes seleccionar una fila de un item", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                MessageBox.Show( "Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
             }
         }
 
@@ -314,6 +386,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
         
+
+
+
+
+
+
 
 
 

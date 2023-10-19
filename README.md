@@ -659,7 +659,7 @@ AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	SELECT  productId, code, productDetail AS item, cant, price
+	SELECT  productId, code, productDetail AS item, cant, price, cant AS quantity
 			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
 			ON fkCode = codeId WHERE productId = 0
 END
