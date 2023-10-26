@@ -40,7 +40,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@clientEmail", this.email ) );
             conn.ParamList.Add( new SqlParameter( "@clientTel", this.tel ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
-            int r = conn.PerformUpdateDeleteInsert( "AddClient" );
+            int r = conn.ExecuteUpdateDeleteInsert( "AddClient" );
 
             return r > 0 ? true : false;
         }
@@ -53,7 +53,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@clientName", this.name ) );
             conn.ParamList.Add( new SqlParameter( "@clientEmail", this.email ) );
             conn.ParamList.Add( new SqlParameter( "@clientTel", this.tel ) );
-            int r = conn.PerformUpdateDeleteInsert( "UpdateClient" );
+            int r = conn.ExecuteUpdateDeleteInsert( "UpdateClient" );
 
             return r > 0 ? true : false;
         }
@@ -64,7 +64,7 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@clientId", this.clientId ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
-            int r = conn.PerformUpdateDeleteInsert( "DeleteClient" );
+            int r = conn.ExecuteUpdateDeleteInsert( "DeleteClient" );
 
             return r > 0 ? true : false;
         }
@@ -74,7 +74,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add(new SqlParameter( "@clientEmail", this.email ) );
-            DataTable responce = conn.PerformSelect( "ConsultClientEmail" );
+            DataTable responce = conn.ExecuteSelect( "ConsultClientEmail" );
 
             if (responce != null && responce.Rows.Count > 0)
             {
@@ -89,7 +89,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@clientTel", this.tel ) );
-            DataTable responce = conn.PerformSelect( "ConsultClientTel" );
+            DataTable responce = conn.ExecuteSelect( "ConsultClientTel" );
 
             if (responce != null && responce.Rows.Count > 0)
             {
@@ -106,7 +106,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
 
-            return conn.PerformSelect( "ClientsList" );
+            return conn.ExecuteSelect( "ClientsList" );
         }
 
         

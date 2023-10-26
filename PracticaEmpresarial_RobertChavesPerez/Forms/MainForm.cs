@@ -14,7 +14,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 {
     public partial class MainForm : Form
     {
-        public Logica.Models.Sale sale { get; set; }
+        private Logica.Models.Sale sale { get; set; }
+
+        private Logica.Models.Inventory inventory { get; set; }
+
+        private Logica.Models.Product product { get; set; }
+
+        private Logica.Models.Logg log { get; set; }
 
         public DataTable dtListItems { get; set; }
 
@@ -28,6 +34,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             sale = new Logica.Models.Sale();
 
+            product = new Logica.Models.Product();
+
+            log = new Logica.Models.Logg();
+
             dtListItems = new DataTable();
         }
 
@@ -35,6 +45,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             new LogsForm().Show();
         }
+
 
         private void inventoryItem_Click(object sender, EventArgs e)
         {
@@ -47,6 +58,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             this.Visible = true;
         }
+
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -113,18 +125,20 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b') e.Handled = true;
         }
 
 
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b') e.Handled = true;
         }
 
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
+            dontShowQuantity();
+
             InventoryForm inventory = new InventoryForm();
 
             inventory.showItems = false;
@@ -144,11 +158,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void calculateAmount()
         {
-            double discount = 0;
-            double subTotal = 0;
-            double total = 0;
-            double IVA = 1;
-            double tax = 0;
+            decimal discount = 0;
+            decimal subTotal = 0;
+            decimal total = 0;
+            decimal IVA = 1;
+            decimal tax = 0;
             int quantity = 0;
 
             if ( dtListItems.Rows.Count > 0 )
@@ -156,7 +170,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 foreach ( DataRow item in dtListItems.Rows )
                 {
                     quantity = Convert.ToInt32( item["cant"] );
-                    subTotal += Convert.ToDouble( item["price"] );
+                    subTotal += Convert.ToDecimal( item["price"] );
 
                     subTotal *= quantity;
                 }
@@ -166,13 +180,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             discount = discountMethod();
 
 
-            if ( cbIVA.Checked ) IVA = 1.13;
+            if ( cbIVA.Checked ) IVA = 1.13M;
 
             total = ( subTotal * IVA ) - discount;
 
             if ( cbIVA.Checked )
             {
-                tax = ( subTotal ) * 0.13;
+                tax = ( subTotal ) * 0.13M;
             }
             else
             {
@@ -184,66 +198,80 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtTotal.Text = total.ToString();
         }
 
-        private double discountMethod()
+
+        private decimal discountMethod()
         {
-            if (string.IsNullOrWhiteSpace( txtDiscount.Text.Trim() ) )
+            if ( string.IsNullOrWhiteSpace( txtDiscount.Text.Trim() ) )
             {
                 return 0;
             }
             else
             {
-                return Convert.ToDouble( txtDiscount.Text.Trim() );
+                return Convert.ToDecimal( txtDiscount.Text.Trim() );
             }
         }
+
+
+        private long clientSelected()
+        {
+            if ( !string.IsNullOrWhiteSpace( txtClientId.Text.Trim() ) )
+            {
+                return Convert.ToInt64( txtClientId.Text.Trim() );
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
 
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
 
-             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
-             {
-                 string validate = quantity();
+            if (dgvList.SelectedRows.Count.Equals(1))
+            {
+                string validate = quantity();
 
-                 if ( string.IsNullOrEmpty( validate ) )
-                 {
-                     DataGridViewRow dgvr = dgvList.SelectedRows[0];
+                if (string.IsNullOrEmpty(validate))
+                {
+                    DataGridViewRow dgvr = dgvList.SelectedRows[0];
 
-                     int dgvIndex = dgvr.Index;
+                    int dgvIndex = dgvr.Index;
 
-                     dtListItems.Rows[dgvr.Index][3] = txtCant.Text.Trim();
+                    dtListItems.Rows[dgvr.Index][3] = txtCant.Text.Trim();
 
-                     dgvList.DataSource = dtListItems;
+                    dgvList.DataSource = dtListItems;
 
-                     dgvList.ClearSelection();
+                    dgvList.ClearSelection();
 
-                     calculateAmount();
+                    calculateAmount();
 
-                     dontShowQuantity();
-                 }
-                 else
-                 {
-                     MessageBox.Show( validate, ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
-                 }
-             }
-             else
-             {
-                 MessageBox.Show( "Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
-             }
-            
+                    dontShowQuantity();
+                }
+                else
+                {
+                    MessageBox.Show(validate, ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
 
         private string quantity()
         {
-            int quantity = Convert.ToInt32( txtCant.Text.Trim() );
+            int quantity = Convert.ToInt32(txtCant.Text.Trim());
 
-            if ( quantity <= 0 )
+            if (quantity <= 0)
             {
                 return "Cantidad debe ser mayor a 0";
             }
 
-            if ( quantity > tempQuantity )
+            if (quantity > tempQuantity)
             {
-                return string.Format( "Cantidad deseada es mayor a la disponible de: {0}", tempProduct );
+                return string.Format("Cantidad deseada es mayor a la disponible de: {0}", tempProduct);
             }
 
             return string.Empty;
@@ -255,24 +283,26 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             calculateAmount();
         }
 
+
         private void txtDiscount_TextChanged(object sender, EventArgs e)
         {
             calculateAmount();
         }
 
+
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
+        { 
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
             {
                 DataGridViewRow dgvr = dgvList.SelectedRows[0];
 
                 int dgvIndex = dgvr.Index;
 
-                tempProduct = Convert.ToString( dtListItems.Rows[dgvr.Index][2] );
+                tempProduct = Convert.ToString(dtListItems.Rows[dgvr.Index][2]);
 
-                txtCant.Text = Convert.ToString( dtListItems.Rows[dgvr.Index][3] );
+                txtCant.Text = Convert.ToString(dtListItems.Rows[dgvr.Index][3]);
 
-                tempQuantity = Convert.ToInt32( dtListItems.Rows[dgvr.Index][5] );
+                tempQuantity = Convert.ToInt32(dtListItems.Rows[dgvr.Index][5]);
             }
 
             showQuantity();
@@ -300,8 +330,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 DataGridViewRow dgvr = dgvList.SelectedRows[0];
 
                 int dgvIndex = dgvr.Index;
-        
-                dtListItems.Rows.RemoveAt( dgvr.Index );
+
+                dtListItems.Rows.RemoveAt(dgvr.Index);
 
                 dgvList.DataSource = dtListItems;
 
@@ -313,111 +343,125 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
             else
             {
-                MessageBox.Show( "Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                MessageBox.Show("Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            sale = new Logica.Models.Sale();
+            string validate = validateFields();
 
-            /*
-        public long saleId { get; set; }
-        public string detail { get; set; }
-        public DateTime date { get; set; }
-        public double subTotal { get; set; }
-        public double discount { get; set; }
-        public double tax { get; set; }
-        public double total { get; set; }
-        public User user { get; set; }
-        public Client client { get; set; }
-        public State state { get; set; }
-             */
-
-            /*
-            sale.detail = "";
-            sale.date = DateTime.Now;
-
-            user.name = txtName.Text.Trim();
-            user.email = txtEmail.Text.Trim();
-            user.password = txtPassword.Text.Trim();
-            user.state.stateId = 1;
-            user.rol.rolId = cbUsersType.SelectedIndex + 1;
-
-            string validate = validateFields(user);
-
-            if (string.IsNullOrEmpty(validate))
+            if ( string.IsNullOrEmpty( validate ) )
             {
-                string text = "Quieres agregar al usuario: {0} ?";
+                sale = new Sale();
+                
+                sale.date = DateTime.Now;
+                sale.subTotal = Convert.ToDecimal( txtSubTotal.Text.Trim() );
+                sale.discount = discountMethod();
+                sale.tax = Convert.ToDecimal( txtTax.Text.Trim() );
+                sale.total = Convert.ToDecimal( txtTotal.Text.Trim() );
+                sale.user.userId = Globals.GlobalUser.userId;
+                sale.client.clientId = clientSelected();
+                sale.state.stateId = 1;
+               
 
-                bool msg = validateYesOrNot(text, user.name);
+                string text = "Quieres hacer la venta {0} ?";
 
-                if (msg)
+                bool msg = validateYesOrNot( text, Globals.GlobalUser.name );
+
+                if ( msg )
                 {
-                    bool ok = user.addUser();
+                    sale.detail = saleProcess( sale );
 
-                    if (ok)
+                    int ok = sale.addSale();
+
+                    if ( ok > 0 )
                     {
-                        string detail = string.Format("Agrego al cliente: {0}", user.name);
+                        string detail = string.Format( "El usuario: {0} hizo una venta", Globals.GlobalUser.name );
 
-                        addLogEvent(detail);
+                        log.addLogEvent( detail, Globals.GlobalUser.userId );
 
-                        MessageBox.Show("Usuario agregado correctamente", ":)", MessageBoxButtons.OK);
+                        MessageBox.Show( "Venta se realizo correctamente", ":)", MessageBoxButtons.OK );
 
                         cleanFields();
-
-                        this.DialogResult = DialogResult.OK;
                     }
                     else
                     {
-                        MessageBox.Show("No se agrego el usuario", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show( "No se realizo la venta", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
-
                 }
-
             }
             else
             {
-                MessageBox.Show(validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
-
-            */
         }
 
-        
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        private string validateFields(User user)
+        private List<Inventory> saleProcess( Sale sale )
         {
-            
-            string responce = "El campo {0} esta vacio";
+            int cant = 0;
+            int quantity = 0;
 
-            if ( txt )
+            foreach( DataRow item in dtListItems.Rows )
             {
-                return string.Format(responce, "nombre");
+                inventory = new Logica.Models.Inventory();
+
+                inventory.product = product.productId = Convert.ToInt64( item["productId"] );
+                quantity = Convert.ToInt32( item["quantity"] );
+                inventory.quantity = cant = Convert.ToInt32( item["cant"] );
+
+                product.cant = ( quantity - cant );
+                inventory.price = Convert.ToDecimal( item["price"] );
+
+                product.updateQuantity();
+
+                sale.detail.Add( inventory );
+            }
+
+            return sale.detail;
+        }
+
+
+        private string validateFields()
+        {
+            double total = Convert.ToDouble( txtTotal.Text.Trim() );
+
+            if ( dtListItems.Rows.Count <= 0 )
+            {
+                return "No hay productos seleccionados";
+            }
+
+            if ( total < 0 )
+            {
+                return "El total no puede ser menor a 0";
             }
 
             return string.Empty;
-            
         }
-        */
 
 
+        private bool validateYesOrNot( string text, string description )
+        {
+            string msg = string.Format( text, description );
+
+            DialogResult result = MessageBox.Show( msg, "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
+
+            return result.Equals( DialogResult.Yes ) ? true : false;
+        }
+
+
+        private void cleanFields()
+        {
+            txtSubTotal.Text = "0";
+            txtTotal.Text = "0";
+            txtTax.Text = "0";
+            txtCant.Text = "1";
+            dtListItems.Clear();
+            dgvList.DataSource = dtListItems;
+            dgvList.ClearSelection();
+        }
 
 
     }

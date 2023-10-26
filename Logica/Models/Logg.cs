@@ -37,7 +37,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@logDetail", this.logDetail ) );
             conn.ParamList.Add( new SqlParameter( "@logDate", this.logDate ) );
             conn.ParamList.Add( new SqlParameter( "@fkUser", this.user.userId ) );
-            int r = conn.PerformUpdateDeleteInsert( "AddLogg" );
+            int r = conn.ExecuteUpdateDeleteInsert( "AddLogg" );
 
             return r > 0 ? true : false;
         }
@@ -54,7 +54,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@fromDate", fromDate ) );
             conn.ParamList.Add( new SqlParameter( "@toDate", toDate ) );
 
-            return conn.PerformSelect( "LoggsList" );
+            return conn.ExecuteSelect( "LoggsList" );
         }
 
         public void addLogEvent( string detail, long userId )

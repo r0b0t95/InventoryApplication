@@ -27,7 +27,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@code", this.code) );
-            int r = conn.PerformUpdateDeleteInsert( "AddCode" );
+            int r = conn.ExecuteUpdateDeleteInsert( "AddCode" );
 
             return r > 0 ? true : false;
         }
@@ -38,7 +38,7 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@codeId", this.codeId) );
             conn.ParamList.Add( new SqlParameter( "@code", this.code) );
-            int r = conn.PerformUpdateDeleteInsert( "UpdateCode" );
+            int r = conn.ExecuteUpdateDeleteInsert( "UpdateCode" );
 
             return r > 0 ? true : false;
         }
@@ -48,7 +48,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@code", this.code ) );
-            DataTable responce = conn.PerformSelect( "ConsultCode" );
+            DataTable responce = conn.ExecuteSelect( "ConsultCode" );
 
             if ( responce != null && responce.Rows.Count > 0 )
             {
@@ -64,7 +64,7 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
 
-            return conn.PerformSelect( "CodeList" );
+            return conn.ExecuteSelect( "CodeList" );
         }
 
     }

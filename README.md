@@ -45,9 +45,17 @@ CREATE TABLE Product (
   fkState       TINYINT NOT NULL )
 GO
 
+CREATE TABLE Detail (
+  detailId BIGINT IDENTITY NOT NULL,
+  inventory VARCHAR(500) NOT NULL,
+  quantity INT NOT NULL,
+  price DECIMAL(10, 2) NOT NULL,
+  fkSale BIGINT NOT NULL,
+  fkProduct BIGINT NOT NULL )
+GO
+
 CREATE TABLE Sale (
   saleId       BIGINT IDENTITY NOT NULL, 
-  saleDetail   VARCHAR(1500) NOT NULL, 
   saleDate     DATETIME NOT NULL,
   saleSubTotal DECIMAL(10, 2) NOT NULL,
   saleDiscount DECIMAL(10, 2) NOT NULL,
@@ -96,6 +104,9 @@ GO
 ALTER TABLE Sale ADD PRIMARY KEY (saleId)
 GO
 
+ALTER TABLE Detail ADD PRIMARY KEY (detailId)
+GO
+
 ALTER TABLE State ADD PRIMARY KEY (stateId)
 GO
 
@@ -129,9 +140,12 @@ CREATE INDEX Product_productId
   ON Product (productId)
 GO
 
-
 CREATE INDEX Sale_saleId 
   ON Sale (saleId)
+GO
+
+CREATE INDEX Detail_detailId 
+  ON Detail (detailId)
 GO
 
 CREATE INDEX State_stateId 
@@ -146,12 +160,15 @@ GO
 
 -- FOREIGN KEYs
 
-
 ALTER TABLE Sale ADD CONSTRAINT SA_CL FOREIGN KEY (fkClient) REFERENCES Client (clientId);
 
 ALTER TABLE Sale ADD CONSTRAINT SA_US FOREIGN KEY (fkUser) REFERENCES [User] (userId);
 
 ALTER TABLE Sale ADD CONSTRAINT SA_ST FOREIGN KEY (fkState) REFERENCES State (stateId);
+
+ALTER TABLE Detail ADD CONSTRAINT DE_SA FOREIGN KEY (fkSale) REFERENCES Sale (saleId);
+
+ALTER TABLE Detail ADD CONSTRAINT DE_PR FOREIGN KEY (fkProduct) REFERENCES Product (productId);
 
 ALTER TABLE Logg ADD CONSTRAINT LO_US FOREIGN KEY (fkUser) REFERENCES [User] (userId);
 
@@ -190,13 +207,11 @@ VALUES
 ( 'abdul', '', 'HCNhE36R7pQLCD0B2cbVqQ==', 1, 1)
 GO
 
-
-INSERT INTO [User] 
-( userName, userEmail, password, fkState, fkRol )
+INSERT INTO [Client]
+( clientName, clientEmail, clientTel, fkState )
 VALUES
-( 'robert', '', 'LHvf2IwkzNuocVwT+QeJzg==', 1, 2)
+( '', '', null, 1 )
 GO
-
 
 -- PROCEDURES
 
@@ -387,7 +402,7 @@ BEGIN
 		BEGIN
 			SELECT clientId, clientName, clientTel, clientEmail
 			FROM [dbo].[Client]
-			WHERE fkState = @actives
+			WHERE fkState = @actives AND clientId > 1
 		END
 	ELSE
 		BEGIN
@@ -395,7 +410,7 @@ BEGIN
 
 			SELECT clientId, clientName, clientTel, clientEmail
 			FROM [dbo].[Client]
-			WHERE fkState = @actives AND
+			WHERE fkState = @actives AND clientId > 1 AND
 				  clientName LIKE @filter OR 
 				  clientTel LIKE @filter OR
 				  clientEmail LIKE @filter
@@ -472,8 +487,8 @@ BEGIN
 END
 GO
 
--- PRODUCT PROCEDURES
 
+-- PRODUCT PROCEDURES
 
 CREATE OR ALTER PROCEDURE [dbo].[AddProduct] 
 	@productDetail varchar(255),
@@ -507,6 +522,19 @@ BEGIN
 	SET productDetail = @productDetail, cant = @cant, 
 		 price = @price, fkCode = @fkCode 
 		 WHERE productId = @productId 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[ReduceQuantityProduct] 
+	@productId bigint,
+	@cant int
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	UPDATE [dbo].[Product] 
+	SET cant = @cant WHERE productId = @productId 
 END
 GO
 
@@ -555,9 +583,7 @@ END
 GO
 
 
-
 -- CODE PROCEDURES
-
 
 CREATE OR ALTER PROCEDURE [dbo].[AddCode] 
 	@code varchar(100)
@@ -620,7 +646,6 @@ GO
 -- SALE PROCEDURES
 
 CREATE OR ALTER PROCEDURE [dbo].[AddSale] 
-	@saleDetail varchar(1500),
 	@saleDate datetime,
 	@saleSubTotal decimal(10, 2),
 	@saleDiscount decimal(10, 2),
@@ -633,12 +658,15 @@ AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	INSERT INTO [dbo].[Sale]  ( saleDetail, saleDate, saleSubTotal,
+	INSERT INTO [dbo].[Sale]  ( saleDate, saleSubTotal,
 		saleDiscount, saleTax, saleTotal, fkUser, fkClient, fkState ) 
-	VALUES  ( @saleDetail, @saleDate, @saleSubTotal, @saleDiscount,
-		@saleTax, @saleTotal, @fkUser, @fkClient, @fkState)
+	VALUES  ( @saleDate, @saleSubTotal, @saleDiscount,
+		@saleTax, @saleTotal, @fkUser, @fkClient, @fkState );
+
+	SELECT SCOPE_IDENTITY();
 END
 GO
+
 
 CREATE OR ALTER PROCEDURE [dbo].[DeleteSale] 
 	@saleId bigint,
@@ -662,6 +690,46 @@ BEGIN
 	SELECT  productId, code, productDetail AS item, cant, price, cant AS quantity
 			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
 			ON fkCode = codeId WHERE productId = 0
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[Ticket] 
+	@id bigint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	BEGIN
+		SELECT Detail.quantity, Detail.price, Product.productDetail, 
+			Sale.saleDate, Sale.saleSubTotal, 
+			Sale.saleDiscount, Sale.saleTax, Sale.saleTotal,
+			[User].userName, Client.clientName
+		FROM Sale INNER JOIN Detail ON Sale.saleId = Detail.fkSale 
+			INNER JOIN Product ON Product.productId = Detail.fkProduct 
+			INNER JOIN [User] ON [User].userId = Sale.fkUser
+			INNER JOIN Client ON Client.clientId = Sale.fkClient
+			WHERE saleId = @id
+		END
+END
+GO
+
+
+-- DETAIL PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[AddDetail] 
+	@quantity int,
+	@price decimal(10, 2),
+	@fkSale bigint,
+	@fkProduct bigint
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	INSERT INTO [dbo].[Detail]  
+	( quantity, price, fkSale, fkProduct ) 
+	VALUES  
+	( @quantity, @price, @fkSale, @fkProduct )
 END
 GO
 

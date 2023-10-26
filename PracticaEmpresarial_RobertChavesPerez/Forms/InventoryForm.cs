@@ -275,7 +275,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 product.detail = txtDetail.Text.Trim();
                 product.cant = Convert.ToInt32( txtCant.Text.Trim() );
-                product.price = Convert.ToDouble( txtPrice.Text.Trim() );
+                product.price = Convert.ToDecimal( txtPrice.Text.Trim() );
                 if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
                 {
                     product.code.codeId = 2;
@@ -375,7 +375,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 product.productId = tempProductId;
                 product.detail = txtDetail.Text.Trim();
                 product.cant = Convert.ToInt32( txtCant.Text.Trim() );
-                product.price = Convert.ToDouble( txtPrice.Text.Trim() );
+                product.price = Convert.ToDecimal( txtPrice.Text.Trim() );
                 if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
                 {
                     product.code.codeId = 2;
@@ -578,7 +578,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private string validateQuantity( string item, int cant )
         {
-            int quantity = Convert.ToInt32( txtCant.Text.Trim() );
+            int quantity = quantityMethod();
 
             if ( cant.Equals( 0 ) )
             {
@@ -596,6 +596,19 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
 
             return string.Empty;
+        }
+
+
+        private int quantityMethod()
+        {
+            if ( string.IsNullOrWhiteSpace( txtCant.Text.Trim() ) )
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32( txtCant.Text.Trim() );
+            }
         }
 
 
@@ -636,6 +649,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 
             }
         }
+
 
         private void selectCell()
         {

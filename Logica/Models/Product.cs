@@ -21,7 +21,7 @@ namespace Logica.Models
 
         public int cant { get; set; }
 
-        public double price { get; set; }
+        public decimal price { get; set; }
 
         public Code code { get; set; }
 
@@ -46,7 +46,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@price", this.price ) );
             conn.ParamList.Add( new SqlParameter( "@fkCode", this.code.codeId ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
-            int r = conn.PerformUpdateDeleteInsert( "AddProduct" );
+            int r = conn.ExecuteUpdateDeleteInsert( "AddProduct" );
 
             return r > 0 ? true : false;
         }
@@ -60,7 +60,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@cant", this.cant ) );
             conn.ParamList.Add( new SqlParameter( "@price", this.price ) );
             conn.ParamList.Add( new SqlParameter( "@fkCode", this.code.codeId ) );
-            int r = conn.PerformUpdateDeleteInsert( "UpdateProduct" );
+            int r = conn.ExecuteUpdateDeleteInsert( "UpdateProduct" );
 
             return r > 0 ? true : false;
         }
@@ -71,7 +71,18 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@productId", this.productId ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
-            int r = conn.PerformUpdateDeleteInsert( "DeleteProduct" );
+            int r = conn.ExecuteUpdateDeleteInsert( "DeleteProduct" );
+
+            return r > 0 ? true : false;
+        }
+
+        public bool updateQuantity()
+        {
+            Connection conn = new Connection();
+
+            conn.ParamList.Add( new SqlParameter( "@productId", this.productId ) );
+            conn.ParamList.Add( new SqlParameter( "@cant", this.cant ) );
+            int r = conn.ExecuteUpdateDeleteInsert( "ReduceQuantityProduct" );
 
             return r > 0 ? true : false;
         }
@@ -83,7 +94,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
 
-            return conn.PerformSelect( "ProductsList" );
+            return conn.ExecuteSelect( "ProductsList" );
         }
 
 

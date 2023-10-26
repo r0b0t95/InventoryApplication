@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.exitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +41,12 @@
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Citem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblSeller = new System.Windows.Forms.Label();
             this.lblClientName = new System.Windows.Forms.Label();
@@ -62,12 +68,6 @@
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtTax = new System.Windows.Forms.TextBox();
             this.lblTax = new System.Windows.Forms.Label();
-            this.Ccode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CproductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Citem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ccant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbIVA = new System.Windows.Forms.CheckBox();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -148,14 +148,14 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Ccode,
@@ -164,14 +164,14 @@
             this.Ccant,
             this.Cquantity,
             this.Cprice});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvList.Location = new System.Drawing.Point(44, 225);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
@@ -181,6 +181,57 @@
             this.dgvList.TabIndex = 34;
             this.dgvList.VirtualMode = true;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
+            // 
+            // Ccode
+            // 
+            this.Ccode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Ccode.DataPropertyName = "code";
+            this.Ccode.HeaderText = "COD";
+            this.Ccode.Name = "Ccode";
+            this.Ccode.ReadOnly = true;
+            this.Ccode.Width = 79;
+            // 
+            // CproductId
+            // 
+            this.CproductId.DataPropertyName = "productId";
+            this.CproductId.HeaderText = "ID";
+            this.CproductId.Name = "CproductId";
+            this.CproductId.ReadOnly = true;
+            this.CproductId.Visible = false;
+            // 
+            // Citem
+            // 
+            this.Citem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Citem.DataPropertyName = "item";
+            this.Citem.HeaderText = "DESCRIPCION DEL PRODUCTO";
+            this.Citem.Name = "Citem";
+            this.Citem.ReadOnly = true;
+            // 
+            // Ccant
+            // 
+            this.Ccant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Ccant.DataPropertyName = "cant";
+            this.Ccant.HeaderText = "CANT";
+            this.Ccant.Name = "Ccant";
+            this.Ccant.ReadOnly = true;
+            this.Ccant.Width = 91;
+            // 
+            // Cquantity
+            // 
+            this.Cquantity.DataPropertyName = "quantity";
+            this.Cquantity.HeaderText = "CANT_TEMP";
+            this.Cquantity.Name = "Cquantity";
+            this.Cquantity.ReadOnly = true;
+            this.Cquantity.Visible = false;
+            // 
+            // Cprice
+            // 
+            this.Cprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Cprice.DataPropertyName = "price";
+            this.Cprice.HeaderText = "PRECIO";
+            this.Cprice.Name = "Cprice";
+            this.Cprice.ReadOnly = true;
+            this.Cprice.Width = 111;
             // 
             // btnAdd
             // 
@@ -443,57 +494,6 @@
             this.lblTax.Size = new System.Drawing.Size(100, 20);
             this.lblTax.TabIndex = 56;
             this.lblTax.Text = "IMPUESTO";
-            // 
-            // Ccode
-            // 
-            this.Ccode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Ccode.DataPropertyName = "code";
-            this.Ccode.HeaderText = "COD";
-            this.Ccode.Name = "Ccode";
-            this.Ccode.ReadOnly = true;
-            this.Ccode.Width = 79;
-            // 
-            // CproductId
-            // 
-            this.CproductId.DataPropertyName = "productId";
-            this.CproductId.HeaderText = "ID";
-            this.CproductId.Name = "CproductId";
-            this.CproductId.ReadOnly = true;
-            this.CproductId.Visible = false;
-            // 
-            // Citem
-            // 
-            this.Citem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Citem.DataPropertyName = "item";
-            this.Citem.HeaderText = "DESCRIPCION DEL PRODUCTO";
-            this.Citem.Name = "Citem";
-            this.Citem.ReadOnly = true;
-            // 
-            // Ccant
-            // 
-            this.Ccant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Ccant.DataPropertyName = "cant";
-            this.Ccant.HeaderText = "CANT";
-            this.Ccant.Name = "Ccant";
-            this.Ccant.ReadOnly = true;
-            this.Ccant.Width = 91;
-            // 
-            // Cquantity
-            // 
-            this.Cquantity.DataPropertyName = "quantity";
-            this.Cquantity.HeaderText = "CANT_TEMP";
-            this.Cquantity.Name = "Cquantity";
-            this.Cquantity.ReadOnly = true;
-            this.Cquantity.Visible = false;
-            // 
-            // Cprice
-            // 
-            this.Cprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Cprice.DataPropertyName = "price";
-            this.Cprice.HeaderText = "PRECIO";
-            this.Cprice.Name = "Cprice";
-            this.Cprice.ReadOnly = true;
-            this.Cprice.Width = 111;
             // 
             // cbIVA
             // 

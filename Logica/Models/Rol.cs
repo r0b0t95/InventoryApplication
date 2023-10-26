@@ -22,7 +22,7 @@ namespace Logica.Models
         {
             Connection conn = new Connection();
 
-            return conn.PerformSelect( "RoleList" );
+            return conn.ExecuteSelect( "RoleList" );
         }
 
     }

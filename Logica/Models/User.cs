@@ -49,7 +49,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@password", hash ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
             conn.ParamList.Add( new SqlParameter( "@fkRol", this.rol.rolId ) );
-            int r = conn.PerformUpdateDeleteInsert( "AddUser" );
+            int r = conn.ExecuteUpdateDeleteInsert( "AddUser" );
 
             return r > 0 ? true : false;
         }
@@ -61,7 +61,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
             conn.ParamList.Add( new SqlParameter( "@userEmail", this.email ) );
             conn.ParamList.Add( new SqlParameter( "@fkRol", this.rol.rolId ) );
-            int r = conn.PerformUpdateDeleteInsert( "UpdateUser" );
+            int r = conn.ExecuteUpdateDeleteInsert( "UpdateUser" );
 
             return r > 0 ? true : false;
         }
@@ -76,7 +76,7 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@userId", this.userId ) );
             conn.ParamList.Add( new SqlParameter( "@password", hash ) );
-            int r = conn.PerformUpdateDeleteInsert( "UpdatePassword" );
+            int r = conn.ExecuteUpdateDeleteInsert( "UpdatePassword" );
 
             return r > 0 ? true : false;
         }
@@ -87,7 +87,7 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@userId", this.userId ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
-            int r = conn.PerformUpdateDeleteInsert( "DeleteUser" );
+            int r = conn.ExecuteUpdateDeleteInsert( "DeleteUser" );
 
             return r > 0 ? true : false;
         }
@@ -105,7 +105,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
             conn.ParamList.Add( new SqlParameter( "@password", hash ) );
             conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
-            DataTable responce = conn.PerformSelect( "LoginUser" );
+            DataTable responce = conn.ExecuteSelect( "LoginUser" );
 
             if ( responce != null && responce.Rows.Count > 0 )
             {
@@ -122,7 +122,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
-            DataTable responce = conn.PerformSelect( "ConsultUserName" );
+            DataTable responce = conn.ExecuteSelect( "ConsultUserName" );
 
             if ( responce != null && responce.Rows.Count > 0)
             {
@@ -137,7 +137,7 @@ namespace Logica.Models
             Connection conn = new Connection();
 
             conn.ParamList.Add( new SqlParameter( "@userEmail", this.email ) );
-            DataTable responce = conn.PerformSelect( "ConsultUserEmail" );
+            DataTable responce = conn.ExecuteSelect( "ConsultUserEmail" );
 
             if ( responce != null && responce.Rows.Count > 0 )
             {
@@ -154,7 +154,7 @@ namespace Logica.Models
             conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
 
-            return conn.PerformSelect( "UsersList" );
+            return conn.ExecuteSelect( "UsersList" );
         }
 
     }
