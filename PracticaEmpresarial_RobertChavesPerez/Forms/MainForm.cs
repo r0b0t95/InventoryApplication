@@ -112,17 +112,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
-        private void clearFields()
-        {
-            txtSubTotal.Text = "0";
-            txtDiscount.Text = "0";
-            txtCant.Text = "0";
-            txtTotal.Text = "0";
-            dgvList.DataSource = dtListItems;
-            btnAdd.Enabled = false;
-        }
-
-
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b') e.Handled = true;
