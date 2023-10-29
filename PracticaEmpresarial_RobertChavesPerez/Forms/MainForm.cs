@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -114,13 +115,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b') e.Handled = true;
+            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b') e.Handled = true;
+            if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
@@ -147,11 +148,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void calculateAmount()
         {
-            decimal discount = 0;
-            decimal subTotal = 0;
-            decimal total = 0;
-            decimal IVA = 1;
-            decimal tax = 0;
+            double discount = 0;
+            double subTotal = 0;
+            double price = 0;
+            double total = 0;
+            double IVA = 1;
+            double tax = 0;
             int quantity = 0;
 
             if ( dtListItems.Rows.Count > 0 )
@@ -159,9 +161,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 foreach ( DataRow item in dtListItems.Rows )
                 {
                     quantity = Convert.ToInt32( item["cant"] );
-                    subTotal += Convert.ToDecimal( item["price"] );
+                    price = Convert.ToDouble( item["price"] );
 
-                    subTotal *= quantity;
+                    subTotal += quantity * price;
                 }
             }
 
@@ -169,13 +171,13 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             discount = discountMethod();
 
 
-            if ( cbIVA.Checked ) IVA = 1.13M;
+            if ( cbIVA.Checked ) IVA = 1.13;
 
             total = ( subTotal * IVA ) - discount;
 
             if ( cbIVA.Checked )
             {
-                tax = ( subTotal ) * 0.13M;
+                tax = ( subTotal ) * 0.13;
             }
             else
             {
@@ -188,7 +190,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
-        private decimal discountMethod()
+        private double discountMethod()
         {
             if ( string.IsNullOrWhiteSpace( txtDiscount.Text.Trim() ) )
             {
@@ -196,7 +198,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             }
             else
             {
-                return Convert.ToDecimal( txtDiscount.Text.Trim() );
+                return Convert.ToDouble( txtDiscount.Text.Trim() );
             }
         }
 
@@ -347,7 +349,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 
                 sale.date = DateTime.Now;
                 sale.subTotal = Convert.ToDecimal( txtSubTotal.Text.Trim() );
-                sale.discount = discountMethod();
+                sale.discount = Convert.ToDecimal( discountMethod() );
                 sale.tax = Convert.ToDecimal( txtTax.Text.Trim() );
                 sale.total = Convert.ToDecimal( txtTotal.Text.Trim() );
                 sale.user.userId = Globals.GlobalUser.userId;
@@ -371,20 +373,46 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                         log.addLogEvent( detail, Globals.GlobalUser.userId );
 
-                        MessageBox.Show( "Venta se realizo correctamente", ":)", MessageBoxButtons.OK );
-
                         cleanFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show( "No se realizo la venta", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
-                    }
+
+                        string ticketText = "Ocupas un Ticket de compra ?";
+
+                        bool ticket = validateYesOrNot( ticketText, Globals.GlobalUser.name );
+
+                        if ( ticket )
+                        {
+                            createTicket( sale );
+                        }
+
+                }
+                else
+                {
+                    MessageBox.Show( "No se realizo la venta", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                 }
             }
-            else
-            {
-                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
-            }
+        }
+        else
+        {
+            MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+        }
+        }
+
+
+        private void createTicket( Sale sale )
+        {
+            Report report = new Report();
+
+            report.Show();
+
+            CrystalReport cr = new CrystalReport();
+
+            DataTable dt = sale.ticket();
+
+            cr.SetDataSource(dt);
+
+            report.crystalReportV1.ReportSource = cr;
+
+            report.crystalReportV1.Refresh();
         }
 
 
@@ -452,6 +480,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dgvList.ClearSelection();
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            cleanFields();
+        }
 
+        
     }
 }

@@ -618,14 +618,14 @@ BEGIN
 
 	IF @filter = '' OR @filter = NULL
 		BEGIN
-			SELECT codeId, code FROM Code  
+			SELECT codeId, code FROM Code WHERE codeId > 1
 		END
 	ELSE
 		BEGIN
 			SET @filter = '%' + @filter + '%'
 
 			SELECT codeId, code FROM Code
-			WHERE code LIKE @filter 
+			WHERE code LIKE @filter AND codeId > 1
 		END
 END
 GO
@@ -695,10 +695,13 @@ GO
 
 
 CREATE OR ALTER PROCEDURE [dbo].[Ticket] 
-	@id bigint
 AS
 BEGIN
 	SET NOCOUNT OFF;
+
+	DECLARE @id BIGINT;
+
+	SELECT @id = MAX(saleId) FROM Sale;
 
 	BEGIN
 		SELECT Detail.quantity, Detail.price, Product.productDetail, 
@@ -744,5 +747,6 @@ BEGIN
 	SELECT rolId, rolName FROM Rol  
 END
 GO
+
 ```
 

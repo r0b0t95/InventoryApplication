@@ -136,5 +136,12 @@ namespace Logica.Models
             return dt;
         }
 
+        public DataTable ticket()
+        {
+            Connection conn = new Connection();
+
+            return conn.ExecuteSelect( "Ticket" );
+        }
+
     }
 }
