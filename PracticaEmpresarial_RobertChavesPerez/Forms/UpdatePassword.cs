@@ -49,15 +49,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
-        private string validateFields()
+        private string validateFields( User user )
         {
             string responce = "El campo {0} esta vacio";
-
-            user = new Logica.Models.User();
-
-            user.name = Globals.GlobalUser.name;
-            user.password = txtCurrentPass.Text.Trim();
-            user.state.stateId = 1;
 
             int[] lUser = user.loginUser();
 
@@ -110,19 +104,19 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string validate = validateFields();
-
             user = new Logica.Models.User();
 
             user.userId = Globals.GlobalUser.userId;
             user.password = txtNewPass.Text;
-            string name = Globals.GlobalUser.name;
+            user.name = Globals.GlobalUser.name;
+
+            string validate = validateFields( user );
 
             if ( string.IsNullOrEmpty( validate ) )
             {
                 string text = "Quieres actualizar la contraseña: {0} ?";
 
-                bool msg = validateYesOrNot( text, name );
+                bool msg = validateYesOrNot( text, user.name );
 
                 if ( msg )
                 {
@@ -130,7 +124,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     if ( ok )
                     {
-                        string detail = string.Format( "Actualizo su propia contraseña: {0}", name );
+                        string detail = string.Format( "Actualizo su propia contraseña: {0}", user.name );
 
                         log.addLogEvent( detail, Globals.GlobalUser.userId );
 

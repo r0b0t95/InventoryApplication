@@ -11,7 +11,9 @@ namespace Logica
 
         string ConnectionString { get; set; }
 
+
         public List<SqlParameter> ParamList = new List<SqlParameter>();
+
 
         public int ExecuteUpdateDeleteInsert( string SPName )
         {
@@ -31,9 +33,6 @@ namespace Logica
                 }
 
                 MyCnn.Open();
-
-                //if a command to perform is some = (update, Insert or delete) 
-                //stablich SET NOCOUNT OFF; en el SP 
 
                 Responce = MyCommand.ExecuteNonQuery();
             }
@@ -58,6 +57,7 @@ namespace Logica
                         MyCommand.Parameters.Add( item );
                     }
                 }
+
                 SqlDataAdapter MyAdaptador = new SqlDataAdapter( MyCommand );
 
                 if ( LoadTable )
@@ -79,7 +79,6 @@ namespace Logica
             Object Retorno = null;
 
             using ( SqlConnection MyCnn = new SqlConnection( ConnectionString ) )
-
             {
                 SqlCommand MyCommand = new SqlCommand( SPName, MyCnn );
                 MyCommand.CommandType = CommandType.StoredProcedure;
@@ -91,11 +90,20 @@ namespace Logica
                         MyCommand.Parameters.Add( item );
                     }
                 }
+
                 MyCnn.Open();
                 Retorno = MyCommand.ExecuteScalar();
             }
 
             return Retorno;
+        }
+
+
+        public void backupDataBase()
+        {
+            Connection conn = new Connection();
+            
+            conn.ExecuteUpdateDeleteInsert( "BackUpDatabase" );
         }
 
 

@@ -276,14 +276,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 product.detail = txtDetail.Text.Trim();
                 product.cant = Convert.ToInt32( txtCant.Text.Trim() );
                 product.price = Convert.ToDecimal( txtPrice.Text.Trim() );
-                if ( string.IsNullOrEmpty( tempCodeId.ToString() ) && tempCodeId <= 0 )
-                {
-                    product.code.codeId = 2;
-                }
-                else
-                {
-                    product.code.codeId = tempCodeId;
-                }
+                product.code.codeId = codeMethod();
                 product.state.stateId = 1;
 
                 string text = "Quieres agregar al producto: {0} ?";
@@ -315,6 +308,19 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             else
             {
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+        }
+
+
+        private long codeMethod()
+        {
+            if ( string.IsNullOrEmpty( tempCodeId.ToString()) && tempCodeId <= 0 )
+            {
+                return 2;
+            }
+            else
+            {
+                return tempCodeId;
             }
         }
 
@@ -470,14 +476,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             if ( tempState.Equals( 2 ) )
             {
                 deleteVector[0] = " eliminar ";
-                deleteVector[1] = " Elimino ";
+                deleteVector[1] = "Elimino ";
                 deleteVector[2] = " eliminado ";
                 deleteVector[3] = " elimino ";
             }
             else
             {
                 deleteVector[0] = " volver activar ";
-                deleteVector[1] = " Has activado ";
+                deleteVector[1] = "Has activado ";
                 deleteVector[2] = " activado ";
                 deleteVector[3] = " activo ";
             }

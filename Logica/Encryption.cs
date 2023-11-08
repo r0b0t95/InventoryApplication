@@ -65,5 +65,61 @@ namespace Logica
             }
         }
 
+
+        // DECRYPTION
+
+        public string DecryptText( string Pass )
+        {
+            StringBuilder sb = new StringBuilder();
+
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
+
+            try
+            {
+                using ( Aes aes = Aes.Create() )
+                {
+                    aes.KeySize = 256;
+                    aes.BlockSize = 128;
+                    aes.Mode = CipherMode.CBC;
+                    aes.Padding = PaddingMode.PKCS7;
+                    aes.Key = keyBytes;
+                    aes.IV = ivBytes;
+
+                    ICryptoTransform decryptor = aes.CreateDecryptor( aes.Key, aes.IV );
+
+                    byte[] ciphertextBytes = Convert.FromBase64String( Pass );
+                    byte[] plaintextBytes = decryptor.TransformFinalBlock( ciphertextBytes, 0, ciphertextBytes.Length );
+
+                    sb.Append(Encoding.UTF8.GetString( plaintextBytes ) );
+                }
+
+                return sb.ToString();
+            }
+            catch ( FormatException ex )
+            {
+                sb.Append( string.Format( "Error {0}", ex.Message ) );
+
+                return sb.ToString();
+            }
+            catch  ( ArgumentException ex )
+            {
+                sb.Append( string.Format( "Error {0}", ex.Message ) );
+
+                return sb.ToString();
+            }
+            catch ( Exception ex )
+            {
+                sb.Append( string.Format( "Error {0}", ex.Message ) );
+
+                return sb.ToString();
+            }
+        }
+
+
+
+
+
+
     }
 }

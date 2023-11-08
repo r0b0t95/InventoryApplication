@@ -42,7 +42,6 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
-
         public DataTable list( string filter = "", string from = "", string to = "" )
         {
             Connection conn = new Connection();

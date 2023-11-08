@@ -104,7 +104,6 @@ namespace Logica.Models
 
             conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
             conn.ParamList.Add( new SqlParameter( "@password", hash ) );
-            conn.ParamList.Add( new SqlParameter( "@fkState", this.state.stateId ) );
             DataTable responce = conn.ExecuteSelect( "LoginUser" );
 
             if ( responce != null && responce.Rows.Count > 0 )
@@ -115,6 +114,34 @@ namespace Logica.Models
             }
 
             return r;
+        }
+
+        public string recoveryPassword()
+        {
+            string pass = string.Empty;
+
+            Connection conn = new Connection();
+
+            Encryption decrypt = new Encryption();
+
+            conn.ParamList.Add( new SqlParameter( "@userName", this.name ) );
+            conn.ParamList.Add( new SqlParameter( "@email", this.email ) );
+            DataTable responce = conn.ExecuteSelect( "PasswordRecovery" );
+
+            if ( responce != null && responce.Rows.Count > 0 )
+            {
+                DataRow row = responce.Rows[0];
+                string hash = Convert.ToString( row["password"] );
+
+                string tempPassword = decrypt.DecryptText( hash );
+
+                if ( tempPassword.Contains( this.password ) )
+                {
+                    pass = tempPassword;
+                }
+            }
+
+            return pass;
         }
 
         public bool consultName()

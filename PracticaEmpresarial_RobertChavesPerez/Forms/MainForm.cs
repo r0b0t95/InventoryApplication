@@ -1,9 +1,11 @@
-﻿using Logica.Models;
+﻿using Logica;
+using Logica.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +23,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private Logica.Models.Product product { get; set; }
 
-        private Logica.Models.Logg log { get; set; }
-
         public DataTable dtListItems { get; set; }
 
         private int tempQuantity { get; set; }
@@ -36,8 +36,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             sale = new Logica.Models.Sale();
 
             product = new Logica.Models.Product();
-
-            log = new Logica.Models.Logg();
 
             dtListItems = new DataTable();
         }
@@ -78,14 +76,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtListItems = sale.billDetailsScheme();
 
             txtUser.Text = Globals.GlobalUser.name.ToString();
-        }
-
-
-        private void btnSearchClient_Click(object sender, EventArgs e)
-        {
-            Form clientListForm = new ClientsListForm();
-
-            clientListForm.ShowDialog();
         }
 
 
@@ -289,11 +279,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 int dgvIndex = dgvr.Index;
 
-                tempProduct = Convert.ToString(dtListItems.Rows[dgvr.Index][2]);
+                tempProduct = Convert.ToString( dtListItems.Rows[dgvr.Index][2] );
 
-                txtCant.Text = Convert.ToString(dtListItems.Rows[dgvr.Index][3]);
+                txtCant.Text = Convert.ToString( dtListItems.Rows[dgvr.Index][3] );
 
-                tempQuantity = Convert.ToInt32(dtListItems.Rows[dgvr.Index][5]);
+                tempQuantity = Convert.ToInt32( dtListItems.Rows[dgvr.Index][5] );
             }
 
             showQuantity();
@@ -369,12 +359,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     if ( ok > 0 )
                     {
-                        string detail = string.Format( "El usuario: {0} hizo una venta", Globals.GlobalUser.name );
-
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
-
-                        cleanFields();
-
                         string ticketText = "Ocupas un Ticket de compra ?";
 
                         bool ticket = validateYesOrNot( ticketText, Globals.GlobalUser.name );
@@ -384,17 +368,18 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                             createTicket( sale );
                         }
 
-                }
-                else
-                {
-                    MessageBox.Show( "No se realizo la venta", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                        cleanFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show( "No se realizo la venta", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                    }
                 }
             }
-        }
-        else
-        {
-            MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
-        }
+            else
+            {
+                MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
         }
 
 
@@ -480,11 +465,68 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dgvList.ClearSelection();
         }
 
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             cleanFields();
         }
 
-        
+
+        private void ticketItem_Click(object sender, EventArgs e)
+        {
+            sale = new Sale();
+            sale.saleId = 0;
+
+            createTicket( sale );
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Form clientListForm = new ClientsListForm();
+
+            clientListForm.ShowDialog();
+        }
+
+
+        private void backUpItem_Click(object sender, EventArgs e)
+        {
+            Connection conn = new Connection();
+
+            string path = @"C:\Respaldo Base Datos Inventario";
+
+            try
+            {
+                if ( !Directory.Exists( path ) )
+                {
+                    Directory.CreateDirectory( path );
+                }
+
+                conn.backupDataBase();
+                MessageBox.Show("Respaldado de base datos creado con exito", ":)", MessageBoxButtons.OK);
+
+            }
+            catch ( Exception )
+            {
+                MessageBox.Show( "Error al crear respaldado de base datos", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+        }
+
+
+        private void restoreItem_Click(object sender, EventArgs e)
+        {
+            string msg = "el archivo InventoryDB.bak se encuentra en el disco C:" +
+                "en la ruta -> C:\\Respaldo Base Datos Inventario\\InventoryDB.bak";
+
+            MessageBox.Show( msg, ":)", MessageBoxButtons.OK );
+        }
+
+
+        private void sellsItem_Click(object sender, EventArgs e)
+        {
+            new SalesListForm().Show();
+        }
+
+
     }
 }

@@ -297,8 +297,7 @@ BEGIN
 
 			SELECT userId, userName, userEmail, rolName
 			FROM [dbo].[User] INNER JOIN [dbo].[Rol] ON fkRol = rolId
-			WHERE fkState = @actives  
-				  AND
+			WHERE fkState = @actives  AND
 				  userName LIKE @filter OR 
 				  userEmail LIKE @filter 
 		END
@@ -308,14 +307,26 @@ GO
 
 CREATE OR ALTER PROCEDURE [dbo].[LoginUser] 
 	@userName varchar(100),
-	@password varchar(255),
-	@fkState tinyint
+	@password varchar(255)
 AS
 BEGIN
 	SET NOCOUNT OFF;
 
 	SELECT userId, userName, fkState FROM [dbo].[User] 
-	WHERE userName = @userName AND password = @password AND fkState = 1
+	WHERE userName = @userName AND password = @password 
+END
+GO
+
+
+CREATE OR ALTER PROCEDURE [dbo].[PasswordRecovery] 
+	@userName varchar(100),
+	@email varchar(255)
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	SELECT password FROM [dbo].[User] 
+	WHERE userName = @userName AND userEmail = @email 
 END
 GO
 
@@ -682,6 +693,46 @@ END
 GO
 
 
+CREATE OR ALTER PROCEDURE [dbo].[SalesList] 
+	@fkState tinyint,
+	@filter varchar(255),
+	@fromDate datetime,
+	@toDate datetime
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	IF @filter = '' OR @filter = NULL
+		BEGIN
+			SELECT CAST(Sale.saleId AS BIGINT) AS saleId, Sale.saleDate,
+			Product.productDetail + ', { Cant: ' + CAST(Detail.quantity AS VARCHAR)
+			+ ' }, { Precio: ' + CAST(Detail.price AS VARCHAR) + ' }' AS productDetail
+			FROM Sale INNER JOIN Detail ON Sale.saleId = Detail.fkSale 
+				INNER JOIN Product ON Product.productId = Detail.fkProduct 
+				INNER JOIN [User] ON [User].userId = Sale.fkUser
+				INNER JOIN Client ON Client.clientId = Sale.fkClient
+				WHERE  saleDate BETWEEN @fromDate AND @toDate AND
+				Sale.fkState = @fkState
+		END
+	ELSE
+		BEGIN
+			SET @filter = '%' + @filter + '%'
+
+			SELECT CAST(Sale.saleId AS BIGINT) AS saleId, Sale.saleDate,
+			Product.productDetail + ', { Cant: ' + CAST(Detail.quantity AS VARCHAR)
+			+ ' }, { Precio: ' + CAST(Detail.price AS VARCHAR) + ' }' AS productDetail
+			FROM Sale INNER JOIN Detail ON Sale.saleId = Detail.fkSale 
+				INNER JOIN Product ON Product.productId = Detail.fkProduct 
+				INNER JOIN [User] ON [User].userId = Sale.fkUser
+				INNER JOIN Client ON Client.clientId = Sale.fkClient
+				WHERE saleDate BETWEEN @fromDate AND @toDate AND
+				Product.productDetail LIKE @filter AND
+				Sale.fkState = @fkState
+		END
+END
+GO
+
+
 CREATE OR ALTER PROCEDURE [dbo].[BillDetailsScheme] 
 AS
 BEGIN
@@ -695,24 +746,26 @@ GO
 
 
 CREATE OR ALTER PROCEDURE [dbo].[Ticket] 
+	@id BIGINT
 AS
 BEGIN
 	SET NOCOUNT OFF;
+		IF @id = 0 OR @id = NULL 
+			BEGIN
+				SELECT @id = MAX(saleId) FROM Sale;
+			END
 
-	DECLARE @id BIGINT;
-
-	SELECT @id = MAX(saleId) FROM Sale;
-
-	BEGIN
-		SELECT Detail.quantity, Detail.price, Product.productDetail, 
-			Sale.saleDate, Sale.saleSubTotal, 
-			Sale.saleDiscount, Sale.saleTax, Sale.saleTotal,
-			[User].userName, Client.clientName
-		FROM Sale INNER JOIN Detail ON Sale.saleId = Detail.fkSale 
-			INNER JOIN Product ON Product.productId = Detail.fkProduct 
-			INNER JOIN [User] ON [User].userId = Sale.fkUser
-			INNER JOIN Client ON Client.clientId = Sale.fkClient
-			WHERE saleId = @id
+		BEGIN
+			SELECT CAST(Sale.saleId AS BIGINT) AS saleId , 
+				Detail.quantity, Detail.price, Product.productDetail, 
+				Sale.saleDate, Sale.saleSubTotal, 
+				Sale.saleDiscount, Sale.saleTax, Sale.saleTotal,
+				[User].userName, Client.clientName
+			FROM Sale INNER JOIN Detail ON Sale.saleId = Detail.fkSale 
+				INNER JOIN Product ON Product.productId = Detail.fkProduct 
+				INNER JOIN [User] ON [User].userId = Sale.fkUser
+				INNER JOIN Client ON Client.clientId = Sale.fkClient
+				WHERE saleId = @id
 		END
 END
 GO
@@ -747,6 +800,47 @@ BEGIN
 	SELECT rolId, rolName FROM Rol  
 END
 GO
+
+
+-- BACKUP AND RESTORE DATABASE PROCEDURES
+
+CREATE OR ALTER PROCEDURE [dbo].[BackUpDatabase]
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	DECLARE @SQL NVARCHAR(300);
+
+	DECLARE @backUpPath NVARCHAR(300) 
+	SET @backUpPath = 'C:/Respaldo Base Datos Inventario/InventoryDB_' + CONVERT(NVARCHAR(10), GETDATE(), 120) + '.bak';
+
+	SET @SQL = N'BACKUP DATABASE ' + QUOTENAME('InventoryDB') + N'
+	TO DISK = ' + QUOTENAME(@backUpPath, '''') + N'
+	WITH FORMAT';
+
+	EXEC sp_executesql @SQL;
+END
+GO
+
+exec BackUpDatabase
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[RestoreDatabase]
+AS
+BEGIN
+	SET NOCOUNT OFF;
+
+	DECLARE @SQL NVARCHAR(300);
+
+	DECLARE @backUpPath NVARCHAR(100) = 'C:/Users/Public/Documents/InventoryDB.bak';
+
+	SET @SQL = N'RESTORE DATABASE ' + QUOTENAME('InventoryDB') + N'
+	FROM DISK = ' + QUOTENAME(@backUpPath, '''');
+
+	EXEC sp_executesql @SQL;
+END
+GO
+
 
 ```
 

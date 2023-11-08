@@ -94,7 +94,6 @@ namespace Logica.Models
             return reponse;
         }
 
-
         public bool deleteSale()
         {
             Connection conn = new Connection();
@@ -106,21 +105,23 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
-
         public DataTable list( int actives, string filter = "", string from = "", string to = "" )
         {
             Connection conn = new Connection();
 
+            StringBuilder sb = new StringBuilder();
 
             DateTime fromDate = Convert.ToDateTime( from );
             DateTime toDate = Convert.ToDateTime( to );
 
-            conn.ParamList.Add( new SqlParameter( "@actives", actives ) );
+            conn.ParamList.Add( new SqlParameter( "@fkState", actives ) );
             conn.ParamList.Add( new SqlParameter( "@filter", filter ) );
             conn.ParamList.Add( new SqlParameter( "@fromDate", fromDate ) );
             conn.ParamList.Add( new SqlParameter( "@toDate", toDate ) );
 
-            return conn.ExecuteSelect( "SalesList" );
+            DataTable dt = conn.ExecuteSelect( "SalesList" );
+
+            return dt;
         }
 
         public DataTable billDetailsScheme()
@@ -140,6 +141,7 @@ namespace Logica.Models
         {
             Connection conn = new Connection();
 
+            conn.ParamList.Add( new SqlParameter( "@id", saleId ) );
             return conn.ExecuteSelect( "Ticket" );
         }
 

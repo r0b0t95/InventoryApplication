@@ -22,7 +22,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            
+            /*   
             Globals.GlobalUser.userId = 1;
 
             Globals.GlobalUser.name = "abdul";
@@ -32,9 +32,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             new LoadingForm().Show();
 
             this.Hide();
-                       
+            */         
             
-            /*
+            
             string validate = validateFields();
 
             user = new Logica.Models.User();
@@ -48,9 +48,9 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 int[] lUser = user.loginUser();
 
-                if ( lUser[1] > 0 )
+                if ( lUser[0] > 0 )
                 {
-                    if ( lUser[0] > 0 )
+                    if ( lUser[1].Equals( 1 ) )
                     {
                         Globals.GlobalUser.userId = lUser[0];
 
@@ -64,12 +64,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                        MessageBox.Show( "Usuario desactivado", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
                     }
                 }
                 else
                 {
-                    MessageBox.Show( "Usuario desactivado", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                    MessageBox.Show( "Nombre o contraseña incorrecto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning );
                 }
 
             }
@@ -77,7 +77,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             {
                 MessageBox.Show( validate, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
-            */
+            
             
         }
 
@@ -97,7 +97,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
-
+            new RecoverPassword().Show();
         }
 
 

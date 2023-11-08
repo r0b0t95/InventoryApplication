@@ -29,10 +29,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtList = new DataTable();
         }
 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -42,6 +44,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( resp.Equals( DialogResult.OK ) ) fillDgv();
         }
+
 
         private void dgvList_DoubleClick(object sender, EventArgs e)
         {
@@ -69,10 +72,12 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         }
 
+
         private void UsersListForm_Load(object sender, EventArgs e)
         {
             fillDgv();
         }
+
 
         public void fillDgv()
         {
@@ -83,6 +88,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dgvList.DataSource = dtList;
         }
 
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearch.Text.Count() > 2 ||
@@ -91,6 +97,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 fillDgv();
             }
         }
+
 
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
@@ -102,7 +109,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private int cbActive()
         {
-            if (cbActivos.Checked)
+            if ( cbActivos.Checked )
             {
                 tempState = 2;
                 return 1;

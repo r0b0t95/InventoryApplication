@@ -117,6 +117,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             return string.Empty;
         }
 
+
         private bool validateYesOrNot( string text ,string description )
         {
             string msg = string.Format( text, description );
@@ -283,14 +284,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             if ( tempState.Equals( 2 ) )
             {
                 deleteVector[0] = " eliminar ";
-                deleteVector[1] = " Elimino ";
+                deleteVector[1] = "Elimino ";
                 deleteVector[2] = " eliminado ";
                 deleteVector[3] = " elimino ";
             }
             else
             {
                 deleteVector[0] = " volver activar ";
-                deleteVector[1] = " Has activado ";
+                deleteVector[1] = "Has activado ";
                 deleteVector[2] = " activado ";
                 deleteVector[3] = " activo ";
             }
