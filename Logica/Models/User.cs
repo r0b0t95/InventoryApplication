@@ -94,7 +94,7 @@ namespace Logica.Models
 
         public int[] loginUser()
         {
-            int[] r = {0, 0};
+            int[] r = {0, 0, 0};
 
             Connection conn = new Connection();
 
@@ -111,6 +111,7 @@ namespace Logica.Models
                 DataRow row = responce.Rows[0];
                 r[0] = Convert.ToInt32( row["userId"] );
                 r[1] = Convert.ToInt32( row["fkState"] );
+                r[2] = Convert.ToInt32( row["fkRol"] );
             }
 
             return r;

@@ -17,9 +17,9 @@ namespace Logica.Models
 
         public long logId { get; set; }
 
-        public string logDetail { get; set; }
+        public string detail { get; set; }
 
-        public DateTime logDate { get; set; }
+        public DateTime date { get; set; }
 
         public User user { get; set; }
 
@@ -34,8 +34,8 @@ namespace Logica.Models
         {
             Connection conn = new Connection();
 
-            conn.ParamList.Add( new SqlParameter( "@logDetail", this.logDetail ) );
-            conn.ParamList.Add( new SqlParameter( "@logDate", this.logDate ) );
+            conn.ParamList.Add( new SqlParameter( "@logDetail", this.detail ) );
+            conn.ParamList.Add( new SqlParameter( "@logDate", this.date ) );
             conn.ParamList.Add( new SqlParameter( "@fkUser", this.user.userId ) );
             int r = conn.ExecuteUpdateDeleteInsert( "AddLogg" );
 
@@ -60,8 +60,8 @@ namespace Logica.Models
         {
             Logg log = new Logg();
             log.user.userId = userId;
-            log.logDetail = detail;
-            log.logDate = DateTime.Now;
+            log.detail = detail;
+            log.date = DateTime.Now;
 
             log.addLog();
         }

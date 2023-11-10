@@ -68,6 +68,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {
             loadData();
+
+            privileges();
         }
 
 
@@ -76,6 +78,23 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtListItems = sale.billDetailsScheme();
 
             txtUser.Text = Globals.GlobalUser.name.ToString();
+        }
+
+
+        private void privileges()
+        {
+            long rol = Globals.GlobalUser.rol.rolId;
+
+            if ( rol.Equals( 2 ) )
+            {
+                logsItem.Visible = false;
+                usersItem.Visible = false;
+            }
+            else
+            {
+                logsItem.Visible = true;
+                usersItem.Visible = true;
+            }
         }
 
 

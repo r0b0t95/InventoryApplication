@@ -55,7 +55,6 @@ namespace Logica.Models
 
             Connection conn = new Connection();
 
-            //conn.ParamList.Add( new SqlParameter( "@saleDetail", this.detail ) );
             conn.ParamList.Add( new SqlParameter( "@saleDate", this.date ) );
             conn.ParamList.Add( new SqlParameter( "@saleSubTotal", this.subTotal ) );
             conn.ParamList.Add( new SqlParameter( "@saleDiscount", this.discount ) );

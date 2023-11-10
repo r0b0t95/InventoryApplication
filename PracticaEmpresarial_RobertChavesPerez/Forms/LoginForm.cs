@@ -22,18 +22,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            /*   
-            Globals.GlobalUser.userId = 1;
-
-            Globals.GlobalUser.name = "abdul";
-
-            cleanFields();
-
-            new LoadingForm().Show();
-
-            this.Hide();
-            */         
-            
             
             string validate = validateFields();
 
@@ -55,6 +43,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                         Globals.GlobalUser.userId = lUser[0];
 
                         Globals.GlobalUser.name = txtName.Text.Trim();
+
+                        Globals.GlobalUser.rol.rolId = lUser[2];
 
                         cleanFields();
 
