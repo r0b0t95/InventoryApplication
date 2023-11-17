@@ -314,7 +314,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
         private long codeMethod()
         {
-            if ( string.IsNullOrEmpty( tempCodeId.ToString()) && tempCodeId <= 0 )
+            if ( string.IsNullOrEmpty( tempCodeId.ToString() ) || tempCodeId <= 0 )
             {
                 return 2;
             }

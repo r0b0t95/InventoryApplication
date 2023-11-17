@@ -70,6 +70,16 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 return string.Format( responce, "Confirmacion Nueva Contraseña" );
             }
 
+            if ( txtNewPass.Text.Trim().Count() < 4 )
+            {
+                return "contraseña nueva debe ser minimo de 4 caracteres";
+            }
+
+            if ( txtCurrentPass.Text.Trim().Equals( txtNewPass.Text.Trim() ) )
+            {
+                return "La nueva contraseña es igual a la actual";
+            }
+
             if ( lUser[0] <= 0 )
             {
                 return "Contraseña actual es incorrecta";
@@ -77,7 +87,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             if ( !txtNewPass.Text.Trim().Equals( txtConNewPass.Text.Trim() ) )
             {
-                return string.Format( responce, "La Nueva Contraseña y su confirmacion son diferentes" );
+                return "La Nueva Contraseña y su confirmacion son diferentes";
             }
 
             return string.Empty;
@@ -107,7 +117,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             user = new Logica.Models.User();
 
             user.userId = Globals.GlobalUser.userId;
-            user.password = txtNewPass.Text;
+            user.password = txtCurrentPass.Text.Trim();
             user.name = Globals.GlobalUser.name;
 
             string validate = validateFields( user );
@@ -120,6 +130,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                 if ( msg )
                 {
+                    user.password = txtNewPass.Text.Trim();
+
                     bool ok = user.updatePassword();
 
                     if ( ok )

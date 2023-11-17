@@ -228,11 +228,11 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
 
-            if (dgvList.SelectedRows.Count.Equals(1))
+            if ( dgvList.SelectedRows.Count.Equals( 1 ) )
             {
                 string validate = quantity();
 
-                if (string.IsNullOrEmpty(validate))
+                if ( string.IsNullOrEmpty( validate ) )
                 {
                     DataGridViewRow dgvr = dgvList.SelectedRows[0];
 
@@ -250,28 +250,29 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
                 else
                 {
-                    MessageBox.Show(validate, ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show( validate, ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                    txtCant.Text = "1";
                 }
             }
             else
             {
-                MessageBox.Show("Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show( "Debes seleccionar una fila de un producto", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
             }
         }
 
 
         private string quantity()
         {
-            int quantity = Convert.ToInt32(txtCant.Text.Trim());
+            int quantity = Convert.ToInt32( txtCant.Text.Trim() );
 
-            if (quantity <= 0)
+            if ( quantity <= 0 )
             {
                 return "Cantidad debe ser mayor a 0";
             }
 
-            if (quantity > tempQuantity)
+            if ( quantity > tempQuantity )
             {
-                return string.Format("Cantidad deseada es mayor a la disponible de: {0}", tempProduct);
+                return string.Format( "Cantidad deseada es mayor a la disponible de: {0}", tempProduct );
             }
 
             return string.Empty;
@@ -478,7 +479,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             txtSubTotal.Text = "0";
             txtTotal.Text = "0";
             txtTax.Text = "0";
+            txtDiscount.Text = "0";
             txtCant.Text = "1";
+            txtClientId.Text = string.Empty;
+            txtClientName.Text = string.Empty;
             dtListItems.Clear();
             dgvList.DataSource = dtListItems;
             dgvList.ClearSelection();
@@ -522,7 +526,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 }
 
                 conn.backupDataBase();
-                MessageBox.Show("Respaldado de base datos creado con exito", ":)", MessageBoxButtons.OK);
+                MessageBox.Show( "Respaldado de base datos creado con exito", ":)", MessageBoxButtons.OK );
 
             }
             catch ( Exception )

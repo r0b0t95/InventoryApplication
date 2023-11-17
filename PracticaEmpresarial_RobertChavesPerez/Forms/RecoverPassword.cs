@@ -57,7 +57,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     }
                     else
                     {
-                        MessageBox.Show( "Credenciales incorrectas", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
+                        MessageBox.Show( "Credenciales incorrectas intente", ":(", MessageBoxButtons.OK, MessageBoxIcon.Exclamation );
                     }
                 }
             }
