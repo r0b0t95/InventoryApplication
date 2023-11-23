@@ -33,12 +33,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit the form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
 
 
+        // add code
         private void btnSave_Click(object sender, EventArgs e)
         {
             code = new Logica.Models.Code();
@@ -61,7 +63,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Agrego al codigo: {0}", code.code );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Codigo agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -85,12 +87,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute loadForm method
         private void CodeForm_Load(object sender, EventArgs e)
         {
             loadForm();
         }
 
 
+        // evaluate if the user
+        // load the form modify or register
         private void loadForm()
         {
             if ( this.tempId.Equals( 0 ) )
@@ -104,6 +109,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute when you add a code
         private void loadRegister()
         {
             btnSave.Visible = true;
@@ -112,6 +118,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute when you modify a code
         private void loadModified()
         {
             btnSave.Visible = false;
@@ -127,6 +134,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate if the user wants to continue
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
@@ -137,12 +145,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean text field
         private void cleanFields()
         {
             txtCode.Text = string.Empty;
         }
 
 
+        // update code
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             code = new Logica.Models.Code();
@@ -166,7 +176,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al codigo: {0}", code.code );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Codigo actualizado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -187,6 +197,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
          
 
+        // validate empty text fields
+        // validate if the code exists
         private string validateFields( Code code )
         {
             string responce = "El campo {0} esta vacio";

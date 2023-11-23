@@ -40,12 +40,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             dtListItems = new DataTable();
         }
 
+
+        // show logs form
         private void logsItem_Click(object sender, EventArgs e)
         {
             new LogsForm().Show();
         }
 
 
+        // select row product (item)
         private void inventoryItem_Click(object sender, EventArgs e)
         {
             InventoryForm inventory = new InventoryForm();
@@ -59,12 +62,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // close system
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
 
+        // execute loadData and privileges methods
         private void MainForm_Load(object sender, EventArgs e)
         {
             loadData();
@@ -73,6 +78,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // insert columns and rows into the dtListItem data table
         private void loadData()
         {
             dtListItems = sale.billDetailsScheme();
@@ -81,6 +87,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // users privileges 
         private void privileges()
         {
             long rol = Globals.GlobalUser.rol.rolId;
@@ -98,42 +105,42 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
-        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new UsersListForm().Show();
-        }
-
-
+        // show logs form
         private void logsItem_Click_1(object sender, EventArgs e)
         {
             new LogsForm().Show();
         }
 
 
+        // show users form
         private void usersItem_Click(object sender, EventArgs e)
         {
             new UsersListForm().Show();
         }
 
 
+        // show recovery password form
         private void changePasswordItem_Click(object sender, EventArgs e)
         {
             new UpdatePassword().Show();
         }
 
 
+        // only allow numbers in the cant (quantity) text field
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
+        // only allow numbers in the discount text field
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
+        // insert a item into sale data grid view
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             dontShowQuantity();
@@ -155,6 +162,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // calculate discount, subtotal, total
         private void calculateAmount()
         {
             double discount = 0;
@@ -212,6 +220,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show client form
         private long clientSelected()
         {
             if ( !string.IsNullOrWhiteSpace( txtClientId.Text.Trim() ) )
@@ -225,6 +234,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // update product quantity
         private void btnUpdateProduct_Click(object sender, EventArgs e)
         {
 
@@ -261,6 +271,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate product quantity
         private string quantity()
         {
             int quantity = Convert.ToInt32( txtCant.Text.Trim() );
@@ -279,6 +290,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // allow or deny IVA
         private void cbIVA_CheckedChanged(object sender, EventArgs e)
         {
             calculateAmount();
@@ -291,6 +303,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select a product (item)
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         { 
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
@@ -310,6 +323,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show product quantity
         private void showQuantity()
         {
             lblCant.Visible = true;
@@ -317,6 +331,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // don't show product quantity
         private void dontShowQuantity()
         {
             lblCant.Visible = false;
@@ -324,6 +339,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // remove a product (item) from sale data grid view
         private void btnRemoveProduct_Click(object sender, EventArgs e)
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
@@ -349,6 +365,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // create a sale
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string validate = validateFields();
@@ -403,6 +420,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // create a ticket
         private void createTicket( Sale sale )
         {
             Report report = new Report();
@@ -421,6 +439,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // process create sale
         private List<Inventory> saleProcess( Sale sale )
         {
             int cant = 0;
@@ -446,6 +465,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate empty fields
         private string validateFields()
         {
             double total = Convert.ToDouble( txtTotal.Text.Trim() );
@@ -464,6 +484,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate if user wants to continue
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
@@ -474,6 +495,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean text fields
         private void cleanFields()
         {
             txtSubTotal.Text = "0";
@@ -489,12 +511,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // reset the main form
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             cleanFields();
         }
 
 
+        // create a ticket reference the last sale
         private void ticketItem_Click(object sender, EventArgs e)
         {
             sale = new Sale();
@@ -504,6 +528,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show users form
         private void btnSearch_Click(object sender, EventArgs e)
         {
             Form clientListForm = new ClientsListForm();
@@ -512,6 +537,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // create a database backup
         private void backUpItem_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
@@ -536,6 +562,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show the database backup path
         private void restoreItem_Click(object sender, EventArgs e)
         {
             string msg = "el archivo InventoryDB.bak se encuentra en el disco C:" +
@@ -545,6 +572,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show sales form
         private void sellsItem_Click(object sender, EventArgs e)
         {
             new SalesListForm().Show();

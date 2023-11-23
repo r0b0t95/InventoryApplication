@@ -32,6 +32,7 @@ namespace Logica.Models
 
         // -> METHODS, DATABASE QUERIES
 
+        // add client method
         public bool addClient()
         {
             Connection conn = new Connection();
@@ -45,6 +46,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // update client method
         public bool updateClient()
         {
             Connection conn = new Connection();
@@ -58,6 +60,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // delete client method
         public bool deleteClient()
         {
             Connection conn = new Connection();
@@ -69,6 +72,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // query if the client email exists 
         public bool consultEmail()
         {
             Connection conn = new Connection();
@@ -84,6 +88,7 @@ namespace Logica.Models
             return false;
         }
 
+        // query if the client tel exists
         public bool consultTel()
         {
             Connection conn = new Connection();
@@ -99,6 +104,7 @@ namespace Logica.Models
             return false;
         }
 
+        // list all clients
         public DataTable list( int actives, string filter = "" )
         {
             Connection conn = new Connection();

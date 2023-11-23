@@ -40,6 +40,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // insert data into the data grid view
         private void fillDgv()
         {
             string fromDate = fromDTPicker.Value.ToString();
@@ -74,6 +75,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate schedules and dates
         private bool compareDates()
         {
             DateTime fromDate = fromDTPicker.Value.Date;
@@ -87,18 +89,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // load data into the form
         private void SalesListForm_Load(object sender, EventArgs e)
         {
             fillDgv();
         }
 
 
+        // exit form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // search specific characters into the data list
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearch.Text.Count() > 2 ||
@@ -109,6 +114,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show inactivated sales
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
             fillDgv();
@@ -117,6 +123,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select a sale
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
@@ -130,6 +137,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // create ticket method
         private void createTicket( Sale sale )
         {
             Report report = new Report();
@@ -148,6 +156,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // create a ticket
         private void btnTicket_Click(object sender, EventArgs e)
         {
             if ( tempSaleId > 0 )
@@ -164,6 +173,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // delete sale
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if ( tempSaleId > 0 )
@@ -188,7 +198,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( deleteVector[1] + "al la venta ID: {0}", id );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Venta fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -209,6 +219,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // load delete or active the client
         private void deleteMethod()
         {
             if ( tempState.Equals(2) )
@@ -228,12 +239,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean text fields
         private void cleanFields()
         {
             tempSaleId = 0;
         }
 
 
+        // validate if user wants to continue
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );

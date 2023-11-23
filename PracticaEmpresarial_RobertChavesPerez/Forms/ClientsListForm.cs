@@ -31,6 +31,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show the client register form
         private void btnAdd_Click(object sender, EventArgs e)
         {
             ClientsForm clientForm = new ClientsForm();
@@ -41,18 +42,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit the form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // load data into the form
         private void ClientsListForm_Load(object sender, EventArgs e)
         {
             fillDgv();
         }
 
 
+        // insert data into the data grid view
         public void fillDgv()
         {
             int active = cbActive();
@@ -63,6 +67,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // search specific characters into the data list
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearch.Text.Count() > 2 ||
@@ -73,6 +78,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select a client 
+        // show the client in the main form
         private void btnSelect_Click(object sender, EventArgs e)
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) ) 
@@ -90,6 +97,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show the user modify form
         private void dgvList_DoubleClick(object sender, EventArgs e)
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
@@ -115,6 +123,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show active o inactive clients
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
             fillDgv();

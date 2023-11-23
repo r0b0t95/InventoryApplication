@@ -28,12 +28,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute fillDgv method
         private void LogsForm_Load(object sender, EventArgs e)
         {
             fillDgv();
         }
 
 
+        // insert data into the data grid view
         private void fillDgv()
         {
             string fromDate = fromDTPicker.Value.ToString();
@@ -51,6 +53,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate schedules and dates
         private bool compareDates()
         {
             DateTime fromDate = fromDTPicker.Value.Date;
@@ -64,6 +67,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // search specific characters into the data list
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearch.Text.Count() > 2 ||
@@ -74,6 +78,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();

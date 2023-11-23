@@ -17,7 +17,8 @@ namespace Logica.Models
         public long rolId { get; set; }
 
         public string rolName { get; set; }
-
+        
+        // list all roles
         public DataTable list()
         {
             Connection conn = new Connection();

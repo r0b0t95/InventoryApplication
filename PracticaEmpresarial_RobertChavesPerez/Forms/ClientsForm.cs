@@ -38,12 +38,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // add client
         private void btnSave_Click(object sender, EventArgs e)
         {
             client = new Logica.Models.Client();
@@ -72,7 +74,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Agrego al cliente: {0}", client.name );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Cliente agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -93,6 +95,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate empty texts fields
+        // execute some databases querys
         private string validateFields( Client client )
         {
             string responce = "El campo {0} esta vacio";
@@ -118,6 +122,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate if the user wants to continue
         private bool validateYesOrNot( string text ,string description )
         {
             string msg = string.Format( text, description );
@@ -128,6 +133,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean texts fields
         private void cleanFields()
         {
             txtName.Text = string.Empty;
@@ -137,12 +143,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // only allow numbers in the tel text field
         private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
+        // update client
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             client = new Logica.Models.Client();
@@ -174,7 +182,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al cliente: {0}", client.name );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Cliente actualizado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -195,12 +203,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute loadForm method
         private void ClientsForm_Load(object sender, EventArgs e)
         {
             loadForm();
         }
 
 
+        // load register client or
+        // load modify client
         private void loadForm()
         {
             if ( this.tempId.Equals( 0 ) )
@@ -214,6 +225,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute when you selected the register client form
         private void loadRegister()
         {
             btnSave.Visible = true;
@@ -223,6 +235,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute when you selected the modify client form
         private void loadModified()
         {
             btnSave.Visible = false;
@@ -233,6 +246,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // temporary attributes
         private void fillTemporal()
         {
             tempEmail = txtEmail.Text.Trim();
@@ -240,6 +254,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // delete client
         private void btnDelete_Click(object sender, EventArgs e)
         {
             client = new Logica.Models.Client();
@@ -262,7 +277,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                 {
                     string detail = string.Format( deleteVector[1] + "al cliente: {0}", client.name );
 
-                    log.addLogEvent( detail, Globals.GlobalUser.userId );
+                    log.addEventLog( detail, Globals.GlobalUser.userId );
 
                     MessageBox.Show( "Cliente fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -279,6 +294,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // load delete or active the client
         private void deleteMethod()
         {
             if ( tempState.Equals( 2 ) )

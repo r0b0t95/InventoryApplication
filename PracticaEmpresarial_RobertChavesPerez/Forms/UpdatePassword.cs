@@ -43,12 +43,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit to the form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // validate empty fields
+        // validate user credentials
         private string validateFields( User user )
         {
             string responce = "El campo {0} esta vacio";
@@ -94,6 +97,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // ask the user if want to continue by a message
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
@@ -104,6 +108,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean the text fields
         private void cleanFields()
         {
             txtCurrentPass.Text = string.Empty;
@@ -112,6 +117,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // update password button
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             user = new Logica.Models.User();
@@ -138,7 +144,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo su propia contraseña: {0}", user.name );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Contraseña actualizada correctamente", ":)", MessageBoxButtons.OK );
 

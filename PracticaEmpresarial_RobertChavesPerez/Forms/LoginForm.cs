@@ -20,6 +20,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             InitializeComponent();
         }
 
+
+        // user login
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             
@@ -29,7 +31,6 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
             user.name = txtName.Text.Trim();
             user.password = txtPassword.Text.Trim();
-            user.state.stateId = 1;
 
             if ( string.IsNullOrEmpty( validate ) )
             {
@@ -72,6 +73,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show password
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if ( cbShowPassword.Checked )
@@ -85,6 +87,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show recovery form
         private void lblForgotPassword_Click(object sender, EventArgs e)
         {
             new RecoverPassword().Show();
@@ -109,6 +112,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // change user name text field
         private void textName()
         {
             txtName.Text = String.Empty;
@@ -116,6 +120,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // change user password text field
         private void textPassword()
         {
             txtPassword.Text = String.Empty;
@@ -124,6 +129,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate empty text fields
         private string validateFields() 
         {
             string responce = "El campo {0} esta vacio";
@@ -142,6 +148,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show policies
         private void lblPolicies_Click(object sender, EventArgs e)
         {
             string message = "Hola usuario las politicas del software son \n" +
@@ -161,12 +168,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // close system
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // clean text fields
         private void cleanFields()
         {
             txtName.Text = string.Empty;

@@ -21,12 +21,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
             InitializeComponent();
         }
 
+
+        // exit form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // recover user password
         private void btnRecoveryPassword_Click(object sender, EventArgs e)
         {
             user = new Logica.Models.User();
@@ -68,6 +71,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean text fields
         private void cleanFields()
         {
             txtUserName.Text = string.Empty;
@@ -76,6 +80,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate empty text fields
         private string validateFields()
         {
             string responce = "El campo {0} esta vacio";
@@ -97,6 +102,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate if user wants to continue
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
@@ -107,6 +113,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show current and new passwords
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if ( cbShowPassword.Checked )

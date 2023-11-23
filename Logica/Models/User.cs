@@ -36,6 +36,7 @@ namespace Logica.Models
 
         // -> METHODS, DATABASE QUERIES
 
+        // add user method
         public bool addUser()
         {
             Connection conn = new Connection();
@@ -54,6 +55,8 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+
+        // update user method
         public bool updateUser()
         {
             Connection conn = new Connection();
@@ -66,6 +69,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // update user password method
         public bool updatePassword()
         {
             Connection conn = new Connection();
@@ -81,6 +85,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // delete user method
         public bool deleteUser()
         {
             Connection conn = new Connection();
@@ -92,6 +97,9 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // login user method
+        // query to the user information
+        // return idUser, state and role
         public int[] loginUser()
         {
             int[] r = {0, 0, 0};
@@ -117,6 +125,7 @@ namespace Logica.Models
             return r;
         }
 
+        // recovery password method
         public string recoveryPassword()
         {
             string pass = string.Empty;
@@ -145,6 +154,7 @@ namespace Logica.Models
             return pass;
         }
 
+        // query if the user name exists
         public bool consultName()
         {
             Connection conn = new Connection();
@@ -160,6 +170,7 @@ namespace Logica.Models
             return false;
         }
 
+        // query if the user email exists
         public bool consultEmail()
         {
             Connection conn = new Connection();
@@ -175,6 +186,7 @@ namespace Logica.Models
             return false;
         }
 
+        // list all users
         public DataTable list( int actives, string filter = "" )
         {
             Connection conn = new Connection();

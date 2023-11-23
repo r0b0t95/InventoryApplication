@@ -37,6 +37,7 @@ namespace Logica.Models
 
         // -> METHODS, DATABASE QUERIES
 
+        // add product method
         public bool addProduct()
         {
             Connection conn = new Connection();
@@ -51,6 +52,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // update product method
         public bool updateProduct()
         {
             Connection conn = new Connection();
@@ -65,6 +67,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // delete producto method
         public bool deleteProduct()
         {
             Connection conn = new Connection();
@@ -76,6 +79,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // update product quantity method
         public bool updateQuantity()
         {
             Connection conn = new Connection();
@@ -87,6 +91,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // list all products
         public DataTable list( int actives, string filter = "" )
         {
             Connection conn = new Connection();

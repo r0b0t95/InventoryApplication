@@ -55,12 +55,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit form
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
         
 
+        // insert data into product data grid view
         public void fillProductDgv()
         {
             int active = cbActive();
@@ -73,6 +75,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // insert data into code data grid view
         public void fillCodeDgv()
         {
             dtCodeList = code.list( txtSearchCode.Text.Trim() );
@@ -81,6 +84,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // load form and execute some methods
         private void InventoryForm_Load(object sender, EventArgs e)
         {
             showItemsMethod();
@@ -89,6 +93,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute inventory or choose some item
         private void showItemsMethod()
         {
             if ( showItems )
@@ -102,6 +107,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // inventory form
         private void inventory()
         {
             lblCode.Visible = true;
@@ -127,6 +133,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // choose item form
         private void chooseItem()
         {
             lblCode.Visible = false;
@@ -152,6 +159,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // search specific products characters into the data list
         private void txtSearchProduct_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearchProduct.Text.Count() > 2 ||
@@ -162,6 +170,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean fields
         private void cleanFields()
         {
             cleanTextFields();
@@ -170,6 +179,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean text fields
         private void cleanTextFields()
         {
             txtCode.Text = string.Empty;
@@ -181,6 +191,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // reset temporary variables
         private void cleanTemp()
         {
             tempProductId = 0;
@@ -195,6 +206,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // search specific codes characters into the data list
         private void txtSearchCode_TextChanged(object sender, EventArgs e)
         {
             if ( txtSearchCode.Text.Count() > 2 ||
@@ -205,6 +217,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show register code form
         private void btnAddCode_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show( "Quieres agregar varios codigos?", "[?]", MessageBoxButtons.YesNo, MessageBoxIcon.Question );
@@ -227,6 +240,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select items
         private void dgvCodeList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if ( dgvCodeList.SelectedRows.Count.Equals( 1 ) )
@@ -241,6 +255,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select which products modify
         private void dgvCodeList_DoubleClick(object sender, EventArgs e)
         {
             if ( dgvCodeList.SelectedRows.Count.Equals( 1 ) )
@@ -265,6 +280,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // register a product
         private void btnSave_Click(object sender, EventArgs e)
         {
             string validate = validateFields();
@@ -291,7 +307,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Agrego al producto: {0}", product.detail );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Producto agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -316,7 +332,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             if ( string.IsNullOrEmpty( tempCodeId.ToString() ) || tempCodeId <= 0 )
             {
-                return 2;
+                return 1;
             }
             else
             {
@@ -325,6 +341,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate empty fields
         private string validateFields()
         {
             string responce = "El campo {0} esta vacio";
@@ -348,6 +365,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate if user wants to continue
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
@@ -358,18 +376,21 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // only allow numbers in the price text field
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
+        // only allow numbers in the cant (quantity) text field
         private void txtCant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ( !char.IsDigit(e.KeyChar) && e.KeyChar != '\b' ) e.Handled = true;
         }
 
 
+        // update products
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string validate = validateFields();
@@ -404,7 +425,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al producto: {0}", product.detail );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Producto actualizado correctamente", ":)", MessageBoxButtons.OK ) ;
 
@@ -425,6 +446,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // delete product
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if( tempProductId > 0 )
@@ -449,7 +471,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( deleteVector[1] + "al producto: {0}", product.detail );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Producto fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -471,6 +493,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // load delete or active the product
         private void deleteMethod()
         {
             if ( tempState.Equals( 2 ) )
@@ -490,6 +513,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show actives or inactives products
         private void cbActivos_CheckedChanged(object sender, EventArgs e)
         {
             fillProductDgv();
@@ -498,6 +522,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show actives or inactives products
         private int cbActive()
         {
             if ( cbActivos.Checked )
@@ -513,6 +538,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean code text field
         private void btnRemoveCode_Click(object sender, EventArgs e)
         {
             txtCode.Text = string.Empty;
@@ -520,6 +546,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // refresh form
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             if ( btnRefresh.Text.Equals( "Refrescar" ) )
@@ -535,6 +562,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select a product
         private void selectItem()
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
@@ -582,6 +610,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate quantity required and available
         private string validateQuantity( string item, int cant )
         {
             int quantity = quantityMethod();
@@ -618,6 +647,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate repeated item in the sale
         private bool validateRepeatedItem( string productId, string code )
         {
             bool codeRepeated = Globals.StcMainForm.dtListItems.Select().ToList().Exists( row => row["code"].ToString().Equals( code ) );
@@ -638,6 +668,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select which producto to modify
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if ( dgvList.SelectedRows.Count.Equals( 1 ) )
@@ -657,6 +688,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // select a product cell
         private void selectCell()
         {
             DataGridViewRow row = dgvList.SelectedRows[0];

@@ -46,6 +46,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // show password
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if ( cbShowPassword.Checked )
@@ -59,12 +60,14 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // exit form 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
 
+        // add user
         private void btnSave_Click(object sender, EventArgs e)
         {
             user = new Logica.Models.User();
@@ -91,7 +94,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format("Agrego al cliente: {0}", user.name);
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId ); 
+                        log.addEventLog( detail, Globals.GlobalUser.userId ); 
 
                         MessageBox.Show( "Usuario agregado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -112,6 +115,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate empty texts fields
+        // execute some databases querys
         private string validateFields( User user )
         {
             string responce = "El campo {0} esta vacio";
@@ -146,6 +151,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // validate if user wants to continue
         private bool validateYesOrNot( string text, string description )
         {
             string msg = string.Format( text, description );
@@ -156,6 +162,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // clean text fields
         private void cleanFields()
         {
             txtName.Text = string.Empty;
@@ -166,6 +173,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // list all users roles
         public void fillUsersType()
         {
             DataTable dtList = new DataTable();
@@ -182,6 +190,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // update user
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             user = new Logica.Models.User();
@@ -207,7 +216,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
                     {
                         string detail = string.Format( "Actualizo al usuario: {0}", user.name );
 
-                        log.addLogEvent( detail, Globals.GlobalUser.userId );
+                        log.addEventLog( detail, Globals.GlobalUser.userId );
 
                         MessageBox.Show( "Usuario actualizado correctamente", ":)", MessageBoxButtons.OK );
 
@@ -228,12 +237,15 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute loadForm method
         private void SignUpForm_Load(object sender, EventArgs e)
         {
             loadForm();
         }
 
 
+        // load register user or
+        // load modify user
         private void loadForm()
         {
             fillUsersType();
@@ -249,6 +261,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute when you selected the register user form
         private void loadRegister() 
         {
             btnSave.Visible = true;
@@ -264,6 +277,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // execute when you selected the modify user form
         private void loadModified()
         {
             btnSave.Visible = false;
@@ -281,6 +295,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // temporary attributes
         private void fillTemporal()
         {
             tempName = txtName.Text.Trim();
@@ -294,6 +309,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // delete user
         private void btnDelete_Click(object sender, EventArgs e)
         {
             user = new Logica.Models.User();
@@ -318,7 +334,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
 
                     string detail = string.Format( deleteVector[1] + "al usuario: {0}", user.name );
 
-                    log.addLogEvent( detail, Globals.GlobalUser.userId );
+                    log.addEventLog( detail, Globals.GlobalUser.userId );
 
                     MessageBox.Show( "Usuario fue" + deleteVector[2] + "correctamente", ":)", MessageBoxButtons.OK );
 
@@ -334,6 +350,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // load delete or active the client
         private void deleteMethod()
         {
             if ( tempState.Equals( 2 ) )

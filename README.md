@@ -312,7 +312,7 @@ AS
 BEGIN
 	SET NOCOUNT OFF;
 
-	SELECT userId, userName, fkState FROM [dbo].[User] 
+	SELECT userId, userName, fkRol, fkState FROM [dbo].[User] 
 	WHERE userName = @userName AND password = @password 
 END
 GO
@@ -582,7 +582,7 @@ BEGIN
 		BEGIN
 			SET @filter = '%' + @filter + '%'
 
-			SELECT productId, productDetail, cant, price, code
+			SELECT productId, cant, price, productDetail, codeId  AS pCodeId, code AS pCode
 			FROM [dbo].[Product] INNER JOIN [dbo].[Code]
 			ON fkCode = codeId
 			WHERE fkState = @actives AND
@@ -825,6 +825,7 @@ GO
 exec BackUpDatabase
 go
 
+/*
 CREATE OR ALTER PROCEDURE [dbo].[RestoreDatabase]
 AS
 BEGIN
@@ -840,6 +841,7 @@ BEGIN
 	EXEC sp_executesql @SQL;
 END
 GO
+*/
 
 
 ```

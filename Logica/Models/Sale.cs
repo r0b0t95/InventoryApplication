@@ -49,6 +49,7 @@ namespace Logica.Models
 
         // -> METHODS, DATABASE QUERIES
 
+        // add sale method
         public int addSale()
         {
             int reponse = 0;
@@ -93,6 +94,7 @@ namespace Logica.Models
             return reponse;
         }
 
+        // delete sale method
         public bool deleteSale()
         {
             Connection conn = new Connection();
@@ -104,6 +106,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // list all sales
         public DataTable list( int actives, string filter = "", string from = "", string to = "" )
         {
             Connection conn = new Connection();
@@ -123,6 +126,7 @@ namespace Logica.Models
             return dt;
         }
 
+        // template to create a sale
         public DataTable billDetailsScheme()
         {
             DataTable dt = new DataTable();
@@ -136,6 +140,10 @@ namespace Logica.Models
             return dt;
         }
 
+        // ticket method
+        // add id and
+        // query all information 
+        // to make a ticket
         public DataTable ticket()
         {
             Connection conn = new Connection();

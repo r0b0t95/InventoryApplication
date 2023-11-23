@@ -22,6 +22,7 @@ namespace Logica.Models
 
         // -> METHODS, DATABASE QUERIES
 
+        // add code method
         public bool addCode()
         {
             Connection conn = new Connection();
@@ -32,6 +33,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // update code method
         public bool updateCode()
         {
             Connection conn = new Connection();
@@ -43,6 +45,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // query if the code exists 
         public bool consultCode()
         {
             Connection conn = new Connection();
@@ -58,6 +61,7 @@ namespace Logica.Models
             return false;
         }
 
+        // list all codes
         public DataTable list( string filter = "" )
         {
             Connection conn = new Connection();

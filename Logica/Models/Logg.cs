@@ -30,6 +30,7 @@ namespace Logica.Models
 
         // -> METHODS, DATABASE QUERIES
 
+        // add log method
         public bool addLog()
         {
             Connection conn = new Connection();
@@ -42,6 +43,7 @@ namespace Logica.Models
             return r > 0 ? true : false;
         }
 
+        // list all logs
         public DataTable list( string filter = "", string from = "", string to = "" )
         {
             Connection conn = new Connection();
@@ -56,7 +58,10 @@ namespace Logica.Models
             return conn.ExecuteSelect( "LoggsList" );
         }
 
-        public void addLogEvent( string detail, long userId )
+        // add event log
+        // gather information and
+        // execute -> add log method
+        public void addEventLog( string detail, long userId )
         {
             Logg log = new Logg();
             log.user.userId = userId;
