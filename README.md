@@ -47,7 +47,6 @@ GO
 
 CREATE TABLE Detail (
   detailId BIGINT IDENTITY NOT NULL,
-  inventory VARCHAR(500) NOT NULL,
   quantity INT NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
   fkSale BIGINT NOT NULL,
