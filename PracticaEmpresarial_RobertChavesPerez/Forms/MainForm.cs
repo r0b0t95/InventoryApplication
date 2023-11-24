@@ -207,6 +207,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // assign discount to the sale
         private double discountMethod()
         {
             if ( string.IsNullOrWhiteSpace( txtDiscount.Text.Trim() ) )

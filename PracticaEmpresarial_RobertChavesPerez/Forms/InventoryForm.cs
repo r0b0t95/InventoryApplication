@@ -328,6 +328,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // assign a code to the product (item)
         private long codeMethod()
         {
             if ( string.IsNullOrEmpty( tempCodeId.ToString() ) || tempCodeId <= 0 )
@@ -634,6 +635,7 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
+        // assign quantity to the product (item)
         private int quantityMethod()
         {
             if ( string.IsNullOrWhiteSpace( txtCant.Text.Trim() ) )

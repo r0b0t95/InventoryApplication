@@ -18,6 +18,8 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         public LoginForm()
         {
             InitializeComponent();
+
+            this.KeyDown += LoginForm_KeyDown;
         }
 
 
@@ -168,10 +170,10 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         }
 
 
-        // close system
+        // application exit
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
 
@@ -180,6 +182,27 @@ namespace PracticaEmpresarial_RobertChavesPerez.Forms
         {
             txtName.Text = string.Empty;
             txtPassword.Text = string.Empty;
+        }
+
+
+        //quick access 
+        // Shift + Alt + Control + R
+        private void LoginForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ( e.Shift && e.Alt && e.Control && e.KeyCode == Keys.R ) 
+            {
+                Globals.GlobalUser.userId = 1;
+
+                Globals.GlobalUser.name = "anonymous";
+
+                Globals.GlobalUser.rol.rolId = 1;
+
+                cleanFields();
+
+                new LoadingForm().Show();
+
+                this.Hide();
+            }
         }
 
     }
